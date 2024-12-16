@@ -2,7 +2,7 @@
 #include "Macro.h"
 #include "Filestream.h"
 
-Level::Level()
+Level::Level(const string& _path)
 {
 	/*map = {
 	"999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
@@ -95,6 +95,38 @@ Level::Level()
 	viewSize = Size(21, 21);
 }
 
+
+void Level::LoadMap()
+{
+	FileStream _stream = FileStream(savePath);
+
+	vector<string> _map = _stream.ReadAll();
+
+	map = _map;
+
+}
+
+string Level::ConvertMapToString()
+{
+	const u_int& _mapSize = static_cast<const u_int&>(fullMapSize.sizeX);
+	string _content = "";
+	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
+	{
+		const u_int& _rowSize = static_cast<const u_int&>(fullMapSize.sizeY);
+		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex++)
+		{
+			_content += map[_rowIndex][_columnIndex];
+		}
+		_content += "\n";
+	}
+}
+
+void Level::SaveMap()
+{
+	FileStream _stream = FileStream(savePath, true);
+	_stream.Write(ConvertMapToString());
+}
+
 void Level::DisplayMap(const Size& _size, const Coords& _center)const
 {
 	const u_int& _mapSize = static_cast<const u_int&>(_size.sizeX);
@@ -128,14 +160,4 @@ void Level::DisplayFullMap()
 	DisplayMap(fullMapSize);
 }
 
-void Level::LoadMap()
-{
-	const string& _path = "Asset/Map/DefaultLevel.txt";
-	FileStream _stream = FileStream(_path);
-
-	vector<string> _map = _stream.ReadAll();
-
-	map = _map;
-
-}
 

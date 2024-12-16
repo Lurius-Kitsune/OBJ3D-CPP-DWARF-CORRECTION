@@ -77,6 +77,9 @@
     <ClInclude Include="Macro.h">
       <Filter>Resource Files\Lib</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Asset\Map\DefaultLevel.txt">

@@ -50,8 +50,8 @@ int main()
     Config();
 
     TEMP();
-
-    Level _level;
+    const string& _path = "Asset/Map/DefaultLevel.txt";
+    Level _level = Level(_path);
 
     _level.DisplayFullMap();
 

@@ -144,6 +144,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Size.h" />
   </ItemGroup>
