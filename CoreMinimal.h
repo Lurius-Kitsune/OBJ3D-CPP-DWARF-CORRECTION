@@ -6,6 +6,7 @@
 #include <chrono>
 #include <thread>
 #include <conio.h>
+#include <random>
 using namespace std;
 using namespace this_thread;
 using namespace chrono;
@@ -13,6 +14,7 @@ typedef unsigned int u_int;
 
 #define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 #define SLEEP(_duration, _time) sleep_for(_duration(_time));
+#define STRING(_value) to_string(_value)
 #define UTF8
 
 #ifdef UTF8

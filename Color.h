@@ -1,5 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Macro.h"
+#include "Random.h"
 
 #pragma region ColorMacro
 #define BOLD_TEXT "\033[1m"					// Gras
@@ -109,12 +111,6 @@
 #define BG_COLOR(x) "\x1B[48;5;"<<x<<"m"
 #pragma endregion
 
-string RainbowEveryChar(const string& _word);
-
-string RainbowString(const string& _word);
-void DisplayRainbow(const string& _text);
-string GetRandomColor();
-
 struct Color
 {
 	int r;
@@ -138,6 +134,12 @@ struct Color
 		if (_textOnly) return TEXT_RGB(r, g, b);
 		return BG_RGB(r, g, b);
 	}
+
+	static string RainbowEveryChar(const string& _word);
+
+	static string RainbowString(const string& _word);
+	static void DisplayRainbow(const string& _text);
+	static string GetRandomColor();
 };
 
 struct Gradient
@@ -156,6 +158,3 @@ struct Gradient
 	string GradientString(const string _text, const bool _textOnly = true);
 	Color ClampGradient(const int _index, const int _maxDisplayChar)const;
 };
-
-
-}

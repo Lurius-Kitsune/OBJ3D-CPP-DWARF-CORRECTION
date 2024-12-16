@@ -1,6 +1,7 @@
 #include "Color.h"
 
-string RainbowEveryChar(const string& _word)
+// ==== COLOR ====
+string Color::RainbowEveryChar(const string& _word)
 {
 	string _newWord = "";
 	for (u_int _i = 0; _i < _word.length(); _i++)
@@ -11,17 +12,17 @@ string RainbowEveryChar(const string& _word)
 	return _newWord + RESET;
 }
 
-string RainbowString(const string& _word)
+string Color::RainbowString(const string& _word)
 {
 	return GetRandomColor() + _word + RESET;
 }
 
-void DisplayRainbow(const string& _text)
+void Color::DisplayRainbow(const string& _text)
 {
 	while (!_kbhit())
 	{
 		CLEAR_SCREEN;
-		DISPLAY(RainbowString(_text), true);
+		cout << RainbowString(_text) << endl;
 		const auto _start = high_resolution_clock::now();
 		sleep_for(200ms);
 		const auto _end = high_resolution_clock::now();
@@ -29,7 +30,7 @@ void DisplayRainbow(const string& _text)
 	}
 }
 
-string GetRandomColor()
+string Color::GetRandomColor()
 {
 	const string _rainbowTable[] =
 	{
@@ -56,6 +57,7 @@ string GetRandomColor()
 	return _rainbowTable[RandomInt(0, _rainbowSize)];
 }
 
+// ==== GRADIENT ====
 string Gradient::GradientString(const string _text, const bool _textOnly)
 {
 	const int _size = static_cast<int>(_text.size());
@@ -91,4 +93,3 @@ Color Gradient::ClampGradient(const int _index, const int _maxDisplayChar) const
 
 	return { (int)_valueRed, (int)_valueGreen, (int)_valueBlue };
 }
-
