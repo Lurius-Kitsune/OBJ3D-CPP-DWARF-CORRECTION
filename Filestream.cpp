@@ -1,19 +1,10 @@
 #include "Filestream.h"
 
-FileStream::FileStream(const string& _fullPath, const bool _autoCreate,
-	const string& _cryptageKey, const bool _isCrypt,
-	const ios_base::openmode& _openMode)
+FileStream::FileStream(const string& _fullPath, const ios_base::openmode& _openMode)
 {
 	openMode = _openMode;
 	openMode |= ios_base::binary;
 	fullPath = _fullPath;
-	isCrypt = _isCrypt;
-	cryptageKey = _cryptageKey;
-	cryptageKeySize = static_cast<u_int>(cryptageKey.size());
-	if (_autoCreate)
-	{
-		ifstream(_fullPath, ios_base::app);
-	}
 	stream = fstream(_fullPath, openMode);
 }
 
@@ -28,21 +19,6 @@ vector<string> FileStream::ReadAll()
 	return _content;
 }
 
-string FileStream::Read(const streamsize& _length, const streampos& _position)
-{
-	if (!IsValid()) return "";
-
-	string _content(_length, '\0');
-
-	if (_position != -1)
-	{
-		stream.seekg(_position);
-	}
-	stream.read(&_content[0], _length);
-
-	return _content;
-}
-
 string FileStream::ReadLine(const u_int& _lineIndex)
 {
 	if (!IsValid()) return "";
@@ -54,50 +30,6 @@ string FileStream::ReadLine(const u_int& _lineIndex)
 	getline(stream, _content);
 	return _content;
 }
-
-bool FileStream::RemoveLine(const u_int& _lineIndex)
-{
-
-	streampos _cursor = _lineIndex > static_cast<u_int>(ComputeLineOfFile()) ? ComputeLenghOfFile() : GetOffset(0, _lineIndex);
-	if (ComputeLineOfFile() > 1) _cursor = _cursor.operator-(_lineIndex == ComputeLineOfFile() ? 1 : 0);
-	return Remove(ReadLine(_lineIndex).size() + 1, _cursor);
-}
-
-bool FileStream::Remove(const streamsize& _length, const streampos& _position)
-{
-	if (!IsValid()) return false;
-
-	stream.clear();
-
-	string _content = Read(_position, 0);
-	_content += Read(ComputeLenghOfFile() - _position, _position + _length);
-	_content.erase(remove(_content.begin(), _content.end(), '\r'), _content.end());
-	_content.erase(remove(_content.begin(), _content.end(), '\0'), _content.end());
-
-	fstream _write = fstream(fullPath, ios::out | ios_base::binary);
-	_write << _content;
-	_write.close();
-
-	stream = fstream(fullPath, openMode);
-
-	return stream.good();
-}
-
-bool FileStream::Clear()
-{
-	if (ComputeLenghOfFile() == 0) return false;
-	return Remove(ComputeLenghOfFile(), 0);;
-}
-
-bool FileStream::Write(const string& _content, const streampos& _position)
-{
-	if (isCrypt)
-		return Uncrypt() &&
-		Write(_content.c_str(), _content.size(), _position)
-		&& Crypt();
-	return Write(_content.c_str(), _content.size(), _position);
-}
-
 
 streampos FileStream::GetOffset(const u_int& _horizontal, const u_int& _vertical)
 {
@@ -125,77 +57,7 @@ streampos FileStream::GetOffset(const u_int& _horizontal, const u_int& _vertical
 	return _pos;
 }
 
-streampos FileStream::ComputeLenghOfFile()
-{
 
-	stream.seekg(0, stream.end);
-	const streampos& _lengh = stream.tellg();
-	stream.seekg(0);
-	return _lengh;
-}
-
-bool FileStream::Crypt()
-{
-	if (!IsValid() || isCrypt) return false;
-	string _modifiedText;
-	const string& _baseText = Read(ComputeLenghOfFile());
-	const u_int& _baseTextSize = static_cast<u_int>(_baseText.size());
-	int _modifiedInt;
-	for (u_int _index = 0; _index < _baseTextSize; _index++)
-	{
-		_modifiedInt = int(_baseText[_index] + cryptageKey[_index % cryptageKeySize]);
-		_modifiedText += char(_modifiedInt);
-	}
-	Clear();
-	Write(_modifiedText.c_str(), _modifiedText.size(), -1);
-	isCrypt = true;
-	return true;
-}
-
-bool FileStream::Uncrypt()
-{
-	if (!IsValid() || !isCrypt) return false;
-	string _modifiedText;
-	const string& _baseText = Read(ComputeLenghOfFile());
-	const u_int& _baseTextSize = static_cast<u_int>(_baseText.size());
-	int _modifiedInt;
-	for (u_int _index = 0; _index < _baseTextSize; _index++)
-	{
-		_modifiedInt = int(_baseText[_index] - cryptageKey[_index % cryptageKeySize]);
-		_modifiedText += char(_modifiedInt);
-	}
-	Clear();
-	Write(_modifiedText.c_str(), _modifiedText.size(), -1);
-	isCrypt = false;
-	return true;
-}
-
-bool FileStream::Write(const char* _content, const streamsize& _lengh, const streampos& _position)
-{
-	if (!IsValid()) return false;
-
-	string _remainingContent;
-
-	if (_position != -1)
-	{
-		stream.seekp(_position);
-		getline(stream, _remainingContent, '\0');
-
-		stream.clear();
-		stream.seekg(_position);
-	}
-	stream.write(_content, _lengh);
-
-	if (!_remainingContent.empty())
-	{
-		stream.write(_remainingContent.c_str(), _remainingContent.size());
-	}
-
-	stream.close();
-	stream.open(fullPath, openMode);
-
-	return stream.good();
-}
 
 int FileStream::ComputeLineOfFile()
 {

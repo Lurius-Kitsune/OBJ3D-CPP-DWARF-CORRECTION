@@ -21,8 +21,7 @@ public:
 
 	FileStream() = default;
 
-	FileStream(const string& _fullPath, const bool _autoCreate = false
-		, const string& _cryptageKey = "LaCleeDesP1", const bool _isCrypt = false,
+	FileStream(const string& _fullPath,
 		const ios_base::openmode& _openMode = ios_base::in | ios_base::out | ios_base::binary);
 
 public:
@@ -61,29 +60,10 @@ public:
 	// Afficher un nombre n de lignes à partir d'un index
 	vector<string> ReadAll();
 
-	string Read(const streamsize& _length, const streampos& _position = -1);
-
 	string ReadLine(const u_int& _lineIndex = 0);
-
-	bool RemoveLine(const u_int& _lineIndex = 0);
-
-	bool Remove(const streamsize& _length, const streampos& _position);
-
-	bool Clear();
-
-	bool Write(const string& _content, const streampos& _position = -1);
 
 	streampos GetOffset(const u_int& _horizontal, const u_int& _vertical);
 
 	int ComputeLineOfFile();
-
-	streampos ComputeLenghOfFile();
-
-	bool Crypt();
-
-	bool Uncrypt();
-
-private:
-	bool Write(const char* _content, const streamsize& _lengh, const streampos& _position);
 };
 

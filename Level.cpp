@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "Macro.h"
 #include "Filestream.h"
+#include "Color.h"
 
 Level::Level(const string& _path)
 {
@@ -89,7 +90,7 @@ Level::Level(const string& _path)
 	"999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
 	};
 	*/
-
+	savePath = _path;
 	LoadMap();
 	fullMapSize = Size(map);
 	viewSize = Size(21, 21);
@@ -106,25 +107,38 @@ void Level::LoadMap()
 
 }
 
-string Level::ConvertMapToString()
+string Level::ConvertMapToSave()
 {
 	const u_int& _mapSize = static_cast<const u_int&>(fullMapSize.sizeX);
 	string _content = "";
 	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
 	{
 		const u_int& _rowSize = static_cast<const u_int&>(fullMapSize.sizeY);
-		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex++)
-		{
-			_content += map[_rowIndex][_columnIndex];
-		}
+		_content += "-" + map[_rowIndex];
 		_content += "\n";
 	}
+	return _content;
 }
 
 void Level::SaveMap()
 {
-	FileStream _stream = FileStream(savePath, true);
-	_stream.Write(ConvertMapToString());
+	//FileStream _stream = FileStream(savePath, true);
+	ofstream _myStream(savePath);
+
+	if (_myStream)
+	{
+		const u_int& _mapSize = static_cast<const u_int&>(fullMapSize.sizeX);
+		string _content = "";
+		for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
+		{
+			const u_int& _rowSize = static_cast<const u_int&>(fullMapSize.sizeY);
+			_myStream << map[_rowIndex] << "\n";
+		}
+	}
+	else
+	{
+		cout << "Cant open File" << endl;
+	}
 }
 
 void Level::DisplayMap(const Size& _size, const Coords& _center)const
@@ -148,6 +162,28 @@ Coords Level::ComputeCenter(const Coords& _cursorPos) const
 		static_cast<int>(_cursorPos.x - viewSize.sizeX / 2.0f),
 		static_cast<int>(_cursorPos.y - viewSize.sizeY / 2.0f)
 	};
+}
+
+string Level::ComputeColor(const char _letter) const
+{
+	const Color _colors[] =
+	{
+		Color(0,0,0),
+		Color(41,30,10),
+		Color(50,46,21),
+		Color(79,69,49),
+		Color(41,207,90),
+		Color(87,189,117),
+		Color(255,250,112),
+		Color(0,156,217),
+		Color(0,4,217)
+	};
+	return _colors[_letter].ToString(false) + " ";
+}
+
+void Level::Save()
+{
+	SaveMap();
 }
 
 void Level::DisplayView(const Coords& _cursorPos)

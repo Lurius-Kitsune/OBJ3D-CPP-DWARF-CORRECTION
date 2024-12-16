@@ -22,11 +22,13 @@ public:
 private:
 	void DisplayMap(const Size& _size, const Coords& _center = { 0, 0 })const;
 	Coords ComputeCenter(const Coords& _cursorPos)const;
+	string ComputeColor(const char _letter)const;
+	void LoadMap();
+	string ConvertMapToSave();
+	void SaveMap();
 
 public :
-	void LoadMap();
-	string ConvertMapToString();
-	void SaveMap();
+	void Save();
 	void DisplayView(const Coords& _center);
 	void DisplayFullMap();
 };
