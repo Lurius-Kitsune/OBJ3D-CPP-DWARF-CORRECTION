@@ -3,6 +3,7 @@
 #include "Size.h"
 #include "Cordinates.h"
 #include "Color.h"
+#include "Cursor.h"
 
 class Level
 {
@@ -12,6 +13,7 @@ class Level
 	Size fullMapSize;
 	Size viewSize;
 	string savePath;
+	Cursor* cursor;
 
 public:
 	INLINE const Size& GetFullSize()const
@@ -20,7 +22,7 @@ public:
 	}
 
 public:
-	Level(const string& _path);
+	Level(const string& _path, Cursor* _cursor);
 
 private:
 

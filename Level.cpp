@@ -2,14 +2,13 @@
 #include "Macro.h"
 #include "Filestream.h"
 
-
-
-Level::Level(const string& _path)
+Level::Level(const string& _path, Cursor* _cursor)
 {
 	savePath = "Asset/Level/" + _path;
 	LoadMap();
 	fullMapSize = Size(map);
-	viewSize = Size(150, 21);
+	viewSize = Size(21, 21);
+	cursor = _cursor;
 }
 
 bool Level::IsOver(const Coords& _coords) const
@@ -78,8 +77,14 @@ void Level::DisplayMap(const Size& _size, const Coords& _center)const
 			{
 				continue;
 			}
-
-			Print(ComputeColor(map[_rowIndex][_columnIndex]), false);
+			if (cursor->GetCoords() == Coords(_rowIndex, _columnIndex))
+			{
+				Print(cursor->GetAppearance(), false);
+			}
+			else
+			{
+				Print(ComputeColor(map[_rowIndex][_columnIndex]), false);
+			}
 		}
 		cout << endl;
 	}
@@ -109,7 +114,7 @@ string Level::ComputeColor(const char _letter) const
 		make_pair('#', Color(0,4,217))
 	};
 
-	return _colors[_letter].ToString(false) + " " + RESET;
+	return _colors[_letter].ToString(false) + "  " + RESET;
 }
 
 void Level::Save()

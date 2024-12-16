@@ -5,15 +5,10 @@
 #include "Macro.h"
 #include "Emoji.h"
 
-Cursor::Cursor(Level* _level)
+Cursor::Cursor(const Coords& _position)
 {
 	appearance = CROSSHAIRE;
-	level = _level;
-}
-
-bool Cursor::IsOver() const
-{
-	return level->IsOver(position);
+	position = _position;
 }
 
 Coords Cursor::GetCenterConsole()
@@ -74,11 +69,3 @@ void Cursor::DisplayOnceCenterMultiLine(const string* _textArray, const u_int& _
 	}
 }
 
-void Cursor::Display(const Coords& _center) const
-{
-	if (!IsOver)
-	{
-		SetCursorPosition(_center.x, _center.y);
-		Print(appearance);
-	}
-}

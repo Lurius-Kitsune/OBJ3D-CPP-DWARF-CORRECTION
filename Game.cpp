@@ -4,7 +4,7 @@
 Game::Game()
 {
 	level = nullptr;
-	cursor = new Cursor(nullptr);
+	cursor = new Cursor({10, 10});
 }
 
 Game::~Game()
@@ -16,7 +16,7 @@ Game::~Game()
 void Game::SelectLevel()
 {
 	const string& _path = "DefaultLevel.txt";
-	level = new Level(_path);
+	level = new Level(_path, cursor);
 }
 
 void Game::Start()
@@ -48,9 +48,7 @@ void Game::Update()
 		}
 		else
 		{
-			const Coords& _center = Coords(10, 10);
-			level->DisplayView(_center);
-			cursor->Display(_center);
+			level->DisplayView(Coords(_center));
 		}
 	}
 	level->Save();

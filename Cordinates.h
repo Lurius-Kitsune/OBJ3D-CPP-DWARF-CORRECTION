@@ -23,4 +23,9 @@ struct Coords
 	{
 		return  "(X : " + STRING(x)  + ", Y : " + STRING(y);
 	}
+
+	bool operator== (const Coords&& _other)const
+	{
+		return x == _other.x && y == _other.y;
+	}
 };
