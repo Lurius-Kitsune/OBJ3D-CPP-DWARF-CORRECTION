@@ -15,6 +15,6 @@ struct Coords
 
 	string ToString() const
 	{
-
+		return  "(X : " + STRING(x)  + ", Y : " + STRING(y);
 	}
 };
