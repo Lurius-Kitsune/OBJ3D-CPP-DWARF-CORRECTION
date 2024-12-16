@@ -53,7 +53,7 @@ int main()
     Game _game;
 
     _game.SelectLevel();
-    _game.StartGame();
+    _game.Start();
     return EXIT_SUCCESS;
 }
 

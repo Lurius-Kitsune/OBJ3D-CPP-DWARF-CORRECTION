@@ -1,7 +1,7 @@
 #include "Level.h"
 #include "Macro.h"
 #include "Filestream.h"
-#include "Color.h"
+
 
 
 Level::Level(const string& _path)
@@ -176,19 +176,23 @@ Coords Level::ComputeCenter(const Coords& _cursorPos) const
 
 string Level::ComputeColor(const char _letter) const
 {
-	const Map<char, Color> _colors =
+	const Map _colors =
 	{
-		{':', Color(41,30,10) },
-		{'=', Color(50,46,21) },
-		{'-', Color(79,69,49) },
-		{'+', Color(41,207,90) },
-		{'@', Color(87,189,117) },
-		{'%', Color(255,250,112) },
-		{'~', Color(0,156,217) },
-		{'#', Color(0,4,217)}
+		make_pair('*', Color(0,0,0)),
+		make_pair(':', Color(41,30,10) ),
+		make_pair('=', Color(50,46,21) ),
+		make_pair('-', Color(79,69,49) ),
+		make_pair('+', Color(41,207,90) ),
+		make_pair('@', Color(87,189,117) ),
+		make_pair('%', Color(255,250,112) ),
+		make_pair('~', Color(0,156,217) ),
+		make_pair('#', Color(0,4,217))
 	};
 
-	if (_colors.find(_letter) == _colors.end()) return "";
+	if (_colors.find(_letter) == _colors.end())
+	{
+		return "";
+	}
 
 	return _colors.at(_letter).ToString(false) + " " + RESET;
 }

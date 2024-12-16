@@ -14,7 +14,7 @@ public:
 
 public:
 	void SelectLevel();
-	void StartGame();
+	void Start();
 	void Update();
 	void Pause();
 	void Stop();

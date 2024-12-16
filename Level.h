@@ -2,11 +2,11 @@
 #include "CoreMinimal.h"
 #include "Size.h"
 #include "Cordinates.h"
+#include "Color.h"
 
 class Level
 {
-	template<typename Key, typename Value>
-	using Map = std::map<Key, Value>;
+	using Map = std::map<char, Color>;
 
 	vector<string> map;
 	Size fullMapSize;

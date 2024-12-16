@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Macro.h"
 
 Game::Game()
 {
@@ -18,8 +19,9 @@ void Game::SelectLevel()
 	level = new Level(_path);
 }
 
-void Game::StartGame()
+void Game::Start()
 {
+	SLEEP(seconds, 3);
 	Update();
 }
 
@@ -36,8 +38,9 @@ void Game::Update()
 				continue;
 			}
 			displayAll = !displayAll;
+			CLEAR_SCREEN;
 		}
-
+		cursor->SetCursorPosition(0, 0);
 		const Size& _center = level->GetFullSize() / 2;
 		if (displayAll)
 		{
