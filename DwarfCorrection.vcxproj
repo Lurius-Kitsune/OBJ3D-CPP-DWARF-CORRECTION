@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Cursor.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="Macro.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
@@ -138,13 +139,14 @@
     <ClInclude Include="CoreMinimal.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="Emoji.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Random.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Map\DefaultLevel.txt" />
-    <Text Include="Map\Map2.txt" />
+    <Text Include="Asset\Map\DefaultLevel.txt" />
+    <Text Include="Asset\Map\Map2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

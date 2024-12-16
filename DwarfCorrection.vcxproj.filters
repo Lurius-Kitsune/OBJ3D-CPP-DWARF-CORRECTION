@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Asset">
+      <UniqueIdentifier>{d6b05f1e-d69d-4455-acc6-ed53943f68ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -27,18 +30,15 @@
     <ClCompile Include="Cursor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Emoji.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CoreMinimal.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Macro.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
@@ -53,13 +53,22 @@
     <ClInclude Include="Random.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Emoji.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Map\DefaultLevel.txt">
-      <Filter>Resource Files</Filter>
+    <Text Include="Asset\Map\DefaultLevel.txt">
+      <Filter>Resource Files\Asset</Filter>
     </Text>
-    <Text Include="Map\Map2.txt">
-      <Filter>Resource Files</Filter>
+    <Text Include="Asset\Map\Map2.txt">
+      <Filter>Resource Files\Asset</Filter>
     </Text>
   </ItemGroup>
 </Project>
