@@ -4,7 +4,7 @@
 Game::Game()
 {
 	level = nullptr;
-	cursor = new Cursor();
+	cursor = new Cursor(nullptr);
 }
 
 Game::~Game()

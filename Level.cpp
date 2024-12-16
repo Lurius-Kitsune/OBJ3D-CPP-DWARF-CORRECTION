@@ -97,6 +97,11 @@ Level::Level(const string& _path)
 	viewSize = Size(150, 21);
 }
 
+bool Level::IsOver(const Coords& _coords) const
+{
+	return false;
+}
+
 
 void Level::LoadMap()
 {
@@ -176,7 +181,7 @@ Coords Level::ComputeCenter(const Coords& _cursorPos) const
 
 string Level::ComputeColor(const char _letter) const
 {
-	const Map _colors =
+	Map _colors =
 	{
 		make_pair('*', Color(0,0,0)),
 		make_pair(':', Color(41,30,10) ),
@@ -189,12 +194,7 @@ string Level::ComputeColor(const char _letter) const
 		make_pair('#', Color(0,4,217))
 	};
 
-	if (_colors.find(_letter) == _colors.end())
-	{
-		return "";
-	}
-
-	return _colors.at(_letter).ToString(false) + " " + RESET;
+	return _colors[_letter].ToString(false) + " " + RESET;
 }
 
 void Level::Save()

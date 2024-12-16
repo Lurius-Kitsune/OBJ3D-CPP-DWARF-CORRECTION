@@ -23,18 +23,26 @@ public:
 	Level(const string& _path);
 
 private:
+
+	#pragma region Display
 	void DisplayMap(const Size& _size, const Coords& _center = { 0, 0 })const;
 	Coords ComputeCenter(const Coords& _cursorPos)const;
 	string ComputeColor(const char _letter)const;
+	bool IsValidCoords(const u_int& _rowIndex, const u_int& _columnIndex) const;
+	#pragma endregion
+
+	#pragma region Save
 	void LoadMap();
 	string ConvertMapToSave();
 	void SaveMap();
+	#pragma endregion
 
-	bool IsValidCoords(const u_int& _rowIndex, const u_int& _columnIndex) const;
+
 
 public :
 	void Save();
 	void DisplayView(const Coords& _center);
 	void DisplayFullMap();
+	bool IsOver(const Coords& _coords) const;
 };
 

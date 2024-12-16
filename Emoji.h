@@ -1,5 +1,8 @@
 #pragma once
 
+#define CROSSHAIRE  "\xF0\x96\xA6\x8F";
+#define CROSSHAIRE2  "\xE2\x8A\xB9";
+
 #define VILLAGE_EMOJI "\xF0\x9F\x8F\x98"
 #define HOUSE_EMOJI    "\xF0\x9F\x8F\xA0"
 #define FORGE_EMOJI "\xE2\x9A\x92"

@@ -1,6 +1,18 @@
 #include "Cursor.h"
 #include "Cursor.h"
 #include "Color.h"
+#include "Cordinates.h"
+
+Cursor::Cursor(Level* _level)
+{
+	appearance = "";
+	level = _level;
+}
+
+bool Cursor::IsOver() const
+{
+	return level->IsOver(position);
+}
 
 Coords Cursor::GetCenterConsole()
 {
