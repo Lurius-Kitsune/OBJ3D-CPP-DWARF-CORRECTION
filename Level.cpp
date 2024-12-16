@@ -94,7 +94,7 @@ Level::Level(const string& _path)
 	savePath = _path;
 	LoadMap();
 	fullMapSize = Size(map);
-	viewSize = Size(21, 21);
+	viewSize = Size(150, 21);
 }
 
 

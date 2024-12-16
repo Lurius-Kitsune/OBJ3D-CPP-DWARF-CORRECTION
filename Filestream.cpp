@@ -19,7 +19,7 @@ FileStream::FileStream(const string& _fullPath, const bool _autoCreate,
 
 vector<string> FileStream::ReadAll(const string& _path)
 {
-    const ios_base::openmode& _openMode = ios_base::in | ios_base::binary);
+    const ios_base::openmode& _openMode = ios_base::in | ios_base::binary;
     ifstream _stream(_path, _openMode);
     vector<string> _lines;
     string _line;
