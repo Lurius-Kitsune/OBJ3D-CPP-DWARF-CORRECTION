@@ -13,6 +13,54 @@ Game::~Game()
 	delete cursor;
 }
 
+bool Game::PoleEvent()
+{
+	if (_kbhit())
+	{
+		const int _code = _getch();
+		if (_code == 27)
+		{
+			return true;
+		}
+		else if (_code == 9)
+		{
+			displayAll = !displayAll;
+			CLEAR_SCREEN;
+		}
+		else if (_code == 72)
+		{
+			cursor->Move(Coords(0, -1));
+		}
+		else if (_code == 75)
+		{
+			cursor->Move(Coords(-1, 0));
+		}
+		else if (_code == 77)
+		{
+			cursor->Move(Coords(1, 0));
+		}
+		else if (_code == 80)
+		{
+			cursor->Move(Coords(0, 1));
+		}
+	}
+	return false;
+}
+
+void Game::Display()
+{
+	cursor->SetCursorPosition(0, 0);
+	const Size& _center = level->GetFullSize() / 2;
+	if (displayAll)
+	{
+		level->DisplayFullMap();
+	}
+	else
+	{
+		level->DisplayView(Coords(_center));
+	}
+}
+
 void Game::SelectLevel()
 {
 	const string& _path = "DefaultLevel.txt";
@@ -30,26 +78,8 @@ void Game::Update()
 	bool _wantToExit = false;
 	while (!_wantToExit)
 	{
-		if (_kbhit())
-		{
-			if (_getch() == 27)
-			{
-				_wantToExit = true;
-				continue;
-			}
-			displayAll = !displayAll;
-			CLEAR_SCREEN;
-		}
-		cursor->SetCursorPosition(0, 0);
-		const Size& _center = level->GetFullSize() / 2;
-		if (displayAll)
-		{
-			level->DisplayFullMap();
-		}
-		else
-		{
-			level->DisplayView(Coords(_center));
-		}
+		_wantToExit = PoleEvent();
+		Display();
 	}
 	level->Save();
 	Stop();

@@ -13,6 +13,8 @@ public:
 	~Game();
 
 public:
+	bool PoleEvent();
+	void Display();
 	void SelectLevel();
 	void Start();
 	void Update();

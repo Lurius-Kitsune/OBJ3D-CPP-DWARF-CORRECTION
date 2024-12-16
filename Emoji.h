@@ -1,6 +1,6 @@
 #pragma once
 
-#define CROSSHAIRE  "\xF0\x96\xA6\x8F";
+#define CROSSHAIRE  "\xE2\x9D\x8C";
 #define CROSSHAIRE2  "\xE2\x8A\xB9";
 
 #define VILLAGE_EMOJI "\xF0\x9F\x8F\x98"

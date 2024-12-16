@@ -29,8 +29,10 @@ struct Coords
 		return x == _other.x && y == _other.y;
 	}
 
-	Coords operator += (const Coords& _other)
+	Coords& operator += (const Coords& _other)
 	{
-		return { x + _other.x, y + _other.y };
+		x += _other.x;
+		y += _other.y;
+		return *this;
 	}
 };
