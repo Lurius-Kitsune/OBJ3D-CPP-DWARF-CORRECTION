@@ -28,9 +28,9 @@ public:
 private:
 
 	#pragma region Print
-	void DisplayMap(const Size& _size, const Coords& _center = { 0, 0 })const;
+	void DisplayMap(const Size& _size, const Coords& _start = { 0, 0 })const;
 	Coords ComputeCenter(const Coords& _cursorPos)const;
-	string ComputeColor(const char _letter)const;
+	string ComputeColor(const char _letter, const bool _isEmoji) const;
 	bool IsValidCoords(const u_int& _rowIndex, const u_int& _columnIndex) const;
 	#pragma endregion
 
@@ -43,8 +43,9 @@ private:
 
 
 public :
+	
 	void Save();
-	void DisplayView();
+	void DisplayView(const Coords& _coords);
 	void DisplayFullMap();
 	bool IsOver(const Coords& _coords) const;
 };

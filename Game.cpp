@@ -45,21 +45,20 @@ bool Game::PoleEvent()
 			cursor->Move(Coords(1, 0));
 		}
 	}
-	cout << cursor->GetCoords().ToString() << endl;
+	
 	return false;
 }
 
 void Game::Display()
 {
 	cursor->SetCursorPosition(0, 0, false);
-	const Size& _center = level->GetFullSize() / 2;
 	if (displayAll)
 	{	
 		level->DisplayFullMap();
 	}
 	else
 	{
-		level->DisplayView();
+		level->DisplayView(cursor->GetCoords());
 	}
 }
 

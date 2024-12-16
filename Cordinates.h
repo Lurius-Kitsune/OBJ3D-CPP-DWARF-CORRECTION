@@ -21,7 +21,7 @@ struct Coords
 
 	string ToString() const
 	{
-		return  "(X : " + STRING(x)  + ", Y : " + STRING(y);
+		return  "(X : " + STRING(x)  + ", Y : " + STRING(y) + ")";
 	}
 
 	bool operator== (const Coords&& _other)const
