@@ -30,6 +30,8 @@ private:
 	string ConvertMapToSave();
 	void SaveMap();
 
+	bool IsValidCoords(const u_int& _rowIndex, const u_int& _columnIndex) const;
+
 public :
 	void Save();
 	void DisplayView(const Coords& _center);

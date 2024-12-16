@@ -100,9 +100,7 @@ Level::Level(const string& _path)
 
 void Level::LoadMap()
 {
-	FileStream _stream = FileStream(savePath);
-
-	vector<string> _map = _stream.ReadAll();
+	vector<string> _map = FileStream::ReadAll(savePath);
 
 	map = _map;
 
@@ -142,6 +140,12 @@ void Level::SaveMap()
 	}
 }
 
+bool Level::IsValidCoords(const u_int& _rowIndex, const u_int& _columnIndex) const
+{
+	return _rowIndex >= 0 && _rowIndex < fullMapSize.sizeX
+		&& _columnIndex >= 0 && _columnIndex < fullMapSize.sizeY;
+}
+
 void Level::DisplayMap(const Size& _size, const Coords& _center)const
 {
 	const u_int& _mapSize = static_cast<const u_int&>(_size.sizeX);
@@ -150,6 +154,11 @@ void Level::DisplayMap(const Size& _size, const Coords& _center)const
 		const u_int& _rowSize = static_cast<const u_int&>(_size.sizeY);
 		for (u_int _columnIndex = _center.y; _columnIndex < _center.y + _rowSize ; _columnIndex++)
 		{
+			if (!IsValidCoords(_rowIndex, _columnIndex))
+			{
+				continue;
+			}
+
 			Display(ComputeColor(map[_rowIndex][_columnIndex]), false);
 		}
 		cout << endl;
@@ -178,6 +187,9 @@ string Level::ComputeColor(const char _letter) const
 		{'~', Color(0,156,217) },
 		{'#', Color(0,4,217)}
 	};
+
+	if (_colors.find(_letter) == _colors.end()) return "";
+
 	return _colors.at(_letter).ToString(false) + " " + RESET;
 }
 
