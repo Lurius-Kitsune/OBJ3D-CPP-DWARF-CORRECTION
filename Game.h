@@ -7,7 +7,7 @@ class Game
 {
 	Level* level;
 	Cursor* cursor;
-	bool displayAll = false;
+	bool displayAll = true;
 public:
 	Game();
 	~Game();

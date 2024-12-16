@@ -79,11 +79,11 @@ void Level::DisplayMap(const Size& _size, const Coords& _center)const
 			}
 			if (cursor->GetCoords() == Coords(_rowIndex, _columnIndex))
 			{
-				Print(cursor->GetAppearance(), false);
+				Print(ComputeColor(map[_rowIndex][_columnIndex]) + cursor->GetAppearance() + " ", false);
 			}
 			else
 			{
-				Print(ComputeColor(map[_rowIndex][_columnIndex]), false);
+				Print(ComputeColor(map[_rowIndex][_columnIndex]) + "  ", false);
 			}
 		}
 		cout << endl;
@@ -114,7 +114,7 @@ string Level::ComputeColor(const char _letter) const
 		make_pair('#', Color(0,4,217))
 	};
 
-	return _colors[_letter].ToString(false) + "  " + RESET;
+	return _colors[_letter].ToString(false) ;
 }
 
 void Level::Save()
