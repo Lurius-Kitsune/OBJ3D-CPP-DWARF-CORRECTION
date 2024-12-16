@@ -18,6 +18,7 @@ bool Game::PoleEvent()
 	if (_kbhit())
 	{
 		const int _code = _getch();
+		cout << _code << endl;
 		if (_code == 27)
 		{
 			return true;
@@ -44,20 +45,21 @@ bool Game::PoleEvent()
 			cursor->Move(Coords(0, 1));
 		}
 	}
+	cout << cursor->GetCoords().ToString() << endl;
 	return false;
 }
 
 void Game::Display()
 {
-	cursor->SetCursorPosition(0, 0);
+	cursor->SetCursorPosition(0, 0, false);
 	const Size& _center = level->GetFullSize() / 2;
 	if (displayAll)
-	{
+	{	
 		level->DisplayFullMap();
 	}
 	else
 	{
-		level->DisplayView(Coords(_center));
+		level->DisplayView(cursor->GetCoords());
 	}
 }
 
@@ -69,7 +71,7 @@ void Game::SelectLevel()
 
 void Game::Start()
 {
-	SLEEP(seconds, 3);
+	//SLEEP(seconds, 3);
 	Update();
 }
 

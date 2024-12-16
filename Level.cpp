@@ -68,7 +68,7 @@ bool Level::IsValidCoords(const u_int& _rowIndex, const u_int& _columnIndex) con
 void Level::DisplayMap(const Size& _size, const Coords& _center)const
 {
 	const u_int& _mapSize = static_cast<const u_int&>(_size.sizeX);
-	for (u_int _rowIndex = _center.x; _rowIndex < _center.x + _mapSize; _rowIndex++)
+	for (u_int _rowIndex = -_center.x; _rowIndex < _center.x + _mapSize; _rowIndex++)
 	{
 		const u_int& _rowSize = static_cast<const u_int&>(_size.sizeY);
 		for (u_int _columnIndex = _center.y; _columnIndex < _center.y + _rowSize ; _columnIndex++)
@@ -77,9 +77,9 @@ void Level::DisplayMap(const Size& _size, const Coords& _center)const
 			{
 				continue;
 			}
-			if (cursor->GetCoords() == Coords(_rowIndex, _columnIndex))
+			if (_center + cursor->GetCoords() == Coords(_rowIndex, _columnIndex))
 			{
-				Print(ComputeColor(map[_rowIndex][_columnIndex]) + cursor->GetAppearance() + " ", false);
+				cout << CROSSHAIRE;
 			}
 			else
 			{
@@ -124,7 +124,7 @@ void Level::Save()
 
 void Level::DisplayView(const Coords& _cursorPos)
 {
-	DisplayMap(viewSize, ComputeCenter(_cursorPos));
+	DisplayMap(Size(60, 60), ComputeCenter(_cursorPos));
 }
 
 void Level::DisplayFullMap()

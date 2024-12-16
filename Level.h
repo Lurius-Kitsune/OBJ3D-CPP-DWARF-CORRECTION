@@ -4,6 +4,7 @@
 #include "Cordinates.h"
 #include "Color.h"
 #include "Cursor.h"
+#include "Emoji.h"
 
 class Level
 {
