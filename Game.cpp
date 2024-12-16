@@ -4,7 +4,7 @@
 Game::Game()
 {
 	level = nullptr;
-	cursor = new Cursor({10, 10});
+	cursor = new Cursor({35, 35});
 }
 
 Game::~Game()
@@ -30,19 +30,19 @@ bool Game::PoleEvent()
 		}
 		else if (_code == 72)
 		{
-			cursor->Move(Coords(0, -1));
+			cursor->Move(Coords(-1, 0));
 		}
 		else if (_code == 75)
 		{
-			cursor->Move(Coords(-1, 0));
+			cursor->Move(Coords(0, -1));
 		}
 		else if (_code == 77)
 		{
-			cursor->Move(Coords(1, 0));
+			cursor->Move(Coords(0, 1));
 		}
 		else if (_code == 80)
 		{
-			cursor->Move(Coords(0, 1));
+			cursor->Move(Coords(1, 0));
 		}
 	}
 	cout << cursor->GetCoords().ToString() << endl;
@@ -59,7 +59,7 @@ void Game::Display()
 	}
 	else
 	{
-		level->DisplayView(cursor->GetCoords());
+		level->DisplayView();
 	}
 }
 

@@ -44,7 +44,7 @@ private:
 
 public :
 	void Save();
-	void DisplayView(const Coords& _center);
+	void DisplayView();
 	void DisplayFullMap();
 	bool IsOver(const Coords& _coords) const;
 };
