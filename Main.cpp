@@ -49,15 +49,11 @@ int main()
 {
     Config();
 
-    TEMP();
-    const string& _path = "Asset/Map/DefaultLevel.txt";
-    Level _level = Level(_path);
+    //TEMP();
+    Game _game;
 
-    _level.DisplayFullMap();
-
-    const Size& _center = _level.GetFullSize() / 2;
-    _level.DisplayView(Coords(_center));
-    _level.Save();
+    _game.SelectLevel();
+    _game.StartGame();
     return EXIT_SUCCESS;
 }
 

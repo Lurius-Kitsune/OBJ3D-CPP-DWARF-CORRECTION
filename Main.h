@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Macro.h"
-#include "Level.h"
+#include "Game.h"
 
 void SetConsoleName(const string& _name);
 
