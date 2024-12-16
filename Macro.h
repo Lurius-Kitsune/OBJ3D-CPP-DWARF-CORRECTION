@@ -14,7 +14,7 @@
 void ChangeEncoding();
 
 template <typename Type>
-void Display(const Type& _value, const bool _endl = true)
+void Print(const Type& _value, const bool _endl = true)
 {
     cout << _value;
     if (_endl) cout << endl;

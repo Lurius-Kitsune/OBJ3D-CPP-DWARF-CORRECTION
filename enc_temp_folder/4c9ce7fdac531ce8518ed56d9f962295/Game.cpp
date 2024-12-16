@@ -48,9 +48,7 @@ void Game::Update()
 		}
 		else
 		{
-			const Coords& _center = Coords(10, 10);
-			level->DisplayView(_center);
-			cursor->Display(_center);
+			level->DisplayView(Coords(_center));
 		}
 	}
 	level->Save();

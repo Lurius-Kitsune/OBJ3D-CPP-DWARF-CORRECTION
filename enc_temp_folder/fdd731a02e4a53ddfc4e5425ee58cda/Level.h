@@ -24,7 +24,7 @@ public:
 
 private:
 
-	#pragma region Print
+	#pragma region Display
 	void DisplayMap(const Size& _size, const Coords& _center = { 0, 0 })const;
 	Coords ComputeCenter(const Coords& _cursorPos)const;
 	string ComputeColor(const char _letter)const;

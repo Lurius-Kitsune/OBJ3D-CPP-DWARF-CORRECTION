@@ -2,12 +2,10 @@
 #include "Cursor.h"
 #include "Color.h"
 #include "Cordinates.h"
-#include "Macro.h"
-#include "Emoji.h"
 
 Cursor::Cursor(Level* _level)
 {
-	appearance = CROSSHAIRE;
+	appearance = "";
 	level = _level;
 }
 
@@ -27,7 +25,7 @@ Coords Cursor::GetCenterConsole()
 	return { _ys, _xs };
 }
 
-void Cursor::SetCursorPosition(const u_int& _xIndex, const u_int& _yIndex, const bool _cursor)const
+void Cursor::SetCursorPosition(const u_int& _xIndex, const u_int& _yIndex, const bool _cursor)
 {
 	static const HANDLE _hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO _info;
@@ -71,14 +69,5 @@ void Cursor::DisplayOnceCenterMultiLine(const string* _textArray, const u_int& _
 		SetCursorPosition(((_center.x + _padding.x) - u_int(_textArray[_index].size())) / 2, (_center.y + (2 * ((_padding.y - _size) / 2 + _index))) / 2);
 		printf(_textArray[_index].c_str());
 		_previousCenter = _center;
-	}
-}
-
-void Cursor::Display(const Coords& _center) const
-{
-	if (!IsOver)
-	{
-		SetCursorPosition(_center.x, _center.y);
-		Print(appearance);
 	}
 }
