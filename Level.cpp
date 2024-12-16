@@ -3,6 +3,7 @@
 #include "Filestream.h"
 #include "Color.h"
 
+
 Level::Level(const string& _path)
 {
 	/*map = {
@@ -144,12 +145,12 @@ void Level::SaveMap()
 void Level::DisplayMap(const Size& _size, const Coords& _center)const
 {
 	const u_int& _mapSize = static_cast<const u_int&>(_size.sizeX);
-	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
+	for (u_int _rowIndex = _center.x; _rowIndex < _center.x + _mapSize; _rowIndex++)
 	{
 		const u_int& _rowSize = static_cast<const u_int&>(_size.sizeY);
-		for (u_int _columnIndex = 0; _columnIndex < _rowSize ; _columnIndex++)
+		for (u_int _columnIndex = _center.y; _columnIndex < _center.y + _rowSize ; _columnIndex++)
 		{
-			Display(map[_rowIndex][_columnIndex], false);
+			Display(ComputeColor(map[_rowIndex][_columnIndex]), false);
 		}
 		cout << endl;
 	}
@@ -166,19 +167,18 @@ Coords Level::ComputeCenter(const Coords& _cursorPos) const
 
 string Level::ComputeColor(const char _letter) const
 {
-	const Color _colors[] =
+	const Map<char, Color> _colors =
 	{
-		Color(0,0,0),
-		Color(41,30,10),
-		Color(50,46,21),
-		Color(79,69,49),
-		Color(41,207,90),
-		Color(87,189,117),
-		Color(255,250,112),
-		Color(0,156,217),
-		Color(0,4,217)
+		{':', Color(41,30,10) },
+		{'=', Color(50,46,21) },
+		{'-', Color(79,69,49) },
+		{'+', Color(41,207,90) },
+		{'@', Color(87,189,117) },
+		{'%', Color(255,250,112) },
+		{'~', Color(0,156,217) },
+		{'#', Color(0,4,217)}
 	};
-	return _colors[_letter].ToString(false) + " ";
+	return _colors.at(_letter).ToString(false) + " " + RESET;
 }
 
 void Level::Save()

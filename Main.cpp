@@ -61,9 +61,31 @@ int main()
     return EXIT_SUCCESS;
 }
 
+void SetConsoleName(const string& _name)
+{
+    SetConsoleTitleA(_name.c_str());
+}
+
+void SetConsoleSize(const u_int& _sizeX, const u_int& _sizeY)
+{
+    HWND Hwnd = GetForegroundWindow();
+    LONG winstyle = GetWindowLong(Hwnd, GWL_STYLE);
+    SetWindowLong(Hwnd, GWL_STYLE, (winstyle | WS_POPUP | WS_MAXIMIZE) & ~WS_CAPTION & ~WS_THICKFRAME & ~WS_BORDER);
+    SetWindowPos(Hwnd, HWND_TOP, 0, 0, _sizeX, _sizeY, 0);
+}
+
+void MaximizeConsole()
+{
+    int _x = GetSystemMetrics(SM_CXSCREEN);
+    int _y = GetSystemMetrics(SM_CYSCREEN);
+    SetConsoleSize(_x, _y);
+}
+
 void Config()
 {
     (_CrtSetDbgFlag)(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Detection de fuite de mémoire
+    SetConsoleName("Dwarf Forteress");
+    MaximizeConsole();
     InitUTF8;
 }
 

@@ -7,6 +7,8 @@
 #include <thread>
 #include <conio.h>
 #include <random>
+#include <map>
+#include <vector>
 #include <fstream>
 #include <sstream>
 #include <assert.h>

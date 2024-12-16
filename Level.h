@@ -5,6 +5,9 @@
 
 class Level
 {
+	template<typename Key, typename Value>
+	using Map = std::map<Key, Value>;
+
 	vector<string> map;
 	Size fullMapSize;
 	Size viewSize;
