@@ -69,3 +69,8 @@ void Cursor::DisplayOnceCenterMultiLine(const string* _textArray, const u_int& _
 	}
 }
 
+void Cursor::Move(const Coords& _offset)
+{
+	position += _offset;
+}
+
