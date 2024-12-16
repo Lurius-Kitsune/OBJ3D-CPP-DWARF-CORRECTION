@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Cursor.cpp" />
+    <ClCompile Include="Filestream.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Macro.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="CoreMinimal.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="Emoji.h" />
+    <ClInclude Include="Filestream.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Main.h" />

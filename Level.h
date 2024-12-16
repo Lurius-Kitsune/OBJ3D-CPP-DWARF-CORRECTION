@@ -5,7 +5,7 @@
 
 class Level
 {
-	vector<string> MAP;
+	vector<string> map;
 	Size fullMapSize;
 	Size viewSize;
 
@@ -25,5 +25,7 @@ private:
 public :
 	void DisplayView(const Coords& _center);
 	void DisplayFullMap();
+
+	void LoadMap();
 };
 

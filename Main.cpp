@@ -56,7 +56,7 @@ int main()
     _level.DisplayFullMap();
 
     const Size& _center = _level.GetFullSize() / 2.0f;
-    _level.DisplayView(_center);
+    _level.DisplayView(Coords(_center));
     return EXIT_SUCCESS;
 }
 

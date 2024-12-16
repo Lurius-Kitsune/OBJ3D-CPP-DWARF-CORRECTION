@@ -16,12 +16,15 @@
     <Filter Include="Resource Files\Asset">
       <UniqueIdentifier>{d6b05f1e-d69d-4455-acc6-ed53943f68ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Lib">
+      <UniqueIdentifier>{d7199814-0b6f-4374-ab92-fd964d657e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lib">
+      <UniqueIdentifier>{6b74f541-3efb-49f9-a1bb-bc22a2c51a14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Macro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Color.cpp">
@@ -32,6 +35,12 @@
     </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Filestream.cpp">
+      <Filter>Source Files\Lib</Filter>
+    </ClCompile>
+    <ClCompile Include="Macro.cpp">
+      <Filter>Source Files\Lib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,17 +62,20 @@
     <ClInclude Include="Random.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="Macro.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Emoji.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Filestream.h">
+      <Filter>Resource Files\Lib</Filter>
+    </ClInclude>
     <ClInclude Include="Size.h">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>Resource Files\Lib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

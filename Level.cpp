@@ -1,9 +1,10 @@
 #include "Level.h"
 #include "Macro.h"
+#include "Filestream.h"
 
 Level::Level()
 {
-	MAP = {
+	/*map = {
 	"999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
 	"999999999999999999999999999999999999999999999999999999999999999999999999999995995959999999999999999999999999999999999999999999999999999999999999999999",
 	"999999999999999999999999999999999999999999999999999999999995555555555555555555555555555555555999999999999999999999999999999999999999999999999999999999",
@@ -87,7 +88,10 @@ Level::Level()
 	"999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
 	"999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
 	};
-	fullMapSize = Size(MAP);
+	*/
+
+	LoadMap();
+	fullMapSize = Size(map);
 	viewSize = Size(21, 21);
 }
 
@@ -99,7 +103,7 @@ void Level::DisplayMap(const Size& _size, const Coords& _center)const
 		const u_int& _rowSize = static_cast<const u_int&>(_size.sizeY);
 		for (u_int _columnIndex = 0; _columnIndex < _rowSize ; _columnIndex++)
 		{
-			Display(MAP[_columnIndex][_rowIndex], false);
+			Display(map[_rowIndex][_columnIndex], false);
 		}
 		cout << endl;
 	}
@@ -116,11 +120,22 @@ Coords Level::ComputeCenter(const Coords& _cursorPos) const
 
 void Level::DisplayView(const Coords& _cursorPos)
 {
-	DisplayMap(viewSize, _cursorPos);
+	DisplayMap(viewSize, ComputeCenter(_cursorPos));
 }
 
 void Level::DisplayFullMap()
 {
 	DisplayMap(fullMapSize);
+}
+
+void Level::LoadMap()
+{
+	const string& _path = "Asset/Map/DefaultLevel.txt";
+	FileStream _stream = FileStream(_path);
+
+	vector<string> _map = _stream.ReadAll();
+
+	map = _map;
+
 }
 

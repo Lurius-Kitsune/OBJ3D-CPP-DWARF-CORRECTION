@@ -9,8 +9,8 @@ struct Size
 	Size(const vector<string>& _map)
 	{
 
-		sizeX = int(_map[0].size());
-		sizeY = int(_map.size());
+		sizeX = int(_map.size());
+		sizeY = int(_map[0].size());
 	}
 	Size(const int _x, const int _y)
 	{

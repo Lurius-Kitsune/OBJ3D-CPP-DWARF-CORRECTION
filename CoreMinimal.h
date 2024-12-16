@@ -8,6 +8,7 @@
 #include <conio.h>
 #include <random>
 #include <fstream>
+#include <sstream>
 #include <assert.h>
 
 using namespace std;
