@@ -7,6 +7,9 @@
 #include <thread>
 #include <conio.h>
 #include <random>
+#include <fstream>
+#include <assert.h>
+
 using namespace std;
 using namespace this_thread;
 using namespace chrono;
@@ -16,6 +19,8 @@ typedef unsigned int u_int;
 #define SLEEP(_duration, _time) sleep_for(_duration(_time));
 #define STRING(_value) to_string(_value)
 #define UTF8
+
+#define INLINE inline
 
 #ifdef UTF8
 #define InitUTF8 SetConsoleOutputCP(CP_UTF8)

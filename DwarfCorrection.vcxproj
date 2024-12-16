@@ -143,6 +143,7 @@
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="Size.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Asset\Map\DefaultLevel.txt" />

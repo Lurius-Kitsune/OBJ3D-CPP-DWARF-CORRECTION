@@ -45,13 +45,18 @@ void TEMP()
     }
 }
 
-
-
 int main()
 {
     Config();
 
     TEMP();
+
+    Level _level;
+
+    _level.DisplayFullMap();
+
+    const Size& _center = _level.GetFullSize() / 2.0f;
+    _level.DisplayView(_center);
     return EXIT_SUCCESS;
 }
 
