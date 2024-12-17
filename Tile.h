@@ -2,6 +2,8 @@
 #include "CoreMinimal.h"
 #include "Emoji.h"
 
+class Cursor;
+
 static vector<string> emojis =
 {
 	VILLAGE,
@@ -111,4 +113,5 @@ public:
 	void SetAppearance(const string& _appearance);
 	void Display() const;
 	string ToString() const;
+	void ShowInfo() const;
 };

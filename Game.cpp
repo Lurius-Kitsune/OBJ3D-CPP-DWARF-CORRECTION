@@ -21,7 +21,15 @@ bool Game::PoleEvent()
 		cout << _code << endl;
 		if (_code == 27)
 		{
-			return true;
+			if (!isMenuOpen)
+			{
+				return true;
+			}
+		}
+		if (_code == 13)
+		{
+			level->ShowTileInfo();
+			isMenuOpen = true;
 		}
 		else if (_code == 9)
 		{

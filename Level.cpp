@@ -2,10 +2,11 @@
 #include "Macro.h"
 #include "FileStream.h"
 #include "Emoji.h"
+#include "Color.h"
 
 Level::Level(const string& _path, Cursor* _cursor)
 {
-	savePath = "Asset/Level/" + _path + ".txt";
+	string savePath = "Asset/Level/" + _path + ".txt";
 	LoadMap();
 	fullMapSize = Size(map);
 	view = Size(35, 35);
@@ -244,4 +245,22 @@ bool Level::ResetItemAtLocation(const Coords& _coords)
 	if (!IsValidCoords(_coords)) return false;
 	GetTileByCoords(_coords).SetAppearance(" "); //TODO METTRE EMPTY
 
+}
+
+void Level::ShowInfoAtCursorLocation(const Coords& _coords)
+{
+	Print("", RESET);
+	GetTileByCoords(_coords).ShowInfo();
+}
+
+void Level::ShowTileInfo()
+{
+	Print("", RESET);
+	GetTileByCoords(cursor->GetLocation()).ShowInfos(cursor);
+}
+
+void Level::HideTileInfo()
+{
+	Print("", RESET);
+	GetTileByCoords(cursor->GetLocation()).ShowInfos(cursor);
 }

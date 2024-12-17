@@ -26,3 +26,7 @@ void Print(const string& _separator, const Type& _value, const Args&... _args)
     Print(_separator, _args...);
 }
 
+static void Reset()
+{
+
+}

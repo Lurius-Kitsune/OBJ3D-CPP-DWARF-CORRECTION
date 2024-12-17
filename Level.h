@@ -76,5 +76,8 @@ public:
 
 	bool SetItemAtLocation(const string& _appearance, const Coords& _coords);
 	bool ResetItemAtLocation(const Coords& _coords);
+	void ShowInfoAtCursorLocation(const Coords& _coords);
+	void ShowTileInfo();
+	void HideTileInfo();
 };
 

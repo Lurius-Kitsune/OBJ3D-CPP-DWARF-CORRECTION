@@ -93,7 +93,7 @@ void Tile::Display() const
     u_int _index = 0;
     for (const string& _emoji : emojis)
     {
-        if (_emoji == _appearance) return _index + 1;
+        if (_emoji == appearance) return _index + 1;
         _index++;
     }
 
@@ -104,3 +104,29 @@ string Tile::ToString() const
 {
     key += 10 * GetKeyByAppearance(_appearance);
 }
+
+void Tile::ShowInfo(Cursor* _cursor) const
+{
+    
+    u_int _index = 0;
+    for (const string& _info : infos)
+    {
+        _cursor->SetCursorPosition(75, _index++);
+        Print("", _info);
+    }
+}
+
+void Tile::HideInfo(Cursor* _cursor) const
+{
+    u_int _index = 0;
+    for (const string& _info : infos)
+    {
+        _cursor->SetCursorPos(75, _index++);
+
+        for (const char _letter : _info)
+        {
+            Print("", " ");
+        }
+    }
+}
+

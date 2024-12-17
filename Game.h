@@ -7,6 +7,7 @@ class Game
 {
 	Level* level;
 	Cursor* cursor;
+	bool isMenuOpen;
 	bool displayAll = false;
 public:
 	Game();
