@@ -1,5 +1,4 @@
 #include "Cursor.h"
-#include "Cursor.h"
 #include "Color.h"
 #include "Macro.h"
 #include "Emoji.h"
@@ -72,6 +71,6 @@ void Cursor::Move(Level* _level, const Coords& _offset)
 {
 	_level->ResetItemAtLocation(position);
 	position += _offset;
-	_level->SetItemAtLocation(appearance, position)
+	_level->SetItemAtLocation(appearance, position);
 }
 

@@ -56,8 +56,8 @@ public:
 #pragma endregion
 
 	vector<Coords> GetCoordsByBiome(const u_int& _biome) const;
-	vector<Coords> SelectCoords(const vector<Coords>& _availableCoords, const u_int& _percentage) const;
-	void SpawnAtCoords(const vector<Coords>& _selectCoords, const string& _elementToSpawn);
+	vector<Coords> SelectCoords(vector<Coords> _availableCoords, const u_int& _percentage) const;
+	void SpawnAtCoords(const vector<Coords> _selectCoords, const string& _elementToSpawn);
 
 	vector<string> ConvertMapToString() const;
 
@@ -68,10 +68,6 @@ public :
 	void DisplayFullMap();
 	bool IsOver(const Coords& _coords) const;
 	void Generate();
-
-private:
-	vector<string> ConvertMapToString() const;
-	bool IsValidCoords(const Coords& _coords) const ;
 public:
 
 	bool SetItemAtLocation(const string& _appearance, const Coords& _coords);

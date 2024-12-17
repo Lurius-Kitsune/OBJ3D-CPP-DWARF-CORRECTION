@@ -53,6 +53,18 @@ enum BiomeType
     BT_COUNT
 };
 
+struct TileData
+{
+    string appearance; 
+    u_int percentage;
+    
+    TileData(const string& _appearance, const u_int& _percentage)
+    {
+        appearance = _appearance;
+		percentage = _percentage;
+    }
+};
+
 struct BiomeData
 {
     BiomeType type;
@@ -65,17 +77,6 @@ struct BiomeData
     }
 };
 
-struct TileData
-{
-    string appearance; 
-    u_int percentage;
-    
-    TileData(const string& _appearance, const u_int& _percentage)
-    {
-        appearance = _appearance;
-		percentage = _percentage;
-    }
-};
 
 
 
