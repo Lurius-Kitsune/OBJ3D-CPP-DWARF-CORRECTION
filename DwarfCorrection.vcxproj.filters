@@ -86,9 +86,6 @@
     <ClInclude Include="Color.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cordinates.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Cursor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -144,6 +141,9 @@
       <Filter>Source Files\menu</Filter>
     </ClInclude>
     <ClInclude Include="VideoMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Coordinates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

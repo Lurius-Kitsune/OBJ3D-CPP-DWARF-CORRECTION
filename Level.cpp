@@ -61,7 +61,7 @@ vector<Coords> Level::GetCoordsByBiome(const u_int& _biome) const
 		for (const TileData& _tilesData : _biomesdata.allData)
 		{
 			const vector<Coords>& _availableCoords = GetCoordsByBiome(_biomesdata.type);
-			const vector<Coords>& _selectCoords = SelectCoords(_availableCoords, _tilesData.percentage);
+			const vector<Coords> _selectCoords = SelectCoords(_availableCoords, _tilesData.percentage);
 			SpawnAtCoords(_selectCoords, _tilesData.appearance);
 		}
 	}
@@ -73,27 +73,17 @@ vector<Coords> Level::GetCoordsByBiome(const u_int& _biome) const
 	//SpawnAtCoords(_selectCoords, _elementToSpawn);
 }
 
-vector<string> Level::ConvertMapToString() const
-{
-	return vector<string>();
-}
-
-bool Level::IsValidCoords(const u_int& _rowIndex, const u_int& _columnIndex) const
-{
-	return _rowIndex >= 0 && _rowIndex < (u_int)fullMapSize.sizeX
-		&& _columnIndex >= 0 && _columnIndex < (u_int)fullMapSize.sizeY;
-}
 
 vector<Coords> Level::GetCoordsByBiome(const u_int& _biome) const
 {
 	vector<Coords> _availableCoords;
 
 	const u_int& _mapSize = static_cast<const u_int&>(map.size());
-	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
+	for (int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
 	{
 		vector<Tile> _rowTile;
 		const u_int& _rowSize = static_cast<const u_int&>(map[_rowIndex].size());
-		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex += 3)
+		for (int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex += 3)
 		{
 			if (map[_rowIndex][_columnIndex].GetBackgroundKey() == _biome)
 			{
@@ -101,9 +91,11 @@ vector<Coords> Level::GetCoordsByBiome(const u_int& _biome) const
 			}
 		}
 	}
+
+	return _availableCoords;
 }
 
-vector<Coords> Level::SelectCoords(const vector<Coords>& _availableCoords, const u_int& _percentage) const
+vector<Coords> Level::SelectCoords(vector<Coords> _availableCoords, const u_int& _percentage) const
 {
 	const u_int& _coordsCount = static_cast<const u_int&>(_availablesCooords.size());
 	random_shuffle(_availablesCooords.begin(), _availablesCooords.end());
@@ -175,7 +167,7 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 {
 	cursor->SetCursorPosition(0, 0);
 
-	const u_int& _mapSize = static_cast<const u_int&>(_size.sizeX);
+	const u_int& _mapSize = static_cast<const u_int&>(_size.x);
 	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
 	{
 		const u_int& _rowSize = static_cast<const u_int&>(_size.sizeY);

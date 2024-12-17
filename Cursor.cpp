@@ -1,5 +1,4 @@
 #include "Cursor.h"
-#include "Cursor.h"
 #include "Color.h"
 #include "Macro.h"
 #include "Emoji.h"

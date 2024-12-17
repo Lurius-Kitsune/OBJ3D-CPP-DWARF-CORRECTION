@@ -2,6 +2,8 @@
 #include "CoreMinimal.h"
 #include "Coordinates.h"
 
+class Level;
+
 class Cursor
 {
 	string appearance; 
