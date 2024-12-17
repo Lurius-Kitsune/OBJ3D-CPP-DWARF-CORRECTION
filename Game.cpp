@@ -64,7 +64,7 @@ void Game::Display()
 	}
 }
 
-void Game::SelectLevel()
+void Game::SelectLevel(const string& _path)
 {
 	const string& _path = "MainLevel.txt";
 	level = new Level(_path, cursor);
