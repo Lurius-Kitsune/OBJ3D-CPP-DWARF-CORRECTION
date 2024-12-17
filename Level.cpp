@@ -109,10 +109,10 @@ string Level::ComputeColor(const char _letter, const bool _isEmoji) const
 		make_pair('+', Color(0,4,217)),
 		make_pair('.', Color(254,255,100)),
 		make_pair('=', Color(88,41,0)),
-		make_pair('*', Color(206,206,206)),
+		make_pair('*', Color(30,30,30)),
 		make_pair('/', Color(244,102,27)),
 		make_pair('#', Color(255,0,0)),
-		make_pair('-', Color(118,155,95)),
+		make_pair('-', Color(20,185,20)),
 	};
 
 	string _color = _colors[_letter].ToString(false);
