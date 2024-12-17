@@ -106,15 +106,13 @@ string Level::ComputeColor(const char _letter, const bool _isEmoji) const
 {
 	Map _colors =
 	{
-		make_pair('#', Color(0,4,217)), // bleu
-		make_pair('~', Color(0,156,217)), // bleu clair
-		make_pair('%', Color(255,250,112)), // jaune
-		make_pair('@', Color(87,189,117)), // vert clair
-		make_pair('+', Color(41,207,90)), // vert
-		make_pair('-', Color(79,69,49)), // marron clair
-		make_pair('=', Color(59,46,21)), // marron
-		make_pair(':', Color(41,30,10)), // marron foncé
-		make_pair('*', Color(0,0,0)), // noir
+		make_pair('+', Color(0,4,217)),
+		make_pair('.', Color(254,255,100)),
+		make_pair('=', Color(88,41,0)),
+		make_pair('*', Color(206,206,206)),
+		make_pair('/', Color(244,102,27)),
+		make_pair('#', Color(255,0,0)),
+		make_pair('-', Color(118,155,95)),
 	};
 
 	string _color = _colors[_letter].ToString(false);
