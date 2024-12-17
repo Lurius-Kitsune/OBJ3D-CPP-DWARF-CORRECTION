@@ -3,7 +3,7 @@
 #include "Color.h"
 #include "Macro.h"
 #include "Emoji.h"
-
+#include "Level.h"
 Cursor::Cursor(const Coords& _position)
 {
 	appearance = CROSSHAIR;
@@ -68,8 +68,10 @@ void Cursor::DisplayOnceCenterMultiLine(const string* _textArray, const u_int& _
 	}
 }
 
-void Cursor::Move(const Coords& _offset)
+void Cursor::Move(Level* _level, const Coords& _offset)
 {
+	_level->ResetItemAtLocation(position);
 	position += _offset;
+	_level->SetItemAtLocation(appearance, position)
 }
 

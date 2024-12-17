@@ -30,19 +30,21 @@ bool Game::PoleEvent()
 		}
 		else if (_code == 72)
 		{
-			cursor->Move(Coords(-1, 0));
+			level->ResetItemAtLocation(cursor->GetCoords());
+			cursor->Move(level ,Coords(-1, 0));
+			level->SetItemAtLocation(cursor->GetAppearance(), cursor->GetCoords());
 		}
 		else if (_code == 75)
 		{
-			cursor->Move(Coords(0, -1));
+			cursor->Move(level, Coords(0, -1));
 		}
 		else if (_code == 77)
 		{
-			cursor->Move(Coords(0, 1));
+			cursor->Move(level, Coords(0, 1));
 		}
 		else if (_code == 80)
 		{
-			cursor->Move(Coords(1, 0));
+			cursor->Move(level ,Coords(1, 0));
 		}
 	}
 	
@@ -64,7 +66,7 @@ void Game::Display()
 
 void Game::SelectLevel()
 {
-	const string& _path = "DefaultLevel.txt";
+	const string& _path = "MainLevel.txt";
 	level = new Level(_path, cursor);
 }
 

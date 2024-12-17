@@ -14,7 +14,7 @@
 #define HIDDEN_TEXT "\033[8m"				// Masqu 
 #define DOUBLE_UNDERLINE_TEXT "\033[21m"	// Double soulign e
 
-#define BLINK_COLOR(x) "\033[5m" << x		// Clignotant
+#define BLINK_COLOR(sizeX) "\033[5m" << sizeX		// Clignotant
 
 // Resets
 #define RESET "\033[0m"
@@ -107,8 +107,8 @@
 #define SWAP "\033[7m" // Swap background and foreground colors
 
 // x => Color code between 0 and 255
-#define COLOR(x) "\x1B[38;5;"<<x<<"m"
-#define BG_COLOR(x) "\x1B[48;5;"<<x<<"m"
+#define COLOR(sizeX) "\x1B[38;5;"<<sizeX<<"m"
+#define BG_COLOR(sizeX) "\x1B[48;5;"<<sizeX<<"m"
 #pragma endregion
 
 struct Color
