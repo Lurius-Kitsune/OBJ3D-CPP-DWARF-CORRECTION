@@ -15,8 +15,8 @@ struct Coords
 	}
 	Coords(const Size& _size)
 	{
-		x = _size.sizeX;
-		y = _size.sizeY;
+		x = _size.x;
+		y = _size.y;
 	}
 
 	string ToString() const

@@ -1,7 +1,6 @@
 #include "Cursor.h"
 #include "Cursor.h"
 #include "Color.h"
-#include "Cordinates.h"
 #include "Macro.h"
 #include "Emoji.h"
 

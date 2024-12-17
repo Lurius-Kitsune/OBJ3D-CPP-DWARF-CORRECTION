@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Cordinates.h"
+#include "Coordinates.h"
+
 class Cursor
 {
 	string appearance; 

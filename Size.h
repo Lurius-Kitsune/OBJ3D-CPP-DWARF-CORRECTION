@@ -4,25 +4,25 @@
 
 struct Size
 {
-	int sizeX;
-	int sizeY;
+	int x;
+	int y;
 
 	Size() = default;
 	Size(const vector<vector<Tile>>& _map)
 	{
 		if (_map.empty()) return;
-		sizeX = int(_map.size());
-		sizeY = int(_map[0].size());
+		x = int(_map.size());
+		y = int(_map[0].size());
 	}
 	Size(const int _x, const int _y)
 	{
-		sizeX = _x;
-		sizeY = _y;
+		x = _x;
+		y = _y;
 	}
 
 	string ToString() const
 	{
-		return  "(SizeX : " + STRING(sizeX) + ", SizeY : " + STRING(sizeY);
+		return  "(SizeX : " + STRING(x) + ", SizeY : " + STRING(y);
 	}
 
 	Size operator/(const int _value) const
@@ -31,8 +31,8 @@ struct Size
 
 		return
 		{
-			sizeX / _value,
-			sizeY / _value
+			x / _value,
+			y / _value
 		};
 	}
 };

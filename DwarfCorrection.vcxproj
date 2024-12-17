@@ -138,7 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
-    <ClInclude Include="Cordinates.h" />
+    <ClInclude Include="Coordinates.h" />
     <ClInclude Include="CoreMinimal.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="Emoji.h" />
