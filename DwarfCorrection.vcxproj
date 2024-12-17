@@ -127,17 +127,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioMenu.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="ControlsMenu.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="Filestream.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Macro.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="OptionsMenu.cpp" />
+    <ClCompile Include="SelectGAmeMenu.cpp" />
+    <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="VideoMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioMenu.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="ControlsMenu.h" />
     <ClInclude Include="Cordinates.h" />
     <ClInclude Include="CoreMinimal.h" />
     <ClInclude Include="Cursor.h" />
@@ -147,13 +157,21 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SelectGAmeMenu.h" />
     <ClInclude Include="Size.h" />
+    <ClInclude Include="StartMenu.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="VideoMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Asset\Level\DefaultLevel.txt" />
+    <Text Include="Asset\Map\Map2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

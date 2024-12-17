@@ -49,7 +49,13 @@ int main()
 {
     Config();
 
- 
+    //mainmenu -> start -> quit -> options 
+    //start -> créer / reprendre
+    //options -> audio / controls / video
+    //audio -> volume / Animals/Attackers/Dwarf / environment 
+    //Controls -> affichage Clavier / souris 
+    //Video -> Intensity / FrameRate /Daltionien / etc...
+    //QUIT -> quitter
 
     //TEMP();
     Game _game;

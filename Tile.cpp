@@ -5,6 +5,45 @@
 Tile::Tile(const string& _key)
 {
 	key = stoi(_key);
+    emojis =
+    {
+        VILLAGE,
+        HOUSE,
+        FORGE,
+        MONUMENT,
+        HUNTER_HUT,
+        LOVE_HOUSE,
+        TRACTOR,
+        FARM_EMOJI,
+        ANIMAL,
+        WOLF,
+        BOAR,
+        FISH,
+        MONKEY,
+        CRAB,
+        TIGER,
+        LION,
+        CROCODILE,
+        PARROT,
+        GORILLA,
+        WATER,
+        TREE,
+        TREE2,
+        PALM_TREE,
+        GRASS,
+        WIND,
+        FLOWER1,
+        FLOWER2,
+        FLOWER3,
+        FLOWER4,
+        ROCK,
+        FOOD,
+        LOG,
+        MEAT,
+        DWARF,
+        ENEMY,
+        FOOTSTEP,
+    };
 }
 
 
@@ -51,14 +90,17 @@ void Tile::SetAppearance(const string& _appearance)
 
 void Tile::Display() const
 {
-	Print("", ComputeColor());
-	if (HasEmoji())
-	{
-		Print("", ComputeAppearance());
-	}
+    u_int _index = 0;
+    for (const string& _emoji : emojis)
+    {
+        if (_emoji == _appearance) return _index + 1;
+        _index++;
+    }
+
+    throw exception("ERROR => Invalid key for appearance");
 }
 
 string Tile::ToString() const
 {
-	return to_string(key);
+    key += 10 * GetKeyByAppearance(_appearance);
 }

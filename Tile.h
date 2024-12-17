@@ -41,6 +41,44 @@ static vector<string> emojis =
 	FOOTSTEP
 };
 
+enum BiomeType
+{
+    BT_WATER,
+    BT_SAND,
+    BT_GRASS,
+    BT_DIRT,
+    BT_ROCK,
+    BT_LAVA,
+
+    BT_COUNT
+};
+
+struct BiomeData
+{
+    BiomeType type;
+    vector<TileData> allData;
+    
+    BiomeData(const BiomeType& _type, const vector<TileData>& _allData)
+    {
+        type = _type;
+		allData = _allData;
+    }
+};
+
+struct TileData
+{
+    string appearance; 
+    u_int percentage;
+    
+    TileData(const string& _appearance, const u_int& _percentage)
+    {
+        appearance = _appearance;
+		percentage = _percentage;
+    }
+};
+
+
+
 class Tile
 {
 	int key;
