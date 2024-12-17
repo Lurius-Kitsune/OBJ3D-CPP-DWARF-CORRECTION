@@ -14,9 +14,15 @@
 void ChangeEncoding();
 
 template <typename Type>
-void Print(const Type& _value, const bool _endl = true)
+void Print(const string& _separator, const Type& _value)
 {
-    cout << _value;
-    if (_endl) cout << endl;
+    cout << _value << _separator;
+}
+
+template <typename Type, typename ...Args>
+void Print(const string& _separator, const Type& _value, const Args&... _args)
+{
+    cout << _value << _separator;
+    Print(_separator, _args...);
 }
 

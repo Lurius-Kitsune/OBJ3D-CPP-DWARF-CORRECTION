@@ -81,7 +81,7 @@ void Level::DisplayMap(const Size& _size, const Coords& _start)const
 			}
 
 			const bool _isCursor = cursor->GetCoords() == Coords(_posX, _posY);
-			Print(ComputeColor(map[_posX][_posY], _isCursor), false);
+			Print(" ", ComputeColor(map[_posX][_posY], _isCursor));
 			if (_isCursor)
 			{
 				cout << cursor->GetAppearance();
