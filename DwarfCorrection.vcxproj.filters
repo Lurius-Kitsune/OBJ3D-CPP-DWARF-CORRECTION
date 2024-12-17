@@ -45,6 +45,9 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -55,9 +58,6 @@
     </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Cordinates.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Cursor.h">
       <Filter>Header Files</Filter>
@@ -86,14 +86,16 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Coordinates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Asset\Map\DefaultLevel.txt">
+    <Text Include="Assets\Levels\DefaultLevel.txt">
       <Filter>Resource Files\Asset</Filter>
     </Text>
-    <Text Include="Asset\Map\Map2.txt">
-      <Filter>Resource Files\Asset</Filter>
-    </Text>
-    <Text Include="Asset\Level\DefaultLevel.txt" />
   </ItemGroup>
 </Project>

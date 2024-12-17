@@ -153,7 +153,7 @@
     <ClInclude Include="Tile.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Asset\Level\DefaultLevel.txt" />
+    <Text Include="Assets\Levels\DefaultLevel.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
