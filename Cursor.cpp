@@ -1,35 +1,37 @@
 #include "Cursor.h"
 #include "Color.h"
-#include "Macro.h"
-#include "Emoji.h"
 #include "Level.h"
-Cursor::Cursor(const Coords& _position)
+#include "Emoji.h"
+#include "Macro.h"
+
+Cursor::Cursor(const Coords& _location)
 {
+	location = _location;
 	appearance = CROSSHAIR;
-	position = _position;
 }
+
 
 Coords Cursor::GetCenterConsole()
 {
-	CONSOLE_SCREEN_BUFFER_INFO _csbi;
-	int _ys, _xs;
+    CONSOLE_SCREEN_BUFFER_INFO _csbi;
+    int _ys, _xs;
 
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &_csbi);
-	_ys = _csbi.srWindow.Right - _csbi.srWindow.Left;
-	_xs = _csbi.srWindow.Bottom - _csbi.srWindow.Top;
-	return { _ys, _xs };
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &_csbi);
+    _ys = _csbi.srWindow.Right - _csbi.srWindow.Left;
+    _xs = _csbi.srWindow.Bottom - _csbi.srWindow.Top;
+    return { _ys, _xs };
 }
 
-void Cursor::SetCursorPosition(const u_int& _xIndex, const u_int& _yIndex, const bool _cursor)const
+void Cursor::SetCursorPosition(const u_int& _xIndex, const u_int& _yIndex, const bool _cursor) const
 {
-	static const HANDLE _hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_CURSOR_INFO _info;
-	std::cout.flush();
-	_info.dwSize = 100;
-	_info.bVisible = _cursor;
-	COORD coord = { (SHORT)_xIndex, (SHORT)_yIndex };
-	SetConsoleCursorInfo(_hOut, &_info);
-	SetConsoleCursorPosition(_hOut, coord);
+    static const HANDLE _hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO _info;
+    std::cout.flush();
+    _info.dwSize = 100;
+    _info.bVisible = _cursor;
+    COORD coord = { (SHORT)_xIndex, (SHORT)_yIndex };
+    SetConsoleCursorInfo(_hOut, &_info);
+    SetConsoleCursorPosition(_hOut, coord);
 }
 
 bool Cursor::CheckConsoleSize(Coords& _center, Coords& _previousCenter, const string& _text, const Coords& _padding, int _height)
@@ -69,7 +71,7 @@ void Cursor::DisplayOnceCenterMultiLine(const string* _textArray, const u_int& _
 
 void Cursor::Move(Level* _level, const Coords& _offset)
 {
-	_level->ResetItemAtLocation(position);
-	_level->SetItemAtLocation(appearance, position);
+	_level->ResetItemAtLocation(location);
+	location += _offset;
+	_level->SetItemAtLocation(appearance, location);
 }
-

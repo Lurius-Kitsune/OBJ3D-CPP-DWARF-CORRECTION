@@ -1,49 +1,17 @@
 #include "Tile.h"
 #include "Color.h"
 #include "Macro.h"
+#include "Cursor.h"
 
 Tile::Tile(const string& _key)
 {
 	key = stoi(_key);
-    emojis =
-    {
-        VILLAGE,
-        HOUSE,
-        FORGE,
-        MONUMENT,
-        HUNTER_HUT,
-        LOVE_HOUSE,
-        TRACTOR,
-        FARM_EMOJI,
-        ANIMAL,
-        WOLF,
-        BOAR,
-        FISH,
-        MONKEY,
-        CRAB,
-        TIGER,
-        LION,
-        CROCODILE,
-        PARROT,
-        GORILLA,
-        WATER,
-        TREE,
-        TREE2,
-        PALM_TREE,
-        GRASS,
-        WIND,
-        FLOWER1,
-        FLOWER2,
-        FLOWER3,
-        FLOWER4,
-        ROCK,
-        FOOD,
-        LOG,
-        MEAT,
-        DWARF,
-        ENEMY,
-        FOOTSTEP,
-    };
+
+	infos = {
+		"Ceci est une info !",
+		"Oui ?",
+		"NON"
+	};
 }
 
 
@@ -88,45 +56,49 @@ void Tile::SetAppearance(const string& _appearance)
 	key += 10 * GetKeyByAppearance(_appearance);
 }
 
+void Tile::ResetAppearance()
+{
+	key = GetBackgroundKey();
+}
+
+void Tile::ShowInfos(Cursor* _cursor) const
+{
+	Print("", RESET);
+	u_int _index = 0;
+
+	for (const string& _info : infos)
+	{
+		_cursor->SetCursorPosition(75, _index++);
+		Print("", _info);
+	}
+}
+
+void Tile::HideInfos(Cursor* _cursor) const
+{
+	Print("", RESET);
+	u_int _index = 0;
+
+	for (const string& _info : infos)
+	{
+		_cursor->SetCursorPosition(75, _index++);
+
+		for (const char _letter : _info)
+		{
+			Print("", " ");
+		}
+	}
+}
+
 void Tile::Display() const
 {
-    u_int _index = 0;
-    for (const string& _emoji : emojis)
-    {
-        if (_emoji == appearance) return _index + 1;
-        _index++;
-    }
-
-    throw exception("ERROR => Invalid key for appearance");
+	Print("", ComputeColor());
+	if (HasEmoji())
+	{
+		Print("", ComputeAppearance());
+	}
 }
 
 string Tile::ToString() const
 {
-    key += 10 * GetKeyByAppearance(_appearance);
+	return to_string(key);
 }
-
-void Tile::ShowInfo(Cursor* _cursor) const
-{
-    
-    u_int _index = 0;
-    for (const string& _info : infos)
-    {
-        _cursor->SetCursorPosition(75, _index++);
-        Print("", _info);
-    }
-}
-
-void Tile::HideInfo(Cursor* _cursor) const
-{
-    u_int _index = 0;
-    for (const string& _info : infos)
-    {
-        _cursor->SetCursorPos(75, _index++);
-
-        for (const char _letter : _info)
-        {
-            Print("", " ");
-        }
-    }
-}
-

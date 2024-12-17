@@ -1,5 +1,6 @@
 #pragma once
-
+#include "CoreMinimal.h"
+#include "Emoji.h"
 #include "Tile.h"
 
 struct Size
@@ -8,26 +9,27 @@ struct Size
 	int y;
 
 	Size() = default;
+	Size(const int _sizeX, const int _sizeY)
+	{
+		x = _sizeX;
+		y = _sizeY;
+	}
 	Size(const vector<vector<Tile>>& _map)
 	{
 		if (_map.empty()) return;
+
 		x = int(_map.size());
 		y = int(_map[0].size());
-	}
-	Size(const int _x, const int _y)
-	{
-		x = _x;
-		y = _y;
 	}
 
 	string ToString() const
 	{
-		return  "(SizeX : " + STRING(x) + ", SizeY : " + STRING(y);
+		return "Size => " + STRING(x) + "/" + STRING(y);
 	}
 
-	Size operator/(const int _value) const
+	Size operator / (const int _value) const
 	{
-		assert(_value != 0 && "Impossible de diviser par 0");
+		assert(_value != 0 && "Impossible de diviser par 0 !");
 
 		return
 		{

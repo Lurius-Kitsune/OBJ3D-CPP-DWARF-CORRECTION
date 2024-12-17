@@ -7,4 +7,3 @@ public:
 	virtual void Show() override;
 	virtual void Hide() override;
 };
-

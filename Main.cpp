@@ -1,4 +1,19 @@
 #include "Main.h"
+#include "Macro.h"
+#include "Animation.h"
+#include "Game.h"
+#include "FileStream.h"
+
+/* TODO list
+* 
+* Menu
+* View
+* Setup village
+* Setup items
+* Cacher/Dévoiler carte
+* Save carte avec item et zone dévoilée
+* 
+*/
 
 string ComputeEmoji(int _codePoint)
 {
@@ -32,70 +47,91 @@ string ComputeEmoji(int _codePoint)
 
 void TEMP()
 {
-    const u_int& _start = 0x1F600;
-    const u_int& _end = 0xFFFFF;
+	const u_int& _start = 0x1F600;
+	const u_int& _end = 0xFFFFFF;
 
-    for (u_int _index = 0x1F600; _index < _end; _index++)
+    for (u_int _index = _start; _index < _end; _index++)
     {
         if (_kbhit()) break;
+
         const string& _emoji = ComputeEmoji(_index);
-        cout << _emoji << " " << hex << uppercase << "U+" << _index << endl;
+        Print("", _emoji);
         SLEEP(milliseconds, 50);
-        //CLEAR_SCREEN;
+        system("cls");
     }
 }
 
+struct MyStruct
+{
+    void A() {}
+};
+
 int main()
 {
-    Config();
+	DefaultSetup();
 
-    //mainmenu -> start -> quit -> options 
-    //start -> créer / reprendre
-    //options -> audio / controls / video
-    //audio -> volume / Animals/Attackers/Dwarf / environment 
-    //Controls -> affichage Clavier / souris 
-    //Video -> Intensity / FrameRate /Daltionien / etc...
-    //QUIT -> quitter
+    /*vector<string> _map = FileStream::ReadAll("Assets/Levels/MainLevel/.txt");
+    vector<string> _newMap;
 
-    //TEMP();
+    for (size_t i = 0; i < _map.size(); i++)
+    {
+        _newMap.push_back();
+        for (size_t j = 0; j < _map[i].size(); j++)
+        {
+            for (size_t k = 0; k < 2; k++)
+            {
+                _newMap[i].push_back('0');
+            }
+            _newMap[i][j]
+        }
+    }
+    FileStream::Write("Assets/Levels/MainLevel/.txt", _map);
+    return -1;*/
+
+	//TEMP();
+    // TODO teste after animation
+    //Animation _anim;
+    //_anim.LoadStartUpAnimation(".\\Assets\\LoadingScreen\\ALS-", ".txt", 44);
+
+    // Main menu -> Start / Options / Quit
+    // Start => Créer / Reprendre
+    // Options => Audio / Controls / Video
+    // Audio => Volume / Dwarf / Attackers / Animals / Environment
+    // Controls => Affichage clavier / souris
+    // Video => Intensity / Framerate / Daltonien / etc..
+    // Quit => quitter
+
     Game _game;
-
-    _game.SelectLevel();
+    _game.SelectLevel("MainLevel");
     _game.Start();
-    return EXIT_SUCCESS;
+
+	return EXIT_SUCCESS;
 }
 
-void SetConsoleName(const string& _name)
+void DefaultSetup()
 {
-    SetConsoleTitleA(_name.c_str());
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    SetConsoleName("Dwarf Fortress");
+    SetConsoleSize(1200, 800);
+	InitUTF8;
+}
+
+void SetConsoleName(const string& _consoleName)
+{
+    SetConsoleTitleA(_consoleName.c_str());
 }
 
 void SetConsoleSize(const u_int& _sizeX, const u_int& _sizeY)
 {
-    HWND Hwnd = GetForegroundWindow();
-    LONG winstyle = GetWindowLong(Hwnd, GWL_STYLE);
-    SetWindowLong(Hwnd, GWL_STYLE, (winstyle | WS_POPUP | WS_MAXIMIZE) & ~WS_CAPTION & ~WS_THICKFRAME & ~WS_BORDER);
-    SetWindowPos(Hwnd, HWND_TOP, 0, 0, _sizeX, _sizeY, 0);
+    const HWND& _hwnd = GetForegroundWindow();
+    const LONG& _winstyle = GetWindowLong(_hwnd, GWL_STYLE);
+    //SetWindowLong(_hwnd, GWL_STYLE, (_winstyle | WS_POPUP | WS_MAXIMIZE) & ~WS_CAPTION & ~WS_THICKFRAME & ~WS_BORDER);
+    SetWindowPos(_hwnd, HWND_TOP, 0, 0, _sizeX, _sizeY, 0);
 }
 
 void MaximizeConsole()
 {
-    int _x = GetSystemMetrics(SM_CXSCREEN);
-    int _y = GetSystemMetrics(SM_CYSCREEN);
+    const int _x = GetSystemMetrics(SM_CXSCREEN);
+    const int _y = GetSystemMetrics(SM_CYSCREEN);
     SetConsoleSize(_x, _y);
 }
-
-void Config()
-{
-    (_CrtSetDbgFlag)(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Detection de fuite de mémoire
-    SetConsoleName("Dwarf Forteress");
-    MaximizeConsole();
-    InitUTF8;
-}
-
-
-/*
-    0 eau profonde
-    1 eau peu profonde
-    9 haute montagne
-*/

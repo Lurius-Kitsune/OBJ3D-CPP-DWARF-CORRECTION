@@ -2,24 +2,29 @@
 #include "CoreMinimal.h"
 #include "Level.h"
 #include "Cursor.h"
+#include "Entity.h"
 
 class Game
 {
 	Level* level;
 	Cursor* cursor;
+	vector<Entity*> entities;
+	bool displayAll;
 	bool isMenuOpen;
-	bool displayAll = false;
+
 public:
 	Game();
 	~Game();
 
+private:
+	bool PollEvents();
+	void UpdateEntities();
+	void Display() const;
+
 public:
-	bool PoleEvent();
-	void Display();
-	void SelectLevel();
+	void SelectLevel(const string& _path);
 	void Start();
 	void Update();
 	void Pause();
 	void Stop();
 };
-

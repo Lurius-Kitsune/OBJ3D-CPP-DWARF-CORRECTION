@@ -4,8 +4,9 @@
 
 class Cursor;
 
-static vector<string> emojis =
+static vector<string> emojis = 
 {
+	CROSSHAIR,
 	VILLAGE,
 	HOUSE,
 	FORGE,
@@ -45,53 +46,51 @@ static vector<string> emojis =
 
 enum BiomeType
 {
-    BT_WATER,
-    BT_SAND,
-    BT_GRASS,
-    BT_DIRT,
-    BT_ROCK,
-    BT_LAVA,
+	BT_WATER,
+	BT_SAND,
+	BT_GRASS,
+	BT_DIRT,
+	BT_ROCK,
+	BT_VOLCANO,
+	BT_LAVA,
 
-    BT_COUNT
+	BT_COUNT
 };
 
 struct TileData
 {
-    string appearance; 
-    u_int percentage;
-    
-    TileData(const string& _appearance, const u_int& _percentage)
-    {
-        appearance = _appearance;
+	string appearance;
+	u_int percentage;
+
+	TileData(const string& _appearance, const u_int& _percentage)
+	{
+		appearance = _appearance;
 		percentage = _percentage;
-    }
+	}
 };
 
 struct BiomeData
 {
-    BiomeType type;
-    vector<TileData> allData;
-    
-    BiomeData(const BiomeType& _type, const vector<TileData>& _allData)
-    {
-        type = _type;
+	BiomeType type;
+	vector<TileData> allData;
+
+	BiomeData(const BiomeType& _type, const vector<TileData>& _allData)
+	{
+		type = _type;
 		allData = _allData;
-    }
+	}
 };
-
-
-
 
 class Tile
 {
 	int key;
+	vector<string> infos;
 
-private:
+public:
 	INLINE bool HasEmoji() const
 	{
 		return key > 9;
 	}
-public:
 	INLINE u_int GetBackgroundKey() const
 	{
 		return key % 10;
@@ -112,7 +111,9 @@ private:
 
 public:
 	void SetAppearance(const string& _appearance);
+	void ResetAppearance();
+	void ShowInfos(Cursor* _cursor) const;
+	void HideInfos(Cursor* _cursor) const;
 	void Display() const;
 	string ToString() const;
-	void ShowInfo() const;
 };

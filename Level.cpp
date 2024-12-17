@@ -1,12 +1,13 @@
 #include "Level.h"
+#include "Cursor.h"
 #include "Macro.h"
-#include "FileStream.h"
-#include "Emoji.h"
 #include "Color.h"
+#include "Emoji.h"
+#include "FileStream.h"
 
 Level::Level(const string& _path, Cursor* _cursor)
 {
-	string savePath = "Asset/Level/" + _path + ".txt";
+	path = "Assets/Levels/" + _path + ".txt";
 	LoadMap();
 	fullMapSize = Size(map);
 	view = Size(35, 35);
@@ -14,11 +15,12 @@ Level::Level(const string& _path, Cursor* _cursor)
 	biomesData =
 	{
 		BiomeData(BT_SAND, {
-			TileData(CRAB, 20)
+			TileData(CRAB, 5),
+			TileData(PALM_TREE, 10),
 		}),
 		BiomeData(BT_GRASS, {
 			TileData(TREE, 40),
-		})
+		}),
 	};
 
 	//TODO move
@@ -52,54 +54,71 @@ vector<string> Level::ConvertMapToString() const
 	return _mapString;
 }
 
+bool Level::IsValidCoords(const Coords& _coords) const
+{
+	return _coords.x >= 0 && _coords.x < fullMapSize.x
+		&& _coords.y >= 0 && _coords.y < fullMapSize.y;
+}
+
+#pragma region Item
+
+bool Level::SetItemAtLocation(const string& _appearance, const Coords& _coords)
+{
+	if (!IsValidCoords(_coords)) return false;
+
+	GetTileByCoords(_coords).SetAppearance(_appearance);
+	return true;
+}
+
+bool Level::ResetItemAtLocation(const Coords& _coords)
+{
+	if (!IsValidCoords(_coords)) return false;
+	GetTileByCoords(_coords).ResetAppearance();
+	return true;
+}
+
+void Level::ShowTileInfo()
+{
+	selectedTile = GetTileByCoords(cursor->GetLocation());
+	selectedTile.ShowInfos(cursor);
+}
+
+void Level::HideTileInfo()
+{
+	selectedTile.HideInfos(cursor);
+}
+
+#pragma endregion
+
 #pragma region Generation
 
 vector<Coords> Level::GetCoordsByBiome(const u_int& _biome) const
 {
-	for (const BiomeData& _biomesdata : biomesData)
-	{
-		for (const TileData& _tilesData : _biomesdata.allData)
-		{
-			const vector<Coords>& _availableCoords = GetCoordsByBiome(_biomesdata.type);
-			const vector<Coords> _selectCoords = SelectCoords(_availableCoords, _tilesData.percentage);
-			SpawnAtCoords(_selectCoords, _tilesData.appearance);
-		}
-	}
-
-	//const string& _elementToSpawn = TREE;
-	//const u_int& _percentage = 20;
-	//const u_int& _biome = 2;
-	//const u_int& _coordsCount = static_cast<const u_int&>(_availableCoords.size());
-	//SpawnAtCoords(_selectCoords, _elementToSpawn);
-}
-
-
-vector<Coords> Level::GetCoordsByBiome(const u_int& _biome) const
-{
-	vector<Coords> _availableCoords;
+	vector<Coords> _availablesCoords;
 
 	const u_int& _mapSize = static_cast<const u_int&>(map.size());
-	for (int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
+	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
 	{
-		vector<Tile> _rowTile;
 		const u_int& _rowSize = static_cast<const u_int&>(map[_rowIndex].size());
-		for (int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex += 3)
+
+		for (u_int _columnIndex = 0; _columnIndex < _rowSize - 1; _columnIndex += 3)
 		{
-			if (map[_rowIndex][_columnIndex].GetBackgroundKey() == _biome)
+			const Tile& _tile = map[_rowIndex][_columnIndex];
+			if (_tile.HasEmoji() && _tile.GetBackgroundKey() == _biome)
 			{
 				_availablesCoords.push_back(Coords(_rowIndex, _columnIndex));
 			}
 		}
 	}
 
-	return _availableCoords;
+	return _availablesCoords;
 }
 
-vector<Coords> Level::SelectCoords(vector<Coords> _availableCoords, const u_int& _percentage) const
+vector<Coords> Level::SelectCoords(vector<Coords> _availablesCooords, const u_int& _percentage) const
 {
 	const u_int& _coordsCount = static_cast<const u_int&>(_availablesCooords.size());
 	random_shuffle(_availablesCooords.begin(), _availablesCooords.end());
-	const u_int& _coordsCountToSelect = _percentage * _coordsCount / 100.0f;
+	const u_int& _coordsCountToSelect = static_cast<const u_int&>(_percentage * _coordsCount / 100);
 	vector<Coords> _selectedCoords;
 	_selectedCoords.insert(_selectedCoords.begin(), _availablesCooords.begin(), _availablesCooords.begin() + _coordsCountToSelect);
 	return _selectedCoords;
@@ -115,12 +134,15 @@ void Level::SpawnAtCoords(const vector<Coords>& _selectedCoords, const string& _
 
 void Level::Generate()
 {
-	const string& _elementToSpawn = TREE;
-	const u_int& _percentage = 20;
-	const u_int& _biome = 2;
-	const vector<Coords>& _availablesCooords = GetCoordsByBiome(_biome);
-	const vector<Coords>& _selectedCoords = SelectCoords(_availablesCooords, _percentage);
-	SpawnAtCoords(_selectedCoords, _elementToSpawn);
+	for (const BiomeData& _biomeData : biomesData)
+	{
+		for (const TileData& _tileData : _biomeData.allData)
+		{
+			const vector<Coords>& _availablesCooords = GetCoordsByBiome(_biomeData.type);
+			const vector<Coords>& _selectedCoords = SelectCoords(_availablesCooords, _tileData.percentage);
+			SpawnAtCoords(_selectedCoords, _tileData.appearance);
+		}
+	}
 }
 
 #pragma endregion
@@ -170,48 +192,28 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 	const u_int& _mapSize = static_cast<const u_int&>(_size.x);
 	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
 	{
-		const u_int& _rowSize = static_cast<const u_int&>(_size.sizeY);
+		const u_int& _rowSize = static_cast<const u_int&>(_size.y);
 		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex++)
 		{
-			const u_int& _posX = _rowIndex + _start.x;
 			const u_int& _posY = _columnIndex + _start.y;
+			const u_int& _posX = _rowIndex + _start.x;
 
-			if (!IsValidCoords(Coords(_posX, _posY)))continue;
+			if (!IsValidCoords(Coords(_posX, _posY))) continue;
 			map[_posX][_posY].Display();
-
-			//const bool _isCursor = cursor->GetCoords() == Coords(_posX, _posY);
-
-			/*string _tileText;
-			for (u_int _i = 0; _i < 3; _i++)
-			{
-				_tileText += map[_posX + _i][_posY].ToString();
-			}
-			Tile(_tileText).Display();*/
-
-			/*if (_isCursor)
-			{
-				cout << cursor->GetAppearance();
-			}*/
 		}
 
 		cout << endl;
 	}
-	/*cout << _start.ToString() << endl;
-	cout << cursor->GetCoords().ToString() << endl;*/
+
+	Reset();
 }
 
 Coords Level::ComputeCenter(const Coords& _cursorPos) const
 {
 	return {
-		 _cursorPos.x - view.sizeX / 2,
-		 _cursorPos.y - view.sizeY / 2,
+		 _cursorPos.x - view.x / 2,
+		 _cursorPos.y - view.y / 2,
 	};
-}
-
-bool Level::IsValidCoords(const u_int& _rowIndex, const u_int& _columnIndex) const
-{
-	return _rowIndex >= 0 && _rowIndex < (u_int)fullMapSize.sizeX
-		&& _columnIndex >= 0 && _columnIndex < (u_int)fullMapSize.sizeY;
 }
 
 void Level::DisplayView(const Coords& _cursorPos) const
@@ -224,35 +226,4 @@ void Level::DisplayFullMap() const
 	DisplayMap(fullMapSize);
 }
 
-bool Level::SetItemAtLocation(const string& _appearance, const Coords& _coords)
-{
-	if (!IsValidCoords(_coords)) return false;
-	
-	GetTileByCoords(_coords).SetAppearance(_appearance);
-	return true;
-}
-
-bool Level::ResetItemAtLocation(const Coords& _coords)
-{
-	if (!IsValidCoords(_coords)) return false;
-	GetTileByCoords(_coords).SetAppearance(" "); //TODO METTRE EMPTY
-
-}
-
-void Level::ShowInfoAtCursorLocation(const Coords& _coords)
-{
-	Print("", RESET);
-	GetTileByCoords(_coords).ShowInfo();
-}
-
-void Level::ShowTileInfo()
-{
-	Print("", RESET);
-	GetTileByCoords(cursor->GetLocation()).ShowInfos(cursor);
-}
-
-void Level::HideTileInfo()
-{
-	Print("", RESET);
-	GetTileByCoords(cursor->GetLocation()).ShowInfos(cursor);
-}
+#pragma endregion
