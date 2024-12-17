@@ -16,6 +16,34 @@ bool Level::IsOver(const Coords& _coords) const
 	return false;
 }
 
+void Level::Generate()
+{
+	const string& _elementToSpawn = TREE;
+	const u_int& _percentage = 20;
+	const char _biomeSymbol = '-';
+	const vector<Coords>& _availableCoords = GetCoordsByBiome(_biomeSymbol);
+	const u_int& _coordsCount = static_cast<const u_int&>(_availableCoords.size());
+	const vector<Coords>& _selectCoords = GetCoordsCount(_coordsCount);
+	SpawnAtCoords(_selectCoords, _elementToSpawn);
+}
+
+vector<Coords> Level::GetCoordsByBiome(const char _biome) const
+{
+	return vector<Coords>();
+}
+
+vector<Coords> Level::GetCoordsCount(const u_int& _coordsCount) const
+{
+	return vector<Coords>();
+}
+
+void Level::SpawnAtCoords(const vector<Coords>& _selectCoords, const string& _elementToSpawn)
+{
+	for (const Coords& _coords : _selectCoords)
+	{
+
+	}
+}
 
 void Level::LoadMap()
 {
@@ -58,6 +86,7 @@ void Level::SaveMap()
 		cout << "Cant open File" << endl;
 	}
 }
+
 
 bool Level::IsValidCoords(const u_int& _rowIndex, const u_int& _columnIndex) const
 {

@@ -40,7 +40,9 @@ private:
 	void SaveMap();
 	#pragma endregion
 
-
+	vector<Coords> GetCoordsByBiome(const char _biome) const;
+	vector<Coords> GetCoordsCount(const u_int& _coordsCount) const;
+	void SpawnAtCoords(const vector<Coords>& _selectCoords, const string& _elementToSpawn);
 
 public :
 	
@@ -48,5 +50,6 @@ public :
 	void DisplayView(const Coords& _coords);
 	void DisplayFullMap();
 	bool IsOver(const Coords& _coords) const;
+	void Generate();
 };
 
