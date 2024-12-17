@@ -134,6 +134,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Macro.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
@@ -149,10 +150,10 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Size.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Asset\Level\DefaultLevel.txt" />
-    <Text Include="Asset\Map\DefaultLevel.txt" />
     <Text Include="Asset\Map\Map2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

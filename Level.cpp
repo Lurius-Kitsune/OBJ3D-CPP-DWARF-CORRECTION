@@ -9,6 +9,8 @@ Level::Level(const string& _path, Cursor* _cursor)
 	fullMapSize = Size(map);
 	viewSize = Size(35, 35);
 	cursor = _cursor;
+
+	Generate();
 }
 
 bool Level::IsOver(const Coords& _coords) const
@@ -16,75 +18,99 @@ bool Level::IsOver(const Coords& _coords) const
 	return false;
 }
 
+vector<string> Level::ConvertMapToString() const
+{
+	vector<string> _mapString;
+
+	const u_int& _rowsCount = map.size();
+	for (u_int _row = 0; _row < _rowsCount; _row++)
+	{
+		const u_int& _colsCount = map[_row].size();
+		for (u_int _col = 0; _col < _colsCount; _col++)
+		{
+			_mapString.push_back(map[_row][_col].ToString());
+		}
+	}
+
+	return _mapString;
+}
+
+
 void Level::Generate()
 {
 	const string& _elementToSpawn = TREE;
 	const u_int& _percentage = 20;
-	const char _biomeSymbol = '-';
-	const vector<Coords>& _availableCoords = GetCoordsByBiome(_biomeSymbol);
+	const u_int& _biome = 2;
+	const vector<Coords>& _availableCoords = GetCoordsByBiome(_biome);
 	const u_int& _coordsCount = static_cast<const u_int&>(_availableCoords.size());
-	const vector<Coords>& _selectCoords = GetCoordsCount(_coordsCount);
+	const vector<Coords>& _selectCoords = SelectCoords(_coordsCount);
 	SpawnAtCoords(_selectCoords, _elementToSpawn);
 }
 
-vector<Coords> Level::GetCoordsByBiome(const char _biome) const
+vector<Coords> Level::GetCoordsByBiome(const u_int& _biome) const
 {
-	return vector<Coords>();
+	vector<Coords> _availableCoords;
+
+	const u_int& _mapSize = static_cast<const u_int&>(map.size());
+	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
+	{
+		vector<Tile> _rowTile;
+		const u_int& _rowSize = static_cast<const u_int&>(map[_rowIndex].size());
+		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex += 3)
+		{
+			if (map[_rowIndex][_columnIndex].GetBackgroundKey() == _biome)
+			{
+				_availableCoords.push_back({_rowIndex, _columnIndex});
+			}
+		}
+	}
 }
 
-vector<Coords> Level::GetCoordsCount(const u_int& _coordsCount) const
+vector<Coords> Level::SelectCoords(const vector<Coords>& _availableCoords, const u_int& _percentage) const
 {
-	return vector<Coords>();
+	const u_int& _coordsCount = static_cast<const u_int&>(_availableCoords.size());
+	random_shuffle(_availableCoords.begin(), _availableCoords.end());
+
+	const u_int& _coordsCountToSelect = _percentage * 100 / _coordsCount;
+	return vector<Coords>(_availableCoords.begin(), _availableCoords.begin() + _coordsCountToSelect);
+
 }
 
 void Level::SpawnAtCoords(const vector<Coords>& _selectCoords, const string& _elementToSpawn)
 {
 	for (const Coords& _coords : _selectCoords)
 	{
-
+		map[_coords.x][_coords.y].SetAppearance(_elementToSpawn);
 	}
 }
 
 void Level::LoadMap()
 {
-	vector<string> _map = FileStream::ReadAll(savePath);
 
-	map = _map;
+	const vector<string>& _allMap = FileStream::ReadAll(savePath);
+	string _tileText;
 
-}
-
-string Level::ConvertMapToSave()
-{
-	const u_int& _mapSize = static_cast<const u_int&>(fullMapSize.sizeX);
-	string _content = "";
+	const u_int& _mapSize = static_cast<const u_int&>(_allMap.size());
 	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
 	{
-		const u_int& _rowSize = static_cast<const u_int&>(fullMapSize.sizeY);
-		_content += "-" + map[_rowIndex];
-		_content += "\n";
+		vector<Tile> _rowTile;
+		const u_int& _rowSize = static_cast<const u_int&>(_allMap[_rowIndex].size());
+		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex+=3)
+		{
+			for (u_int _i = 0; _i < 3; _i++)
+			{
+				_tileText += _allMap[_rowIndex][_columnIndex + _i];
+			}
+			_rowTile.push_back(Tile(_tileText));
+		}
+		map.push_back(_rowTile);
+
 	}
-	return _content;
 }
 
 void Level::SaveMap()
 {
-	//FileStream _stream = FileStream(savePath, true);
-	ofstream _myStream(savePath);
 
-	if (_myStream)
-	{
-		const u_int& _mapSize = static_cast<const u_int&>(fullMapSize.sizeX);
-		string _content = "";
-		for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
-		{
-			const u_int& _rowSize = static_cast<const u_int&>(fullMapSize.sizeY);
-			_myStream << map[_rowIndex] << "\n";
-		}
-	}
-	else
-	{
-		cout << "Cant open File" << endl;
-	}
 }
 
 
@@ -109,8 +135,17 @@ void Level::DisplayMap(const Size& _size, const Coords& _start)const
 				continue;
 			}
 
+			map[_posX][_posY].Display();
+
 			const bool _isCursor = cursor->GetCoords() == Coords(_posX, _posY);
-			Print(" ", ComputeColor(map[_posX][_posY], _isCursor));
+
+			string _tileText;
+			for (u_int _i = 0; _i < 3; _i++)
+			{
+				_tileText += map[_posX + _i][_posY].ToString();
+			}
+			Tile(_tileText).Display();
+
 			if (_isCursor)
 			{
 				cout << cursor->GetAppearance();
@@ -131,22 +166,7 @@ Coords Level::ComputeCenter(const Coords& _cursorPos) const
 	};
 }
 
-string Level::ComputeColor(const char _letter, const bool _isEmoji) const
-{
-	Map _colors =
-	{
-		make_pair('+', Color(0,4,217)),
-		make_pair('.', Color(254,255,100)),
-		make_pair('=', Color(88,41,0)),
-		make_pair('*', Color(30,30,30)),
-		make_pair('/', Color(244,102,27)),
-		make_pair('#', Color(255,0,0)),
-		make_pair('-', Color(20,185,20)),
-	};
 
-	string _color = _colors[_letter].ToString(false);
-	return _color + (_isEmoji ? "" : "  ");
-}
 void Level::Save()
 {
 	SaveMap();

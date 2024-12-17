@@ -1,14 +1,16 @@
 #pragma once
 
+#include "Tile.h"
+
 struct Size
 {
 	int sizeX;
 	int sizeY;
 
 	Size() = default;
-	Size(const vector<string>& _map)
+	Size(const vector<vector<Tile>>& _map)
 	{
-
+		if (_map.empty()) return;
 		sizeX = int(_map.size());
 		sizeY = int(_map[0].size());
 	}
