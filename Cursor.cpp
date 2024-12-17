@@ -7,7 +7,7 @@
 
 Cursor::Cursor(const Coords& _position)
 {
-	appearance = CROSSHAIRE;
+	appearance = CROSSHAIR;
 	position = _position;
 }
 

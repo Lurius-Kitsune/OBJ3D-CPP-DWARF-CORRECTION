@@ -41,7 +41,7 @@ private:
 	#pragma endregion
 
 	vector<Coords> GetCoordsByBiome(const u_int& _biome) const;
-	vector<Coords> SelectCoords(const vector<Coords>& _availableCoords, const u_int& _percentage) const;
+	vector<Coords> SelectCoords(vector<Coords> _availableCoords, const u_int& _percentage) const;
 	void SpawnAtCoords(const vector<Coords>& _selectCoords, const string& _elementToSpawn);
 
 	vector<string> ConvertMapToString() const;

@@ -42,8 +42,7 @@ void Level::Generate()
 	const u_int& _percentage = 20;
 	const u_int& _biome = 2;
 	const vector<Coords>& _availableCoords = GetCoordsByBiome(_biome);
-	const u_int& _coordsCount = static_cast<const u_int&>(_availableCoords.size());
-	const vector<Coords>& _selectCoords = SelectCoords(_coordsCount);
+	const vector<Coords>& _selectCoords = SelectCoords(_availableCoords, _percentage);
 	SpawnAtCoords(_selectCoords, _elementToSpawn);
 }
 
@@ -51,12 +50,12 @@ vector<Coords> Level::GetCoordsByBiome(const u_int& _biome) const
 {
 	vector<Coords> _availableCoords;
 
-	const u_int& _mapSize = static_cast<const u_int&>(map.size());
-	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
+	const int _mapSize = static_cast<const int>(map.size());
+	for (int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
 	{
 		vector<Tile> _rowTile;
-		const u_int& _rowSize = static_cast<const u_int&>(map[_rowIndex].size());
-		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex += 3)
+		const int _rowSize = static_cast<const int>(map[_rowIndex].size());
+		for (int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex += 3)
 		{
 			if (map[_rowIndex][_columnIndex].GetBackgroundKey() == _biome)
 			{
@@ -64,9 +63,10 @@ vector<Coords> Level::GetCoordsByBiome(const u_int& _biome) const
 			}
 		}
 	}
+	return _availableCoords;
 }
 
-vector<Coords> Level::SelectCoords(const vector<Coords>& _availableCoords, const u_int& _percentage) const
+vector<Coords> Level::SelectCoords(vector<Coords> _availableCoords, const u_int& _percentage) const
 {
 	const u_int& _coordsCount = static_cast<const u_int&>(_availableCoords.size());
 	random_shuffle(_availableCoords.begin(), _availableCoords.end());
