@@ -5,7 +5,7 @@
 
 Level::Level(const string& _path, Cursor* _cursor)
 {
-	path = "Assets/Levels/" + _path + ".txt";
+	path = "Assets/Levels/" + _path;
 	LoadMap();
 	fullMapSize = Size(map);
 	view = Size(35, 35);
