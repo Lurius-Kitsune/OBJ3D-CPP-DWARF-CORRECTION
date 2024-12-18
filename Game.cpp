@@ -84,7 +84,7 @@ void Game::Display() const
 	else
 	{
 		const Coords& _center = Coords(35, 35);
-		level->DisplayView(_center);
+		level->DisplayView(cursor->GetLocation());
 	}
 }
 
