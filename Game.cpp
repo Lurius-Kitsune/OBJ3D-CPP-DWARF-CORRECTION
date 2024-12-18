@@ -48,19 +48,19 @@ bool Game::PollEvents()
 
 		else if (_code == 72) // haut
 		{
-			cursor->Move(level, Coords(0, -1));
+			cursor->Move(level, Coords(-1, 0));
 		}
 		else if (_code == 75) // gauche
 		{
-			cursor->Move(level, Coords(-1, 0));
+			cursor->Move(level, Coords(0, -1));
 		}
 		else if (_code == 77) // droite
 		{
-			cursor->Move(level, Coords(1, 0));
+			cursor->Move(level, Coords(0, 1));
 		}
 		else if (_code == 80) // bas
 		{
-			cursor->Move(level, Coords(0, 1));
+			cursor->Move(level, Coords(1, 0));
 		}
 	}
 
@@ -96,6 +96,7 @@ void Game::SelectLevel(const string& _path)
 
 void Game::Start()
 {
+	level->SetItemAtLocation(cursor->GetAppearance(), cursor->GetLocation());
 	SLEEP(seconds, 3);
 	entities.push_back(new Dwarf());
 	Update();

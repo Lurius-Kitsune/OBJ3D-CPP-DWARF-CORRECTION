@@ -188,11 +188,12 @@ void Level::Save()
 void Level::DisplayMap(const Size& _size, const Coords& _start) const
 {
 	cursor->SetCursorPosition(0, 0);
-	const u_int& _rowSize = static_cast<const u_int&>(_size.y);
-	for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex++)
+
+	const u_int& _mapSize = static_cast<const u_int&>(_size.x);
+	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
 	{
-		const u_int& _mapSize = static_cast<const u_int&>(_size.x);
-		for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
+		const u_int& _rowSize = static_cast<const u_int&>(_size.y);
+		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex++)
 		{
 			const u_int& _posY = _columnIndex + _start.y;
 			const u_int& _posX = _rowIndex + _start.x;
@@ -200,9 +201,9 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 			if (!IsValidCoords(Coords(_posX, _posY))) continue;
 			map[_posX][_posY].Display();
 		}
-
 		cout << endl;
 	}
+
 	Reset();
 }
 
