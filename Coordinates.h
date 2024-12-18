@@ -31,10 +31,16 @@ struct Coords
 		return x == _other.x
 			&& y == _other.y;
 	}
+
 	Coords& operator += (const Coords& _other)
 	{
 		x += _other.x;
 		y += _other.y;
 		return *this;
+	}
+
+	Coords operator+ (const Coords& _other)
+	{
+		return { x + _other.x, y + _other.y };
 	}
 };

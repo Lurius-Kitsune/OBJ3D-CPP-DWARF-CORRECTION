@@ -71,7 +71,12 @@ void Cursor::DisplayOnceCenterMultiLine(const string* _textArray, const u_int& _
 
 void Cursor::Move(Level* _level, const Coords& _offset)
 {
-	_level->ResetItemAtLocation(location);
-	location += _offset;
-	_level->SetItemAtLocation(appearance, location);
+	const Coords& _newPos = location + _offset;
+	if (_level->IsValidCoords(_newPos))
+	{
+		_level->ResetItemAtLocation(location);
+		_level->SetItemAtLocation(appearance, _newPos);
+		location = _newPos;
+	}
+	
 }

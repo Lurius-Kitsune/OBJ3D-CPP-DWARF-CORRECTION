@@ -198,7 +198,12 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 			const u_int& _posY = _columnIndex + _start.y;
 			const u_int& _posX = _rowIndex + _start.x;
 
-			if (!IsValidCoords(Coords(_posX, _posY))) continue;
+			if (!IsValidCoords(Coords(_posX, _posY)))
+			{
+				cout << BG_BLACK << " ";
+				continue;
+			}
+
 			map[_posX][_posY].Display();
 		}
 		cout << endl;

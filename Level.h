@@ -34,6 +34,8 @@ public:
 	bool IsOver(const Coords& _coords) const;
 private:
 	vector<string> ConvertMapToString() const;
+
+public:
 	bool IsValidCoords(const Coords& _coords) const;
 
 	#pragma region Item
