@@ -232,7 +232,7 @@ void Level::DisplayHorizontalBorder(const u_int& _rowSize) const
 {
 	for (u_int _i = 0; _i < _rowSize + 2; _i++)
 	{
-		Print("", BG_GRAY, " ", RESET);
+		Print("", BG_CYAN, " ", RESET);
 	}
 	Print("\n", RESET);
 }
@@ -247,7 +247,7 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 
 	const u_int& _mapSize = static_cast<const u_int&>(_size.x);
 	const u_int& _rowSize = static_cast<const u_int&>(_size.y);
-	const string& _borderColor = BG_GRAY;
+	const string& _borderColor = BG_CYAN;
 	DisplayHorizontalBorder(_rowSize * 2);
 	//Print("", "\n");
 	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
@@ -258,16 +258,9 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 			const u_int& _posX = _rowIndex + _start.x;
 			const u_int& _posY = _columnIndex + _start.y;
 			const Coords& _currentCoords = Coords(_posX, _posY);
-			//if (!IsValidCoords(_currentCoords)) continue;
-			bool _isCursor = Cursor::GetInstance().GetLocation() == _currentCoords;
-			if (!IsValidCoords(_currentCoords))
-			{
-				Print("", _borderColor + "  ", RESET);
-			}
-			else
-			{
-				map[_posX][_posY].Display(_isCursor);
-			}
+			if (!IsValidCoords(_currentCoords)) continue;
+			const bool _isCursor = Cursor::GetInstance().GetLocation() == _currentCoords;
+			map[_posX][_posY].Display(_isCursor);
 		}
 		DisplayVerticalBorder(_borderColor, true);
 
