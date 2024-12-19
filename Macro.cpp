@@ -1,6 +1,6 @@
 #include "Macro.h"
 
-void Reset()
+void ResetColor()
 {
 	Print("", RESET);
 }

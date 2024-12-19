@@ -1,6 +1,6 @@
 #include "FileStream.h"
+#include "Color.h"
 #include "Cursor.h"
-
 
 vector<string> FileStream::ReadAll(const string& _path) 
 {
@@ -46,15 +46,21 @@ bool FileStream::Write(const string& _path, const vector<string>& _content)
 	return true;
 }
 
-void FileStream::DisplayFile(const string& _path, const Gradient& _gradient)
+void FileStream::DisplayFile(const string& _path, const Gradient& _color)
 {
 	Cursor _cursor;
 	ifstream _stream = ifstream(_path);
+
+
 	vector<string> _logo;
 	string _line;
+	while (getline(_stream, _line))
+	{
+		_logo.push_back(_color.GradientString(_line));
+	}
 
-
-	while (getline(_stream, _line)) _logo.push_back(_gradient.GradientString(_line));
-
-	while (!_kbhit()) _cursor.DisplayOnceCenterMultiLine(_logo, (u_int)_logo.size());
+	while (!_kbhit())
+	{
+		_cursor.DisplayOnceCenterMultiLine(_logo, CAST(u_int,_logo.size()));
+	}
 }

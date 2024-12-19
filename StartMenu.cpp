@@ -9,11 +9,26 @@ StartMenu::StartMenu() : Menu("Start")
 
 void StartMenu::LaunchGame(const string& _path)
 {
-	//TODO start game
+	//Todo
 }
 
 void StartMenu::Show(const bool _toAdd)
 {
-	const function<void(const u_int&)> _callback = [&](const u_int& _index) { allSaves[_index]; };
-	OpenMenu(allSaves, "Quelle sauvegarde choisissez-vous ?", _callback);
+	function<void(const u_int&)> _callback = [&](const u_int& _index) { LaunchGame(allSaves[_index].path); };
+	OpenMenu(allSaves, "Quel sauvegarde choisissez-vous ?", _callback, false);
+
+	u_int _index = 0;
+	for (const Save& _save : allSaves)
+	{
+		cout << _index++ << " - " << _save.title << endl;
+	}
+
+	u_int _textIndex;
+	cin >> _textIndex;
+	_textIndex--;
+}
+
+void StartMenu::Hide()
+{
+
 }

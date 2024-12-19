@@ -56,22 +56,22 @@
       <UniqueIdentifier>{671645c2-45a3-41c7-b55a-3d55c9b243ad}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scripts\Level\Cursor">
-      <UniqueIdentifier>{557a4e56-d338-42cc-b9eb-3793ff3ad55c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scripts\Level\Files">
-      <UniqueIdentifier>{8ea16c98-fbd1-4052-9437-b85f0040d2d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scripts\Level\Size">
-      <UniqueIdentifier>{0d805922-1ded-45ea-8e8e-7e3868679994}</UniqueIdentifier>
+      <UniqueIdentifier>{1b15e77c-5cc3-4611-beac-fa0bf9baf0ed}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scripts\Level\Tile">
-      <UniqueIdentifier>{4ed585dc-93d9-4e2f-a7a8-ab3d2872200c}</UniqueIdentifier>
+      <UniqueIdentifier>{affd9a36-ca2b-4853-b7f3-0696be307cb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scripts\Level\Tile\Coordniates">
-      <UniqueIdentifier>{ba762096-6afd-4537-a5c4-e801636adeee}</UniqueIdentifier>
+    <Filter Include="Scripts\Level\Files">
+      <UniqueIdentifier>{3bd2d8e5-da98-4a20-9234-27ec2083b0ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Level\Coordinates">
+      <UniqueIdentifier>{29319d8c-7a14-48ba-827c-d35f917eaacd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Level\Size">
+      <UniqueIdentifier>{c995203d-f3cc-44e3-a7d3-a787e0c80e53}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scripts\Level\Save">
-      <UniqueIdentifier>{521f038a-7993-4bef-befb-c3cfed6dcf18}</UniqueIdentifier>
+      <UniqueIdentifier>{4f6f0e1a-5442-40ba-9098-4aa30ddd68c4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +89,15 @@
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Scripts\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Scripts\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Scripts\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Scripts\Level</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Scripts\Components</Filter>
@@ -129,18 +138,6 @@
     <ClCompile Include="GameInput.cpp">
       <Filter>Scripts\Game\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Cursor.cpp">
-      <Filter>Scripts\Level\Cursor</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Scripts\Level\Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Scripts\Level\Tile</Filter>
-    </ClCompile>
-    <ClCompile Include="Save.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoreMinimal.h">
@@ -160,6 +157,21 @@
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Scripts\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Scripts\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>Scripts\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Coordinates.h">
+      <Filter>Scripts\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Size.h">
+      <Filter>Scripts\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Scripts\Level</Filter>
     </ClInclude>
     <ClInclude Include="MovementComponent.h">
       <Filter>Scripts\Components</Filter>
@@ -206,28 +218,13 @@
     <ClInclude Include="GameInput.h">
       <Filter>Scripts\Game\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Cursor.h">
-      <Filter>Scripts\Level\Cursor</Filter>
-    </ClInclude>
-    <ClInclude Include="Coordinates.h">
-      <Filter>Scripts\Level\Tile\Coordniates</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Scripts\Level\Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Scripts\Level\Tile</Filter>
-    </ClInclude>
-    <ClInclude Include="Size.h">
-      <Filter>Scripts\Level\Size</Filter>
-    </ClInclude>
     <ClInclude Include="Save.h">
-      <Filter>Header Files</Filter>
+      <Filter>Scripts\Level\Save</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\Levels\MainLevel.txt">
-      <Filter>Scripts\Level\Files</Filter>
+      <Filter>Scripts\Level</Filter>
     </Text>
   </ItemGroup>
 </Project>

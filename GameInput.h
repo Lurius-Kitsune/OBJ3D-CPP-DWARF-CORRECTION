@@ -53,7 +53,7 @@ struct GameInput
 			{IAT_DOWN, "Bas"},
 			{IAT_LEFT, "Gauche"},
 			{IAT_RIGHT, "Droite"},
-			{IAT_INTERACT, "Intéragir"},
+			{IAT_INTERACT, "Interagir"},
 			{IAT_VALIDATE, "Valider"},
 			{IAT_PAUSE, "Mettre en pause"},
 			{IAT_TAB, "TAB ?"},

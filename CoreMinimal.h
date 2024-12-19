@@ -12,8 +12,8 @@
 #include <fstream>
 #include <sstream>
 #include <assert.h>
-#include <functional>
 #include <regex>
+#include <functional>
 
 using namespace std;
 using namespace this_thread;

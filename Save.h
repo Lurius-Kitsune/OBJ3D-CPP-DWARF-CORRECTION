@@ -1,16 +1,17 @@
 #pragma once
+
 #include "CoreMinimal.h"
 
 struct Save
 {
 	string title;
 	string path;
+
 	Save()
 	{
 		title = "Empty";
 		path = "";
 	}
-
 	Save(const string& _title, const string& _path)
 	{
 		title = _title;
@@ -22,4 +23,3 @@ struct Save
 		return _stream << _save.title;
 	}
 };
-

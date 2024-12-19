@@ -251,7 +251,7 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 		}
 		Print("", BG_GRAY, "  \n", RESET);
 	}
-	Reset();
+	ResetColor();
 	for (u_int _index = 0; _index < _rowSize + 2; _index++)
 	{
 		Print("", BG_GRAY, "  ", RESET);
