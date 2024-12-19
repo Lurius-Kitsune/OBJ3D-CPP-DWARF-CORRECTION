@@ -1,9 +1,9 @@
-#include "Color.h"
+﻿#include "Color.h"
 #include "Macro.h"
 #include "Random.h"
 
 // === Gradient === 
-string Gradient::GradientString(const string _text, const bool _textOnly)
+string Gradient::GradientString(const string& _text, const bool _textOnly)
 {
     const int _size = static_cast<int>(_text.size());
     string _newWord = "";
@@ -11,9 +11,19 @@ string Gradient::GradientString(const string _text, const bool _textOnly)
     for (int _index = 0; _index < _size; _index++)
     {
         const Color& _color = ClampGradient(_index, _size);
-        _newWord += _color.ToString(_textOnly) + _text[_index];
+        if (_text[_index] == ' ') _newWord += _text[_index];
+        else _newWord += _color.ToString(_textOnly) + _text[_index];
     }
     return _newWord + RESET;
+}
+Color Gradient::GradientColor(const int _length, const int _colorIndex)
+{
+    vector<Color> _colorGradient;
+    for (int _index = 0; _index < _length; _index++)
+    {
+        _colorGradient.push_back(ClampGradient(_index, _length));
+    }
+    return _colorGradient[_colorIndex];
 }
 
 Color Gradient::ClampGradient(const int _index, const int _maxDisplayChar) const
@@ -93,4 +103,23 @@ string Color::GetRandomColor()
 
     const u_int& _rainbowSize = size(_rainbowTable) - 1;
     return _rainbowTable[GetRandom(0, _rainbowSize)];
+}
+
+void Color::CalculateSaturation(double _factor)
+{
+    // Calcul de l'intensit�
+    double _gray = (r + g + b) / 3.0;
+
+    // Ajuste chaque composante en fonction de la saturation
+    r = Clamp(static_cast<int>(_gray + (r - _gray) * _factor), 0, 255);
+    g = Clamp(static_cast<int>(_gray + (g - _gray) * _factor), 0, 255);
+    b = Clamp(static_cast<int>(_gray + (b - _gray) * _factor), 0, 255);
+
+}
+
+void Color::AdjustBrightness(double _factor)
+{
+    r = Clamp(static_cast<int>(r * _factor), 0, 255);
+    g = Clamp(static_cast<int>(g * _factor), 0, 255);
+    b = Clamp(static_cast<int>(b * _factor), 0, 255);
 }

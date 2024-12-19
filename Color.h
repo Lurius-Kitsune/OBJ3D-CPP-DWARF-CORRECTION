@@ -135,6 +135,14 @@ struct Color
 	static string RainbowString(const string& _word);
 	static void DisplayRainbow(const string& _text);
 	static string GetRandomColor();
+	void CalculateSaturation(double _factor);
+	void AdjustBrightness(double _factor);
+
+private:
+	int Clamp(int _value, int _min, int _max)
+	{
+		return (_value < _min) ? _min : (_value > _max ? _max : _value);
+	}
 };
 
 struct Gradient
@@ -149,6 +157,7 @@ struct Gradient
 		gradB = _b;
 	}
 
-	string GradientString(const string _text, const bool _textOnly = true);
+	string GradientString(const string& _text, const bool _textOnly = true);
+	Color GradientColor(const int _length, const int _colorIndex);
 	Color ClampGradient(const int _index, const int _maxDisplayChar) const;
 };

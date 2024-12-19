@@ -1,18 +1,22 @@
-#include "Main.h"
+ï»¿#include "Main.h"
 #include "Macro.h"
 #include "Animation.h"
 #include "Game.h"
 #include "FileStream.h"
 
+#include "MainMenu.h"
+
+#include "ControlsMenu.h"
+
 /* TODO list
-* 
+*
 * Menu
 * View
 * Setup village
 * Setup items
-* Cacher/Dévoiler carte
-* Save carte avec item et zone dévoilée
-* 
+* Cacher/Dï¿½voiler carte
+* Save carte avec item et zone dï¿½voilï¿½e
+*
 */
 
 string ComputeEmoji(int _codePoint)
@@ -47,8 +51,8 @@ string ComputeEmoji(int _codePoint)
 
 void TEMP()
 {
-	const u_int& _start = 0x1F600;
-	const u_int& _end = 0xFFFFFF;
+    const u_int& _start = 0x1F600;
+    const u_int& _end = 0xFFFFFF;
 
     for (u_int _index = _start; _index < _end; _index++)
     {
@@ -61,14 +65,22 @@ void TEMP()
     }
 }
 
-struct MyStruct
-{
-    void A() {}
-};
-
 int main()
 {
-	DefaultSetup();
+    DefaultSetup();
+
+    /*GameInput* _newGameInput = new GameInput();
+    ControlsMenu _menu = ControlsMenu(_newGameInput);
+    _menu.Show();*/
+
+    //Gradient _gradient = Gradient({ 222, 22, 35 }, { 24, 65, 230 }); // Red to Blue
+    //Animation _anim;
+    //_anim.LoadAnimation("Assets\\SmolLoadingScreen\\SLS-", ".txt", 3);
+    //_anim.SetColor(_gradient);
+    //_anim.SetPlayRate(1000);
+    //_anim.SetUseGradient(true);
+    //_anim.PaddingForSmolLoadingScreen();
+    //_anim.PlayAnimation(false);
 
     /*vector<string> _map = FileStream::ReadAll("Assets/Levels/MainLevel/.txt");
     vector<string> _newMap;
@@ -86,34 +98,36 @@ int main()
         }
     }
     FileStream::Write("Assets/Levels/MainLevel/.txt", _map);
-    return -1;*/
+    return -1;
+    TEMP();
+     TODO teste after animation
+    Animation _anim;
+    _anim.LoadStartUpAnimation(".\\Assets\\LoadingScreen\\ALS-", ".txt", 44);
+     Main menu -> Start / Options / Quit
+     Start => Crï¿½er / Reprendre
+     Options => Audio / Controls / Video
+     Audio => Volume / Dwarf / Attackers / Animals / Environment
+     Controls => Affichage clavier / souris
+     Video => Intensity / Framerate / Daltonien / etc..
+     Quit => quitter*/
 
-	//TEMP();
-    // TODO teste after animation
-    //Animation _anim;
-    //_anim.LoadStartUpAnimation(".\\Assets\\LoadingScreen\\ALS-", ".txt", 44);
-
-    // Main menu -> Start / Options / Quit
-    // Start => Créer / Reprendre
-    // Options => Audio / Controls / Video
-    // Audio => Volume / Dwarf / Attackers / Animals / Environment
-    // Controls => Affichage clavier / souris
-    // Video => Intensity / Framerate / Daltonien / etc..
-    // Quit => quitter
-
-    Game _game;
+   /* Game _game;
     _game.SelectLevel("MainLevel");
-    _game.Start();
+    _game.Start();*/
 
-	return EXIT_SUCCESS;
+    MainMenu _mainMenu = MainMenu();
+    //_mainMenu
+
+    return EXIT_SUCCESS;
 }
 
 void DefaultSetup()
 {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     SetConsoleName("Dwarf Fortress");
-    SetConsoleSize(1200, 800);
-	InitUTF8;
+    //SetConsoleSize(1200, 800);
+    MaximizeConsole();
+    InitUTF8;
 }
 
 void SetConsoleName(const string& _consoleName)
@@ -121,17 +135,24 @@ void SetConsoleName(const string& _consoleName)
     SetConsoleTitleA(_consoleName.c_str());
 }
 
+Coords GetDesktopResolution()
+{
+    RECT desktop;
+    const HWND hDesktop = GetDesktopWindow();
+    GetWindowRect(hDesktop, &desktop);
+    return { desktop.right, desktop.bottom };
+}
+
 void SetConsoleSize(const u_int& _sizeX, const u_int& _sizeY)
 {
     const HWND& _hwnd = GetForegroundWindow();
     const LONG& _winstyle = GetWindowLong(_hwnd, GWL_STYLE);
     //SetWindowLong(_hwnd, GWL_STYLE, (_winstyle | WS_POPUP | WS_MAXIMIZE) & ~WS_CAPTION & ~WS_THICKFRAME & ~WS_BORDER);
-    SetWindowPos(_hwnd, HWND_TOP, 0, 0, _sizeX, _sizeY, 0);
+    SetWindowPos(_hwnd, HWND_TOP, (1920 - _sizeX) / 2, (1080 - _sizeY) / 2, _sizeX, _sizeY, 0);
 }
 
 void MaximizeConsole()
 {
-    const int _x = GetSystemMetrics(SM_CXSCREEN);
-    const int _y = GetSystemMetrics(SM_CYSCREEN);
-    SetConsoleSize(_x, _y);
+    HWND _hwnd = GetForegroundWindow();
+    ShowWindow(_hwnd, SW_MAXIMIZE);
 }

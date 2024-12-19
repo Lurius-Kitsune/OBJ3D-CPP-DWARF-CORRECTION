@@ -4,7 +4,6 @@
 class Menu
 {
 	string title;
-	Menu* owner;
 
 public:
 	INLINE string GetTitle() const
@@ -16,6 +15,8 @@ public:
 	Menu(const string& _title);
 
 public:
+
 	virtual void Show() {};
 	virtual void Hide() {};
+	virtual void Interact() {};
 };

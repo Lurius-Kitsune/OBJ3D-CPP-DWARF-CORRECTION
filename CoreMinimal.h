@@ -2,9 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <map>
 #include <queue>
-#include <set>
 #include <windows.h>
 #include <algorithm>
 #include <chrono>
@@ -14,10 +12,12 @@
 #include <fstream>
 #include <sstream>
 #include <assert.h>
+#include <regex>
 
 using namespace std;
 using namespace this_thread;
 using namespace chrono;
+
 typedef unsigned int u_int;
 
 #define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
@@ -27,7 +27,7 @@ typedef unsigned int u_int;
 
 #define UTF8
 #ifdef UTF8
-	#define InitUTF8 SetConsoleOutputCP(CP_UTF8)
+#define InitUTF8 SetConsoleOutputCP(CP_UTF8)
 #else
-	#define InitUTF8 locale::global(locale("fr-FR"))
+#define InitUTF8 locale::global(locale("fr-FR"))
 #endif

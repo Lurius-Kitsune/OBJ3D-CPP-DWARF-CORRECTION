@@ -1,12 +1,16 @@
-#include "Game.h"
+﻿#include "Game.h"
 #include "Dwarf.h"
+#include "ControlsMenu.h" // TODO REMOVE
+#include "MainMenu.h"
 
 Game::Game()
 {
 	level = nullptr;
 	displayAll = false;
-	cursor = new Cursor({ 35, 35 });
+	gameInput = new GameInput();
+	cursor = new Cursor({ 109, 200 });
 	isMenuOpen = false;
+	currentMenu = new MainMenu(gameInput, level);
 }
 
 Game::~Game()
@@ -17,50 +21,72 @@ Game::~Game()
 	{
 		delete _entity;
 	}
-}
 
+	delete gameInput;
+}
 
 bool Game::PollEvents()
 {
 	if (_kbhit())
 	{
-		const int _code = _getch();
-		if (_code == 27) // echap
+		InputActionType _inputAction = gameInput->GetInputActionType(_getch());
+		if (_inputAction == IAT_PAUSE) // echap
 		{
 			if (!isMenuOpen)
 			{
-				return true;
+				isMenuOpen = true;
 			}
 
 			level->HideTileInfo();
-			isMenuOpen = false;
+			//isMenuOpen = false;
 		}
-		if (_code == 13) // enter
+		if (_inputAction == IAT_INTERACT) // enter
 		{
 			level->ShowTileInfo();
 			isMenuOpen = true;
 		}
-		else if (_code == 9) // tab
+		else if (_inputAction == IAT_TAB) // tab
 		{
 			system("cls");
 			displayAll = !displayAll; // toggle
 		}
 
-		else if (_code == 72) // haut
+		else if (_inputAction == IAT_UP) // haut
+		{
+			if (isMenuOpen)
+			{
+				currentMenu->AddOnCurrentIndex(-1);
+			}
+			else
+			{
+				cursor->Move(level, Coords(-1, 0));
+			}
+		}
+		else if (_inputAction == IAT_LEFT) // gauche
 		{
 			cursor->Move(level, Coords(0, -1));
 		}
-		else if (_code == 75) // gauche
-		{
-			cursor->Move(level, Coords(-1, 0));
-		}
-		else if (_code == 77) // droite
-		{
-			cursor->Move(level, Coords(1, 0));
-		}
-		else if (_code == 80) // bas
+		else if (_inputAction == IAT_RIGHT) // droite
 		{
 			cursor->Move(level, Coords(0, 1));
+		}
+		else if (_inputAction == IAT_DOWN) // bas
+		{
+			if (isMenuOpen)
+			{
+				currentMenu->AddOnCurrentIndex(1);
+			}
+			else
+			{
+				cursor->Move(level, Coords(1, 0));
+			}
+		}
+		else if (_inputAction == IAT_VALIDATE) // entr�
+		{
+			if (isMenuOpen)
+			{
+				currentMenu->Interact();
+			}
 		}
 	}
 
@@ -77,17 +103,20 @@ void Game::UpdateEntities()
 
 void Game::Display() const
 {
-	if (displayAll)
+	cursor->SetCursorPosition(0, 0);
+	if (currentMenu && isMenuOpen)
+	{
+		currentMenu->Show();
+	}
+	else if (displayAll)
 	{
 		level->DisplayFullMap();
 	}
 	else
 	{
-		const Coords& _center = Coords(35, 35);
-		level->DisplayView(_center);
+		level->DisplayView(cursor->GetLocation());
 	}
 }
-
 
 void Game::SelectLevel(const string& _path)
 {
@@ -96,8 +125,6 @@ void Game::SelectLevel(const string& _path)
 
 void Game::Start()
 {
-	SLEEP(seconds, 3);
-	entities.push_back(new Dwarf());
 	Update();
 }
 
@@ -116,6 +143,7 @@ void Game::Update()
 
 void Game::Pause()
 {
+
 }
 
 void Game::Stop()

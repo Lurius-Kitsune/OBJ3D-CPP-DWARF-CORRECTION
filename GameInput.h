@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "CoreMinimal.h"
 #include <map>
 
@@ -47,13 +47,13 @@ struct GameInput
 			{9, IAT_TAB},
 		};
 
-		inputsName = 
+		inputsName =
 		{
 			{IAT_UP, "Haut"},
 			{IAT_DOWN, "Bas"},
 			{IAT_LEFT, "Gauche"},
 			{IAT_RIGHT, "Droite"},
-			{IAT_INTERACT, "Intéragir"},
+			{IAT_INTERACT, "Intï¿½ragir"},
 			{IAT_VALIDATE, "Valider"},
 			{IAT_PAUSE, "Mettre en pause"},
 			{IAT_TAB, "TAB ?"},
@@ -69,7 +69,7 @@ struct GameInput
 	{
 		for (pair<char, InputActionType> _input : inputs)
 		{
-			if(_input.second == _inputActionType)
+			if (_input.second == _inputActionType)
 			{
 				return _input.first;
 			}
@@ -78,4 +78,3 @@ struct GameInput
 		return 0;
 	}
 };
-
