@@ -93,12 +93,6 @@
     <ClCompile Include="Level.cpp">
       <Filter>Scripts\Level</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Scripts\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Cursor.cpp">
-      <Filter>Scripts\Level</Filter>
-    </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Scripts\Components</Filter>
     </ClCompile>
@@ -138,6 +132,12 @@
     <ClCompile Include="GameInput.cpp">
       <Filter>Scripts\Game\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Scripts\Level\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Scripts\Level\Tile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoreMinimal.h">
@@ -159,18 +159,6 @@
       <Filter>Scripts\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>Scripts\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Cursor.h">
-      <Filter>Scripts\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Coordinates.h">
-      <Filter>Scripts\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Size.h">
-      <Filter>Scripts\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
       <Filter>Scripts\Level</Filter>
     </ClInclude>
     <ClInclude Include="MovementComponent.h">
@@ -221,10 +209,22 @@
     <ClInclude Include="Save.h">
       <Filter>Scripts\Level\Save</Filter>
     </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>Scripts\Level\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="Coordinates.h">
+      <Filter>Scripts\Level\Coordinates</Filter>
+    </ClInclude>
+    <ClInclude Include="Size.h">
+      <Filter>Scripts\Level\Size</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Scripts\Level\Tile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\Levels\MainLevel.txt">
-      <Filter>Scripts\Level</Filter>
+      <Filter>Scripts\Level\Files</Filter>
     </Text>
   </ItemGroup>
 </Project>

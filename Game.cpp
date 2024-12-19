@@ -1,16 +1,13 @@
 ﻿#include "Game.h"
-#include "Dwarf.h"
-#include "ControlsMenu.h" // TODO REMOVE
-#include "MainMenu.h"
+#include "Entity.h"
 
 Game::Game()
 {
 	level = nullptr;
 	displayAll = false;
-	gameInput = new GameInput();
+	gameInput = GameInput();
 	cursor = new Cursor({ 109, 200 });
 	isMenuOpen = false;
-	currentMenu = new MainMenu();
 }
 
 Game::~Game()
@@ -22,14 +19,13 @@ Game::~Game()
 		delete _entity;
 	}
 
-	delete gameInput;
 }
 
 bool Game::PollEvents()
 {
 	if (_kbhit())
 	{
-		InputActionType _inputAction = gameInput->GetInputActionType(_getch());
+		InputActionType _inputAction = gameInput.GetInputActionType(_getch());
 		if (_inputAction == IAT_PAUSE) // echap
 		{
 			if (!isMenuOpen)
@@ -83,10 +79,7 @@ bool Game::PollEvents()
 		}
 		else if (_inputAction == IAT_VALIDATE) // entr�
 		{
-			if (isMenuOpen)
-			{
-				currentMenu->Interact();
-			}
+
 		}
 	}
 
@@ -104,18 +97,7 @@ void Game::UpdateEntities()
 void Game::Display() const
 {
 	cursor->SetCursorPosition(0, 0);
-	if (currentMenu && isMenuOpen)
-	{
-		currentMenu->Show();
-	}
-	else if (displayAll)
-	{
-		level->DisplayFullMap();
-	}
-	else
-	{
-		level->DisplayView(cursor->GetLocation());
-	}
+	displayAll ? level->DisplayFullMap() : level->DisplayView(cursor->GetLocation());
 }
 
 void Game::SelectLevel(const string& _path)

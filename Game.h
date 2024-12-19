@@ -2,9 +2,7 @@
 #include "CoreMinimal.h"
 #include "Level.h"
 #include "Cursor.h"
-#include "Entity.h"
 #include "GameInput.h"
-#include "Menu.h"
 #include "VideoMenu.h"
 
 #pragma region ToDelete
@@ -17,10 +15,9 @@ class Game
 {
 	Level* level;
 	Cursor* cursor;
-	GameInput* gameInput;
+	GameInput gameInput;
 	vector<Entity*> entities;
-	Menu* currentMenu;
-	bool displayAll;
+	
 	bool isMenuOpen;
 
 public:

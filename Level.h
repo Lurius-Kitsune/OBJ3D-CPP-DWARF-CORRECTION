@@ -17,6 +17,7 @@ class Level
 	Tile selectedTile;
 	double colorSaturation;
 	double colorBrightness;
+	bool displayAll;
 
 public:
 	INLINE const Size& GetFullSize() const
