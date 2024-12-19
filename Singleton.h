@@ -8,7 +8,7 @@ protected:
 	static Class instance;
 
 public: 
-	static Inline Class& GetInstance()
+	static INLINE Class& GetInstance()
 	{
 		return instance;
 	}

@@ -45,11 +45,12 @@ void Game::Display() const
 
 void Game::SelectLevel(const string& _path)
 {
-	level = new Level(_path, cursor);
+	level = new Level(_path);
 }
 
-void Game::Start()
+void Game::Start(Level* _level)
 {
+	level = _level;
 	Update();
 }
 

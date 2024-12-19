@@ -3,9 +3,9 @@
 #include "Level.h"
 #include "Cursor.h"
 #include "Entity.h"
-#include "Menu.h"
+#include "Singleton.h"
 
-class Game
+class Game : public Singleton<Game>
 {
 	Level* level;
 	Cursor* cursor;
@@ -22,7 +22,7 @@ private:
 
 public:
 	void SelectLevel(const string& _path);
-	void Start();
+	void Start(Level* _level);
 	void Update();
 	void Pause();
 	void Stop();

@@ -12,7 +12,6 @@ class Level
 	Size fullMapSize;
 	Size view;
 	string path;
-	Cursor* cursor;
 	vector<BiomeData> biomesData;
 	Tile selectedTile;
 	bool displayAll;
@@ -37,7 +36,7 @@ private:
 	}
 
 public:
-	Level(const string& _path, Cursor* _cursor);
+	Level(const string& _path);
 
 public:
 	bool IsOver(const Coords& _coords) const;

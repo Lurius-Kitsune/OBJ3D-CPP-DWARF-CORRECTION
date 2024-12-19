@@ -2,8 +2,8 @@
 #include "CoreMinimal.h"
 #include "Level.h"
 #include "Coordinates.h"
-
-class Cursor
+#include "Singleton.h"
+class Cursor : public Singleton<Cursor>
 {
 	Coords location;
 	string appearance;
