@@ -272,9 +272,13 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 
 Coords Level::ComputeCenter(const Coords& _cursorPos) const
 {
+
+	const int _poxX = _cursorPos.x + (view.x / 2) > fullMapSize.x ? fullMapSize.x - view.x : _cursorPos.x - (view.x / 2) < 0 ? 0 : _cursorPos.x - view.x / 2;
+	const int _poxY = _cursorPos.y + (view.y / 2) > fullMapSize.y ? fullMapSize.y - view.y : _cursorPos.y - (view.y/ 2) < 0 ? 0 : _cursorPos.y - view.y / 2;
+
 	return {
-		 _cursorPos.x - view.x / 2,
-		 _cursorPos.y - view.y / 2,
+		 _poxX,
+		 _poxY,
 	};
 }
 
