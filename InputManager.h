@@ -22,6 +22,7 @@ enum MouseEventType
 	MET_MOVED,
 	MET_CLOCKED,
 	MET_DRAGGED,
+
 	MET_COUNT,
 };
 
@@ -33,13 +34,29 @@ union MouseValue
 		int y;
 	} position;
 
-	int mouseCode;
+	int code;
+
+	MouseValue(const COORD& _coord)
+	{
+		position.x = _coord.X;
+		position.y = _coord.Y;
+	}
+	MouseValue(const int _code)
+	{
+		code = _code;
+	}
 };
 
 struct MouseEvent
 {
 	MouseEventType type;
 	MouseValue value;
+
+	MouseEvent(const MouseEventType& _type, const MouseValue& _value)
+	{
+		type = _type;
+		value = _value;
+	}
 };
 
 enum EventType
@@ -76,6 +93,11 @@ struct Event
 class InputManager : public Singleton<InputManager>
 {
 	queue<Event> allEvents;
+
+private:
+	void CollectEvents();
+
 public:
 	bool PollEvents(Event& _event);
+	void PollEventDemo();
 };
