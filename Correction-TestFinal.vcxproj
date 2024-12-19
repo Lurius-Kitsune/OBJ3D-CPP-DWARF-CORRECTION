@@ -137,7 +137,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="FileStream.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameInput.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Macro.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -163,7 +163,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="FileStream.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameInput.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Main.h" />
