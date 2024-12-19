@@ -55,7 +55,7 @@ bool Game::PollEvents()
 		{
 			if (isMenuOpen)
 			{
-				currentMenu->AddOnCurrentIndex();
+				//currentMenu->AddOnCurrentIndex();
 			}
 			else
 			{
