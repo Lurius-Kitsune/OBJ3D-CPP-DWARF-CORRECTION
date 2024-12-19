@@ -247,25 +247,26 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 
 	const u_int& _mapSize = static_cast<const u_int&>(_size.x);
 	const u_int& _rowSize = static_cast<const u_int&>(_size.y);
-	const string& _borderColor = CYAN;
-	DisplayHorizontalBorder(_rowSize);
-	Print("", "\n");
+	const string& _borderColor = BG_GRAY;
+	DisplayHorizontalBorder(_rowSize * 2);
+	//Print("", "\n");
 	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
 	{
 		DisplayVerticalBorder(_borderColor, false);
 		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex++)
 		{
-			const u_int& _posY = _columnIndex + _start.y;
 			const u_int& _posX = _rowIndex + _start.x;
+			const u_int& _posY = _columnIndex + _start.y;
 			const Coords& _currentCoords = Coords(_posX, _posY);
 			if (!IsValidCoords(_currentCoords)) continue;
 			bool _isCursor = Cursor::GetInstance().GetLocation() == _currentCoords;
 			map[_posX][_posY].Display(_isCursor);
 		}
-		Print("", BG_GRAY, "  \n", RESET);
+		DisplayVerticalBorder(_borderColor, true);
+
 	}
 	ResetColor();
-	DisplayVerticalBorder(_borderColor,  true);
+	DisplayHorizontalBorder(_rowSize * 2);
 
 }
 
