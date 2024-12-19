@@ -4,8 +4,7 @@
 
 class Cursor;
 
-static vector<string> emojis = 
-{
+static vector<string> emojis = {
 	CROSSHAIR,
 	VILLAGE,
 	HOUSE,
@@ -25,6 +24,10 @@ static vector<string> emojis =
 	CROCODILE,
 	PARROT,
 	GORILLA,
+	SPOUTING_WHALE,
+	OCTOPUS,
+	TROPICAL_FISH,
+	JELLY_FISH,
 	WATER,
 	TREE,
 	TREE2,
@@ -57,15 +60,24 @@ enum BiomeType
 	BT_COUNT
 };
 
+enum RateType
+{
+	RT_PERTEN = 10,
+	RT_PERCENT = 100,
+	RT_PERTHOUSAND = 1000,
+};
+
 struct TileData
 {
 	string appearance;
 	u_int percentage;
+	RateType rate;
 
-	TileData(const string& _appearance, const u_int& _percentage)
+	TileData(const string& _appearance, const u_int& _percentage, const RateType& _rate)
 	{
 		appearance = _appearance;
 		percentage = _percentage;
+		rate = _rate;
 	}
 };
 
@@ -85,6 +97,8 @@ class Tile
 {
 	int key;
 	vector<string> infos;
+	double colorSaturation;
+	double colorBrightness;
 
 public:
 	INLINE bool HasEmoji() const
@@ -101,11 +115,22 @@ public:
 	}
 
 public:
+	void SetColorSaturation(const int _value)
+	{
+		colorSaturation = _value;
+	}
+
+	void SetColorBrightness(const int _value)
+	{
+		colorBrightness = _value;
+	}
+
+public:
 	Tile() = default;
 	Tile(const string& _key);
 
 private:
-	string ComputeColor() const;
+	string ComputeColor(const bool _isCursorPosition) const;
 	string ComputeAppearance() const;
 	u_int GetKeyByAppearance(const string& _appearance) const;
 
@@ -114,6 +139,6 @@ public:
 	void ResetAppearance();
 	void ShowInfos(Cursor* _cursor) const;
 	void HideInfos(Cursor* _cursor) const;
-	void Display() const;
+	void Display(const Cursor* _cursor = nullptr)const;
 	string ToString() const;
 };

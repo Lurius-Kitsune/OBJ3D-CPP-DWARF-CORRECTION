@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Color.h"
+#include "Random.h"
 
 template <typename Type>
 void Print(const string& _separator, const Type& _value)
