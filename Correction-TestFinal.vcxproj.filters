@@ -22,12 +22,6 @@
     <Filter Include="Resource Files\Color">
       <UniqueIdentifier>{a0790e91-b991-4b02-97d8-ed3b031a14e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Entities\Components\Component">
-      <UniqueIdentifier>{157d8074-ab56-485c-aaaa-49b3b480abff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entities\Components\MouvementComponent">
-      <UniqueIdentifier>{a76060ac-7dfb-496d-aee2-327d43da7113}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\Color">
       <UniqueIdentifier>{fbaac54f-3eb7-4cf4-8ce3-8340ecaab82b}</UniqueIdentifier>
     </Filter>
@@ -36,6 +30,15 @@
     </Filter>
     <Filter Include="Resource Files\Levels">
       <UniqueIdentifier>{ea2922b4-1088-4db9-92e1-bf6c64b6fcbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{f785320d-6212-483e-b46c-7e71b36db9cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{42f00de8-fa79-4d44-9102-d642fc3ef10e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Component">
+      <UniqueIdentifier>{4466096d-16bd-41f4-bc6a-96a674141d89}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,21 +54,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Menus\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectGameMenu.cpp">
-      <Filter>Game\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="StartMenu.cpp">
-      <Filter>Game\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Entities\Components\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="MovementComponent.cpp">
-      <Filter>Entities\Components\MouvementComponent</Filter>
-    </ClCompile>
     <ClCompile Include="FileStream.cpp">
       <Filter>Resource Files\FileStream</Filter>
     </ClCompile>
@@ -75,19 +63,7 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AudioMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Bar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ControlsMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dwarf.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameInput.cpp">
@@ -99,13 +75,43 @@
     <ClCompile Include="Macro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="ControlsMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
     <ClCompile Include="OptionsMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectGameMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="StartMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Dwarf.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SelectGameMenu.cpp">
@@ -114,11 +120,8 @@
     <ClCompile Include="StartMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VideoMenu.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MovementComponent.cpp">
+      <Filter>Entities\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,12 +158,6 @@
     <ClInclude Include="Macro.h">
       <Filter>Resource Files\Macro</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Entities\Components\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="MovementComponent.h">
-      <Filter>Entities\Components\MouvementComponent</Filter>
-    </ClInclude>
     <ClInclude Include="FileStream.h">
       <Filter>Resource Files\FileStream</Filter>
     </ClInclude>
@@ -173,38 +170,44 @@
     <ClInclude Include="Bar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ControlsMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dwarf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameInput.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OptionsMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectGameMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StartMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ControlsMenu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsMenu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectGameMenu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="StartMenu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
     <ClInclude Include="VideoMenu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Dwarf.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementComponent.h">
+      <Filter>Entities\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
