@@ -137,8 +137,8 @@ private:
 public:
 	void SetAppearance(const string& _appearance);
 	void ResetAppearance();
-	void ShowInfos(Cursor* _cursor) const;
-	void HideInfos(Cursor* _cursor) const;
-	void Display(const Cursor* _cursor = nullptr)const;
+	void ShowInfos() const;
+	void HideInfos() const;
+	void Display(const bool _isCursor) const;
 	string ToString() const;
 };

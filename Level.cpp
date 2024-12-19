@@ -5,13 +5,12 @@
 #include "Emoji.h"
 #include "FileStream.h"
 
-Level::Level(const string& _path, Cursor* _cursor)
+Level::Level(const string& _path)
 {
 	path = "Assets/Levels/" + _path + ".txt";
 	LoadMap();
 	fullMapSize = Size(map);
 	view = Size(21, 21);
-	cursor = _cursor;
 	biomesData = {
 		BiomeData(BT_WATER, {
 			TileData(FISH, 10, RT_PERTHOUSAND),
@@ -113,13 +112,14 @@ bool Level::ResetItemAtLocation(const Coords& _coords)
 
 void Level::ShowTileInfo()
 {
-	selectedTile = GetTileByCoords(cursor->GetLocation());
-	selectedTile.ShowInfos(cursor);
+	Cursor _cursor = Cursor::GetInstance();
+	selectedTile = GetTileByCoords(_cursor.GetLocation());
+	selectedTile.ShowInfos();
 }
 
 void Level::HideTileInfo()
 {
-	selectedTile.HideInfos(cursor);
+	selectedTile.HideInfos();
 }
 
 #pragma endregion
@@ -227,7 +227,8 @@ void Level::Save()
 
 void Level::DisplayMap(const Size& _size, const Coords& _start) const
 {
-	cursor->SetCursorPosition(0, 0);
+	Cursor _cursor = Cursor::GetInstance();
+	_cursor.SetCursorPosition(0, 0);
 
 	const u_int& _mapSize = static_cast<const u_int&>(_size.x);
 	const u_int& _rowSize = static_cast<const u_int&>(_size.y);
@@ -245,8 +246,8 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 			const u_int& _posX = _rowIndex + _start.x;
 			const Coords& _currentCoords = Coords(_posX, _posY);
 			if (!IsValidCoords(_currentCoords)) continue;
-			const Cursor* _cursor = cursor->GetLocation() == _currentCoords ? cursor : nullptr;
-			map[_posX][_posY].Display(_cursor);
+			bool _isCursor = _cursor.GetLocation() == _currentCoords;
+			map[_posX][_posY].Display(_isCursor);
 		}
 		Print("", BG_GRAY, "  \n", RESET);
 	}
@@ -279,8 +280,9 @@ void Level::DisplayFullMap() const
 
 void Level::Display() const
 {
-	cursor->SetCursorPosition(0, 0);
-	displayAll ? DisplayFullMap() : DisplayView(cursor->GetLocation());
+	Cursor _cursor = Cursor::GetInstance();
+	_cursor.SetCursorPosition(0, 0);
+	displayAll ? DisplayFullMap() : DisplayView(_cursor.GetLocation());
 }
 
 #pragma endregion

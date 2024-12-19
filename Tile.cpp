@@ -67,26 +67,27 @@ void Tile::ResetAppearance()
 	key = GetBackgroundKey();
 }
 
-void Tile::ShowInfos(Cursor* _cursor) const
+void Tile::ShowInfos() const
 {
+	Cursor _cursor = Cursor::GetInstance();
 	Print("", RESET);
 	u_int _index = 0;
 
 	for (const string& _info : infos)
 	{
-		_cursor->SetCursorPosition(75, _index++);
+		_cursor.SetCursorPosition(75, _index++);
 		Print("", _info);
 	}
 }
 
-void Tile::HideInfos(Cursor* _cursor) const
+void Tile::HideInfos() const
 {
+	Cursor _cursor = Cursor::GetInstance();
 	Print("", RESET);
 	u_int _index = 0;
-
 	for (const string& _info : infos)
 	{
-		_cursor->SetCursorPosition(75, _index++);
+		_cursor.SetCursorPosition(75, _index++);
 
 		for (const char _letter : _info)
 		{
@@ -95,18 +96,19 @@ void Tile::HideInfos(Cursor* _cursor) const
 	}
 }
 
-void Tile::Display(const Cursor* _cursor)const
+void Tile::Display(const bool _isCursor)const
 {
-	Print("", ComputeColor(_cursor));
+	Cursor _cursor = Cursor::GetInstance();
+	Print("", ComputeColor(_isCursor));
 
 	if (HasEmoji())
 	{
-		if (_cursor)
+		if (_isCursor)
 			Print("", RED_INTENSE_BG);
 		Print("", ComputeAppearance(), RESET);
 	}
-	else if (_cursor)
-		Print("", _cursor->GetAppearance(), RESET);
+	else if (_isCursor)
+		Print("", _cursor.GetAppearance(), RESET);
 }
 
 string Tile::ToString() const
