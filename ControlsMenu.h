@@ -4,13 +4,9 @@
 
 class ControlsMenu : public Menu
 {
-	GameInput gameInputs;
 public:
 	ControlsMenu();
 
 public:
 	virtual void Show(const bool _toAdd) override;
-	virtual void Interact() override;
-
-	void ChangeKey(pair<char, InputActionType> _inputToChange);
 };
