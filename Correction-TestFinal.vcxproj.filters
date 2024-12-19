@@ -52,9 +52,6 @@
     <Filter Include="Scripts\Entities">
       <UniqueIdentifier>{24184491-663a-4c72-bb3c-f98c1127ba29}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scripts\Game\Input">
-      <UniqueIdentifier>{671645c2-45a3-41c7-b55a-3d55c9b243ad}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scripts\Level\Cursor">
       <UniqueIdentifier>{1b15e77c-5cc3-4611-beac-fa0bf9baf0ed}</UniqueIdentifier>
     </Filter>
@@ -75,6 +72,9 @@
     </Filter>
     <Filter Include="Scripts\Resource Files\Singleton">
       <UniqueIdentifier>{48cbb208-ebf2-4b2d-9cce-71ae9d2a804d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Manager">
+      <UniqueIdentifier>{351b11cf-f3a0-4152-9773-e41a8f2b8e3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -132,14 +132,14 @@
     <ClCompile Include="Color.cpp">
       <Filter>Scripts\Resource Files\Render\Color</Filter>
     </ClCompile>
-    <ClCompile Include="GameInput.cpp">
-      <Filter>Scripts\Game\Input</Filter>
-    </ClCompile>
     <ClCompile Include="Cursor.cpp">
       <Filter>Scripts\Level\Cursor</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Scripts\Level\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,9 +206,6 @@
     <ClInclude Include="Emoji.h">
       <Filter>Scripts\Resource Files\Render\Emoji</Filter>
     </ClInclude>
-    <ClInclude Include="GameInput.h">
-      <Filter>Scripts\Game\Input</Filter>
-    </ClInclude>
     <ClInclude Include="Save.h">
       <Filter>Scripts\Level\Save</Filter>
     </ClInclude>
@@ -226,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>Scripts\Resource Files\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Scripts\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

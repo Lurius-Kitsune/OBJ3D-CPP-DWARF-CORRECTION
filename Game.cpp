@@ -22,12 +22,44 @@ Game::~Game()
 
 bool Game::PollEvents()
 {
-	if (_kbhit())
-	{
-
-	}
-
-	return false;
+    const int _code = getch();
+    if (_code == 27) // echap
+    {
+        if (!isMenuOpen)
+        {
+            return true;
+        }
+        level->HideTileInfo();
+        isMenuOpen = false;
+    }
+    if (_code == 13) // enter
+    {
+        level->ShowTileInfo();
+        isMenuOpen = true;
+    }
+    else if (_code == 9) // tab
+    {
+        system("cls");
+        displayAll = !displayAll; // toggle
+    }
+    else if (_code == 72) // haut
+    {
+        cursor->Move(level, Coords(0, -1));
+    }
+    else if (_code == 75) // gauche
+    {
+        cursor->Move(level, Coords(-1, 0));
+    }
+    else if (_code == 77) // droite
+    {
+        cursor->Move(level, Coords(1, 0));
+    }
+    else if (_code == 80) // bas
+    {
+        cursor->Move(level, Coords(0, 1));
+    }
+}
+return false;
 }
 
 void Game::UpdateEntities()
