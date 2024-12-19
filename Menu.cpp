@@ -5,6 +5,7 @@ Menu::Menu(const string& _title)
 	title = _title;
 }
 
+
 void Menu::Show(const bool _toAdd)
 {
 	CLEAR;
@@ -22,6 +23,14 @@ void Menu::Hide()
 	if (Menu* _previous = queue.back())
 	{
 		_previous->Show(false);
+	}
+}
+
+void Menu::Close()
+{
+	while (Menu* _previous = queue.back())
+	{
+		queue.pop();
 	}
 }
 

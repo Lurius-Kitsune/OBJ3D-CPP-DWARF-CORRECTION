@@ -16,7 +16,7 @@ public:
 
 public:
 	Menu(const string& _title);
-
+	virtual ~Menu() = default;
 public:
 
 	virtual void Show(const bool _toAdd = true);
@@ -34,7 +34,7 @@ private:
 			string _firstSymbol = "", _secondSymbol = "" RESET;
 			if (_i == _currentIndex)
 			{
-				_firstSymbol = PURPLE "[";
+				_firstSymbol = PURPLE "[" RED;
 				_secondSymbol = PURPLE "]" RESET;
 			}
 			stringstream _ss;
@@ -108,5 +108,6 @@ protected:
 	}
 
 public:
+	void Close();
 	friend ostream& operator << (ostream& _stream, Menu* _other);
 };
