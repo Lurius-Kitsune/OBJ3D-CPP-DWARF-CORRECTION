@@ -258,9 +258,16 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 			const u_int& _posX = _rowIndex + _start.x;
 			const u_int& _posY = _columnIndex + _start.y;
 			const Coords& _currentCoords = Coords(_posX, _posY);
-			if (!IsValidCoords(_currentCoords)) continue;
+			//if (!IsValidCoords(_currentCoords)) continue;
 			bool _isCursor = Cursor::GetInstance().GetLocation() == _currentCoords;
-			map[_posX][_posY].Display(_isCursor);
+			if (!IsValidCoords(_currentCoords))
+			{
+				Print("", _borderColor + "  ", RESET);
+			}
+			else
+			{
+				map[_posX][_posY].Display(_isCursor);
+			}
 		}
 		DisplayVerticalBorder(_borderColor, true);
 
