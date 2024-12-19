@@ -1,10 +1,11 @@
 #include "Macro.h"
 
-void ChangeEncoding()
+void Reset()
 {
-#ifdef UTF8
-	#undef UTF8
-#else 
-	#define UTF8
-#endif // UTF8
+	Print("", RESET);
+}
+
+void JumpLine()
+{
+	Print("", "\n");
 }

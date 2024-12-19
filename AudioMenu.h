@@ -4,7 +4,5 @@
 class AudioMenu : public Menu
 {
 public:
-	virtual void Show() override;
-	virtual void Hide() override;
+	virtual void Show(const bool _toAdd) override;
 };
-

@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{07b8654a-eef3-41f2-863c-777328c19635}</ProjectGuid>
-    <RootNamespace>DwarfCorrection</RootNamespace>
+    <ProjectGuid>{6d15c86e-6f4d-41c7-9268-602729aa6c99}</ProjectGuid>
+    <RootNamespace>CorrectionTestFinal</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AudioMenu.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -134,20 +135,23 @@
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="Dwarf.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Filestream.cpp" />
+    <ClCompile Include="FileStream.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameInput.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Macro.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
-    <ClCompile Include="SelectGAmeMenu.cpp" />
+    <ClCompile Include="Save.cpp" />
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="VideoMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="AudioMenu.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
@@ -158,27 +162,25 @@
     <ClInclude Include="Dwarf.h" />
     <ClInclude Include="Emoji.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="Filestream.h" />
+    <ClInclude Include="FileStream.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameInput.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="Map.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="Random.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="resource1.h" />
-    <ClInclude Include="SelectGAmeMenu.h" />
+    <ClInclude Include="Save.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="StartMenu.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="VideoMenu.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Asset\Level\DefaultLevel.txt" />
-    <Text Include="Asset\Map\Map2.txt" />
+    <Text Include="Assets\Levels\MainLevel.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DwarfCorrection.rc" />

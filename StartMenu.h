@@ -1,7 +1,7 @@
 #pragma once
 #include "Menu.h"
-#include "Game.h"
 
+class Game;
 
 struct Save
 {
@@ -22,13 +22,14 @@ struct Save
 
 class StartMenu : public Menu
 {
-
 	vector<Save> allSaves;
 
-public: 
-	StartMenu();
 public:
-	virtual void Show() override;
-	virtual void Hide() override;
-};
+	StartMenu();
 
+private:
+	void LaunchGame(const string& _path);
+
+public:
+	virtual void Show(const bool _toAdd) override;
+};

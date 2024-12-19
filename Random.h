@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 
-static int RandomInt(const int _min, const int _max)
+static int GetRandom(const int _min, const int _max)
 {
 	random_device _rSeed; // Obtient un graine aléatoire
 	mt19937 _gen(_rSeed()); // Initialise le générateur avec la graine

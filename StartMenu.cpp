@@ -1,27 +1,19 @@
 #include "StartMenu.h"
+#include "Game.h"
 
 StartMenu::StartMenu() : Menu("Start")
 {
 	allSaves = vector<Save>(3);
-	allSaves[0] = { "Save1", "coucou" };
+	allSaves[0] = Save("Save1", "coucou");
 }
 
-void StartMenu::Show()
+void StartMenu::LaunchGame(const string& _path)
 {
-	u_int _index = 0;
-	for (const Save& _save : allSaves)
-	{
-		cout << _index++ << " - " << _save.title << endl;
-	}
-
-	u_int _textIndex;
-	cin >> _textIndex;
-	_textIndex--;
-
-	Game::SelectLevel(allSaves[_textIndex].path);
-
+	//TODO start game
 }
 
-void StartMenu::Hide()
+void StartMenu::Show(const bool _toAdd)
 {
+	const function<void(const u_int&)> _callback = [&](const u_int& _index) { allSaves[_index]; };
+	OpenMenu(allSaves, "Quelle sauvegarde choisissez-vous ?", _callback);
 }

@@ -1,9 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Macro.h"
-#include "Random.h"
 
 #pragma region ColorMacro
+
 #define BOLD_TEXT "\033[1m"					// Gras
 #define ITALIC_TEXT "\033[3m"				// Italique
 #define UNDERLINE_TEXT "\033[4m"			// Soulign 
@@ -14,7 +13,7 @@
 #define HIDDEN_TEXT "\033[8m"				// Masqu 
 #define DOUBLE_UNDERLINE_TEXT "\033[21m"	// Double soulign e
 
-#define BLINK_COLOR(sizeX) "\033[5m" << sizeX		// Clignotant
+#define BLINK_COLOR(x) "\033[5m" << x		// Clignotant
 
 // Resets
 #define RESET "\033[0m"
@@ -47,7 +46,6 @@
 #define PURPLE "\x1B[38;5;99m"
 #define BROWN "\x1B[38;5;130m"
 #define TEXT_RGB(r,g,b) "\033[38;2;" + to_string(r) + ";" + to_string(g) + ";" + to_string(b) + "m"
-
 
 //Base Colors
 #define BLACK_BASE "\u001b[30m"
@@ -82,8 +80,6 @@
 #define BG_BROWN "\x1B[48;5;130m"
 #define BG_RGB(r,g,b) "\033[48;2;" + to_string(r) + ";" + to_string(g) + ";" + to_string(b) + "m"
 
-
-
 // High intensity text colors
 #define BLACK_INTENSE_TEXT "\033[90m"
 #define RED_INTENSE_TEXT "\033[91m"
@@ -107,8 +103,8 @@
 #define SWAP "\033[7m" // Swap background and foreground colors
 
 // x => Color code between 0 and 255
-#define COLOR(sizeX) "\x1B[38;5;"<<sizeX<<"m"
-#define BG_COLOR(sizeX) "\x1B[48;5;"<<sizeX<<"m"
+#define COLOR(x) "\x1B[38;5;"<<x<<"m"
+#define BG_COLOR(x) "\x1B[48;5;"<<x<<"m"
 #pragma endregion
 
 struct Color
@@ -117,17 +113,9 @@ struct Color
 	int g;
 	int b;
 
-	Color()
-	{
-		r = g = b = 0;
-	}
+	Color();
 
-	Color(const int _r, const int _g, const int _b)
-	{
-		r = _r;
-		g = _g;
-		b = _b;
-	}
+	Color(const int _r, const int _g, const int _b);
 
 	string ToString(const bool _textOnly) const
 	{
@@ -136,10 +124,14 @@ struct Color
 	}
 
 	static string RainbowEveryChar(const string& _word);
-
 	static string RainbowString(const string& _word);
 	static void DisplayRainbow(const string& _text);
 	static string GetRandomColor();
+	void CalculateSaturation(double _factor);
+	void AdjustBrightness(double _factor);
+
+private:
+	int ClampColor(int& _value, double _factor);
 };
 
 struct Gradient
@@ -154,7 +146,7 @@ struct Gradient
 		gradB = _b;
 	}
 
-
-	string GradientString(const string _text, const bool _textOnly = true);
-	Color ClampGradient(const int _index, const int _maxDisplayChar)const;
+	string GradientString(const string& _text, const bool _textOnly = true);
+	Color GradientColor(const int _length, const int _colorIndex);
+	Color ClampGradient(const int _index, const int _maxDisplayChar) const;
 };

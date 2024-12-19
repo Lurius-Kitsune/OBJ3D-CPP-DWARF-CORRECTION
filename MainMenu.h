@@ -1,9 +1,9 @@
 #pragma once
 #include "Menu.h"
-#include "StartMenu.h"
-#include "OptionsMenu.h"
+#include "GameInput.h"
+#include "Level.h"
 
-class MainMenu: public Menu
+class MainMenu : public Menu
 {
 	vector<Menu*> menus;
 
@@ -12,8 +12,7 @@ public:
 	~MainMenu();
 
 public:
-	virtual void Show() override;
+	virtual void Show(const bool _toAdd = true) override;
+	void DisplayLogo();
 	virtual void Hide() override;
-
 };
-

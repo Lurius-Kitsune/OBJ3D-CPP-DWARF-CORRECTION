@@ -4,8 +4,8 @@
 
 class Cursor;
 
-static vector<string> emojis =
-{
+static vector<string> emojis = {
+	CROSSHAIR,
 	VILLAGE,
 	HOUSE,
 	FORGE,
@@ -24,6 +24,10 @@ static vector<string> emojis =
 	CROCODILE,
 	PARROT,
 	GORILLA,
+	SPOUTING_WHALE,
+	OCTOPUS,
+	TROPICAL_FISH,
+	JELLY_FISH,
 	WATER,
 	TREE,
 	TREE2,
@@ -45,53 +49,62 @@ static vector<string> emojis =
 
 enum BiomeType
 {
-    BT_WATER,
-    BT_SAND,
-    BT_GRASS,
-    BT_DIRT,
-    BT_ROCK,
-    BT_LAVA,
+	BT_WATER,
+	BT_SAND,
+	BT_GRASS,
+	BT_DIRT,
+	BT_ROCK,
+	BT_VOLCANO,
+	BT_LAVA,
 
-    BT_COUNT
+	BT_COUNT
+};
+
+enum RateType
+{
+	RT_PERTEN = 10,
+	RT_PERCENT = 100,
+	RT_PERTHOUSAND = 1000,
 };
 
 struct TileData
 {
-    string appearance; 
-    u_int percentage;
-    
-    TileData(const string& _appearance, const u_int& _percentage)
-    {
-        appearance = _appearance;
+	string appearance;
+	u_int percentage;
+	RateType rate;
+
+	TileData(const string& _appearance, const u_int& _percentage, const RateType& _rate)
+	{
+		appearance = _appearance;
 		percentage = _percentage;
-    }
+		rate = _rate;
+	}
 };
 
 struct BiomeData
 {
-    BiomeType type;
-    vector<TileData> allData;
-    
-    BiomeData(const BiomeType& _type, const vector<TileData>& _allData)
-    {
-        type = _type;
+	BiomeType type;
+	vector<TileData> allData;
+
+	BiomeData(const BiomeType& _type, const vector<TileData>& _allData)
+	{
+		type = _type;
 		allData = _allData;
-    }
+	}
 };
-
-
-
 
 class Tile
 {
 	int key;
+	vector<string> infos;
+	double colorSaturation;
+	double colorBrightness;
 
-private:
+public:
 	INLINE bool HasEmoji() const
 	{
 		return key > 9;
 	}
-public:
 	INLINE u_int GetBackgroundKey() const
 	{
 		return key % 10;
@@ -102,17 +115,30 @@ public:
 	}
 
 public:
+	void SetColorSaturation(const int _value)
+	{
+		colorSaturation = _value;
+	}
+
+	void SetColorBrightness(const int _value)
+	{
+		colorBrightness = _value;
+	}
+
+public:
 	Tile() = default;
 	Tile(const string& _key);
 
 private:
-	string ComputeColor() const;
+	string ComputeColor(const bool _isCursorPosition) const;
 	string ComputeAppearance() const;
 	u_int GetKeyByAppearance(const string& _appearance) const;
 
 public:
 	void SetAppearance(const string& _appearance);
-	void Display() const;
+	void ResetAppearance();
+	void ShowInfos(Cursor* _cursor) const;
+	void HideInfos(Cursor* _cursor) const;
+	void Display(const Cursor* _cursor = nullptr)const;
 	string ToString() const;
-	void ShowInfo() const;
 };

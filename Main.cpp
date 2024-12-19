@@ -1,4 +1,23 @@
-#include "Main.h"
+ï»¿#include "Main.h"
+#include "Macro.h"
+#include "Animation.h"
+#include "Game.h"
+#include "FileStream.h"
+
+#include "MainMenu.h"
+
+#include "ControlsMenu.h"
+
+/* TODO list
+*
+* Menu
+* View
+* Setup village
+* Setup items
+* Cacher/Dï¿½voiler carte
+* Save carte avec item et zone dï¿½voilï¿½e
+*
+*/
 
 string ComputeEmoji(int _codePoint)
 {
@@ -33,69 +52,107 @@ string ComputeEmoji(int _codePoint)
 void TEMP()
 {
     const u_int& _start = 0x1F600;
-    const u_int& _end = 0xFFFFF;
+    const u_int& _end = 0xFFFFFF;
 
-    for (u_int _index = 0x1F600; _index < _end; _index++)
+    for (u_int _index = _start; _index < _end; _index++)
     {
         if (_kbhit()) break;
+
         const string& _emoji = ComputeEmoji(_index);
-        cout << _emoji << " " << hex << uppercase << "U+" << _index << endl;
+        Print("", _emoji);
         SLEEP(milliseconds, 50);
-        //CLEAR_SCREEN;
+        system("cls");
     }
 }
 
 int main()
 {
-    Config();
+    DefaultSetup();
 
-    //mainmenu -> start -> quit -> options 
-    //start -> créer / reprendre
-    //options -> audio / controls / video
-    //audio -> volume / Animals/Attackers/Dwarf / environment 
-    //Controls -> affichage Clavier / souris 
-    //Video -> Intensity / FrameRate /Daltionien / etc...
-    //QUIT -> quitter
+    /*GameInput* _newGameInput = new GameInput();
+    ControlsMenu _menu = ControlsMenu(_newGameInput);
+    _menu.Show();*/
 
-    //TEMP();
-    Game _game;
+    //Gradient _gradient = Gradient({ 222, 22, 35 }, { 24, 65, 230 }); // Red to Blue
+    //Animation _anim;
+    //_anim.LoadAnimation("Assets\\SmolLoadingScreen\\SLS-", ".txt", 3);
+    //_anim.SetColor(_gradient);
+    //_anim.SetPlayRate(1000);
+    //_anim.SetUseGradient(true);
+    //_anim.PaddingForSmolLoadingScreen();
+    //_anim.PlayAnimation(false);
 
-    _game.SelectLevel();
-    _game.Start();
+    /*vector<string> _map = FileStream::ReadAll("Assets/Levels/MainLevel/.txt");
+    vector<string> _newMap;
+
+    for (size_t i = 0; i < _map.size(); i++)
+    {
+        _newMap.push_back();
+        for (size_t j = 0; j < _map[i].size(); j++)
+        {
+            for (size_t k = 0; k < 2; k++)
+            {
+                _newMap[i].push_back('0');
+            }
+            _newMap[i][j]
+        }
+    }
+    FileStream::Write("Assets/Levels/MainLevel/.txt", _map);
+    return -1;
+    TEMP();
+     TODO teste after animation
+    Animation _anim;
+    _anim.LoadStartUpAnimation(".\\Assets\\LoadingScreen\\ALS-", ".txt", 44);
+     Main menu -> Start / Options / Quit
+     Start => Crï¿½er / Reprendre
+     Options => Audio / Controls / Video
+     Audio => Volume / Dwarf / Attackers / Animals / Environment
+     Controls => Affichage clavier / souris
+     Video => Intensity / Framerate / Daltonien / etc..
+     Quit => quitter*/
+
+   /* Game _game;
+    _game.SelectLevel("MainLevel");
+    _game.Start();*/
+
+    MainMenu _mainMenu = MainMenu();
+    //_mainMenu
+
     return EXIT_SUCCESS;
 }
 
-void SetConsoleName(const string& _name)
+void DefaultSetup()
 {
-    SetConsoleTitleA(_name.c_str());
-}
-
-void SetConsoleSize(const u_int& _sizeX, const u_int& _sizeY)
-{
-    HWND Hwnd = GetForegroundWindow();
-    LONG winstyle = GetWindowLong(Hwnd, GWL_STYLE);
-    SetWindowLong(Hwnd, GWL_STYLE, (winstyle | WS_POPUP | WS_MAXIMIZE) & ~WS_CAPTION & ~WS_THICKFRAME & ~WS_BORDER);
-    SetWindowPos(Hwnd, HWND_TOP, 0, 0, _sizeX, _sizeY, 0);
-}
-
-void MaximizeConsole()
-{
-    int _x = GetSystemMetrics(SM_CXSCREEN);
-    int _y = GetSystemMetrics(SM_CYSCREEN);
-    SetConsoleSize(_x, _y);
-}
-
-void Config()
-{
-    (_CrtSetDbgFlag)(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // Detection de fuite de mémoire
-    SetConsoleName("Dwarf Forteress");
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    SetConsoleName("Dwarf Fortress");
+    //SetConsoleSize(1200, 800);
     MaximizeConsole();
     InitUTF8;
 }
 
+void SetConsoleName(const string& _consoleName)
+{
+    SetConsoleTitleA(_consoleName.c_str());
+}
 
-/*
-    0 eau profonde
-    1 eau peu profonde
-    9 haute montagne
-*/
+Coords GetDesktopResolution()
+{
+    RECT desktop;
+    const HWND hDesktop = GetDesktopWindow();
+    GetWindowRect(hDesktop, &desktop);
+    return { desktop.right, desktop.bottom };
+}
+
+void SetConsoleSize(const u_int& _sizeX, const u_int& _sizeY)
+{
+    const HWND& _hwnd = GetForegroundWindow();
+    const LONG& _winstyle = GetWindowLong(_hwnd, GWL_STYLE);
+    //SetWindowLong(_hwnd, GWL_STYLE, (_winstyle | WS_POPUP | WS_MAXIMIZE) & ~WS_CAPTION & ~WS_THICKFRAME & ~WS_BORDER);
+    SetWindowPos(_hwnd, HWND_TOP, (1920 - _sizeX) / 2, (1080 - _sizeY) / 2, _sizeX, _sizeY, 0);
+}
+
+void MaximizeConsole()
+{
+    HWND _hwnd = GetForegroundWindow();
+    ShowWindow(_hwnd, SW_MAXIMIZE);
+}

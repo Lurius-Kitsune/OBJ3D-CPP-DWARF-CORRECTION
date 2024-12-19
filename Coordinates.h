@@ -2,10 +2,12 @@
 #include "CoreMinimal.h"
 #include "Size.h"
 
+struct Size;
+
 struct Coords
 {
-	int y;
 	int x;
+	int y;
 
 	Coords() = default;
 	Coords(const int _x, const int _y)
@@ -21,23 +23,18 @@ struct Coords
 
 	string ToString() const
 	{
-		return  "(X : " + STRING(x)  + ", Y : " + STRING(y) + ")";
+		return "X: " + STRING(x) + " Y:" + STRING(y);
 	}
 
-	bool operator== (const Coords&& _other)const
+	bool operator == (const Coords& _other) const
 	{
-		return x == _other.x && y == _other.y;
+		return x == _other.x
+			&& y == _other.y;
 	}
-
 	Coords& operator += (const Coords& _other)
 	{
 		x += _other.x;
 		y += _other.y;
 		return *this;
 	}
-
-    Coords operator+ (const Coords& _other) const
-    {
-        return { x + _other.x, y + _other.y};
-    }
 };

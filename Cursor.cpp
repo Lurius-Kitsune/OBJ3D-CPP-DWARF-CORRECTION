@@ -1,15 +1,17 @@
 #include "Cursor.h"
 #include "Color.h"
-#include "Macro.h"
-#include "Emoji.h"
 #include "Level.h"
-Cursor::Cursor(const Coords& _position)
+#include "Emoji.h"
+#include "Macro.h"
+
+Cursor::Cursor(const Coords& _location)
 {
+	location = _location;
 	appearance = CROSSHAIR;
-	position = _position;
 }
 
-Coords Cursor::GetCenterConsole()
+
+Coords Cursor::GetCenterConsole() const
 {
 	CONSOLE_SCREEN_BUFFER_INFO _csbi;
 	int _ys, _xs;
@@ -20,7 +22,7 @@ Coords Cursor::GetCenterConsole()
 	return { _ys, _xs };
 }
 
-void Cursor::SetCursorPosition(const u_int& _xIndex, const u_int& _yIndex, const bool _cursor)const
+void Cursor::SetCursorPosition(const u_int& _xIndex, const u_int& _yIndex, const bool _cursor) const
 {
 	static const HANDLE _hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO _info;
@@ -32,14 +34,17 @@ void Cursor::SetCursorPosition(const u_int& _xIndex, const u_int& _yIndex, const
 	SetConsoleCursorPosition(_hOut, coord);
 }
 
-bool Cursor::CheckConsoleSize(Coords& _center, Coords& _previousCenter, const string& _text, const Coords& _padding, int _height)
+bool Cursor::CheckConsoleSize(Coords& _center, Coords& _previousCenter, const string& _text, const Coords& _padding, int _height) const
 {
 	if (_height < 1) _height = 1;
+	const regex& _regex = regex("x1b[(38|48);2;[0-9]{1,3};[0-9]{1,3};[0-9]{1,3}m|\x1b[[0-9;]*[mKHVfF]"); // Regex pour supprimer les codes ANSI
+	const int _size = (int)regex_replace(_text, _regex, "").size();
+
 	const string& _errorText = "Agrandissez la taille de la console !";
 	_center = GetCenterConsole();
 	if (_previousCenter.x != _center.x || _previousCenter.y != _center.y) system("cls");
 
-	if (_center.x + _padding.x < _text.size() || _center.y + _padding.y < _height)
+	if (_center.x + _padding.x < _size || _center.y + _padding.y < _height)
 	{
 		if (_errorText.size() > _center.x)
 		{
@@ -54,22 +59,28 @@ bool Cursor::CheckConsoleSize(Coords& _center, Coords& _previousCenter, const st
 	return false;
 }
 
-void Cursor::DisplayOnceCenterMultiLine(const string* _textArray, const u_int& _size, const Coords& _padding)
+void Cursor::DisplayOnceCenterMultiLine(const vector<string> _textArray, const u_int& _size, const Coords& _padding) const
 {
 	Coords _center = GetCenterConsole();
 	Coords _previousCenter = _center;
+	const regex& _regex = regex("x1b[(38|48);2;[0-9]{1,3};[0-9]{1,3};[0-9]{1,3}m|\x1b[[0-9;]*[mKHVfF]"); // Regex pour supprimer les codes ANSI
+
 	for (u_int _index = 0; _index < _size; _index++)
 	{
+		const int _lineSize = (int)regex_replace(_textArray[_index], _regex, "").size();
 		if (CheckConsoleSize(_center, _previousCenter, _textArray[_index], _padding, _size)) continue;
-		SetCursorPosition(((_center.x + _padding.x) - u_int(_textArray[_index].size())) / 2, (_center.y + (2 * ((_padding.y - _size) / 2 + _index))) / 2);
-		printf(_textArray[_index].c_str());
+		SetCursorPosition(((_center.x + _padding.x) - u_int(_lineSize)) / 2, (_center.y + (2 * ((_padding.y - _size) / 2 + _index))) / 2);
+		cout << _textArray[_index];
 		_previousCenter = _center;
 	}
 }
 
-void Cursor::Move(Level* _level, const Coords& _offset)
+void Cursor::FlushInput()
 {
-	_level->ResetItemAtLocation(position);
-	_level->SetItemAtLocation(appearance, position);
+	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
 }
 
+void Cursor::Move(Level* _level, const Coords& _offset)
+{
+	location += _offset;
+}

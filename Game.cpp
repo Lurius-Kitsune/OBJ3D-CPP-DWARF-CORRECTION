@@ -1,86 +1,130 @@
-#include "Game.h"
-#include "Macro.h"
+﻿#include "Game.h"
+#include "Dwarf.h"
+#include "ControlsMenu.h" // TODO REMOVE
+#include "MainMenu.h"
 
 Game::Game()
 {
 	level = nullptr;
-	cursor = new Cursor({35, 35});
+	displayAll = false;
+	gameInput = new GameInput();
+	cursor = new Cursor({ 109, 200 });
+	isMenuOpen = false;
+	currentMenu = new MainMenu();
 }
 
 Game::~Game()
 {
-	delete level;
 	delete cursor;
+
+	for (Entity* _entity : entities)
+	{
+		delete _entity;
+	}
+
+	delete gameInput;
 }
 
-bool Game::PoleEvent()
+bool Game::PollEvents()
 {
 	if (_kbhit())
 	{
-		const int _code = _getch();
-		cout << _code << endl;
-		if (_code == 27)
+		InputActionType _inputAction = gameInput->GetInputActionType(_getch());
+		if (_inputAction == IAT_PAUSE) // echap
 		{
 			if (!isMenuOpen)
 			{
-				return true;
+				isMenuOpen = true;
 			}
+
+			level->HideTileInfo();
+			//isMenuOpen = false;
 		}
-		if (_code == 13)
+		if (_inputAction == IAT_INTERACT) // enter
 		{
 			level->ShowTileInfo();
 			isMenuOpen = true;
 		}
-		else if (_code == 9)
+		else if (_inputAction == IAT_TAB) // tab
 		{
-			displayAll = !displayAll;
-			CLEAR_SCREEN;
+			system("cls");
+			displayAll = !displayAll; // toggle
 		}
-		else if (_code == 72)
+
+		else if (_inputAction == IAT_UP) // haut
 		{
-			level->ResetItemAtLocation(cursor->GetCoords());
-			cursor->Move(level ,Coords(-1, 0));
-			level->SetItemAtLocation(cursor->GetAppearance(), cursor->GetCoords());
+			if (isMenuOpen)
+			{
+				currentMenu->AddOnCurrentIndex();
+			}
+			else
+			{
+				cursor->Move(level, Coords(-1, 0));
+			}
 		}
-		else if (_code == 75)
+		else if (_inputAction == IAT_LEFT) // gauche
 		{
 			cursor->Move(level, Coords(0, -1));
 		}
-		else if (_code == 77)
+		else if (_inputAction == IAT_RIGHT) // droite
 		{
 			cursor->Move(level, Coords(0, 1));
 		}
-		else if (_code == 80)
+		else if (_inputAction == IAT_DOWN) // bas
 		{
-			cursor->Move(level ,Coords(1, 0));
+			if (isMenuOpen)
+			{
+				currentMenu->AddOnCurrentIndex(1);
+			}
+			else
+			{
+				cursor->Move(level, Coords(1, 0));
+			}
+		}
+		else if (_inputAction == IAT_VALIDATE) // entr�
+		{
+			if (isMenuOpen)
+			{
+				currentMenu->Interact();
+			}
 		}
 	}
-	
+
 	return false;
 }
 
-void Game::Display()
+void Game::UpdateEntities()
 {
-	cursor->SetCursorPosition(0, 0, false);
-	if (displayAll)
-	{	
+	for (Entity* _entity : entities)
+	{
+		_entity->Update();
+	}
+}
+
+void Game::Display() const
+{
+	cursor->SetCursorPosition(0, 0);
+	if (currentMenu && isMenuOpen)
+	{
+		currentMenu->Show();
+	}
+	else if (displayAll)
+	{
 		level->DisplayFullMap();
 	}
 	else
 	{
-		level->DisplayView(cursor->GetCoords());
+		level->DisplayView(cursor->GetLocation());
 	}
 }
 
 void Game::SelectLevel(const string& _path)
 {
-	const string& _path = "MainLevel.txt";
 	level = new Level(_path, cursor);
 }
 
 void Game::Start()
 {
-	//SLEEP(seconds, 3);
 	Update();
 }
 
@@ -89,21 +133,20 @@ void Game::Update()
 	bool _wantToExit = false;
 	while (!_wantToExit)
 	{
-		_wantToExit = PoleEvent();
+		if (PollEvents()) break;
+		UpdateEntities();
 		Display();
 	}
-	level->Save();
+
 	Stop();
 }
 
 void Game::Pause()
 {
+
 }
 
 void Game::Stop()
 {
 	delete level;
-	level = nullptr;
-	delete cursor;
-	cursor = nullptr;
 }
