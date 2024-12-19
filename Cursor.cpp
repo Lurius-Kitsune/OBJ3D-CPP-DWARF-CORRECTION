@@ -81,5 +81,6 @@ void Cursor::FlushInput()
 
 void Cursor::Move(Level* _level, const Coords& _offset)
 {
-	if (!_level->IsValidCoords(location + _offset)) return;
+		if (!_level->IsValidCoords(location + _offset)) return;
+		location += _offset;
 }
