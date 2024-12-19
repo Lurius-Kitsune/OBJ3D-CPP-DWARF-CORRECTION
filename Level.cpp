@@ -230,7 +230,7 @@ void Level::Save()
 
 void Level::DisplayHorizontalBorder(const u_int& _rowSize) const
 {
-	for (u_int _i = 0; _i < _rowSize + 2; _i++)
+	for (u_int _i = 0; _i < _rowSize + 4; _i++)
 	{
 		Print("", BG_CYAN, " ", RESET);
 	}
@@ -239,7 +239,7 @@ void Level::DisplayHorizontalBorder(const u_int& _rowSize) const
 
 void Level::DisplayVerticalBorder(const string& _color, const bool _isRight) const
 {
-	Print("", _color + " " + (_isRight ? "\n" : " "), RESET);
+	Print("", _color + " " + (_isRight ? " \n" : " "), RESET);
 }
 
 void Level::DisplayMap(const Size& _size, const Coords& _start) const
