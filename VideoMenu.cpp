@@ -53,8 +53,6 @@ void VideoMenu::DisplayMenu(int _selectedIndex, int& _brightness, int& _contrast
 			cout << "  " << _options[_index] << endl;
 		}
 	}
-	level->UpdateSaturation(_contrast);
-	level->UpdateBrightness(_brightness);
 }
 
 void VideoMenu::DisplayProgressBar(const string& _label, int& _value, int _maxLength)
@@ -85,40 +83,40 @@ void VideoMenu::Interact()
 
 	while (true)
 	{
-		if (_kbhit())
-		{
-			InputActionType _inputAction = gameInput->GetInputActionType(_getch());
+		//if (_kbhit())
+		//{
+		//	InputActionType _inputAction = gameInput->GetInputActionType(_getch());
 
-			switch (_inputAction)
-			{
-			case IAT_UP:
-				_selectedIndex = (_selectedIndex - 1 + 3) % 3;
-				break;
-			case IAT_DOWN:
-				_selectedIndex = (_selectedIndex + 1) % 3;
-				break;
-			case IAT_RIGHT:
-				if (_selectedIndex == 0)
-					AdjustValue(_brightness, 5);
-				else if (_selectedIndex == 1)
-					AdjustValue(_contrast, 5);
-				break;
-			case IAT_LEFT:
-				if (_selectedIndex == 0)
-					AdjustValue(_brightness, -5);
-				else if (_selectedIndex == 1)
-					AdjustValue(_contrast, -5);
-				break;
-			case IAT_VALIDATE:
-				if (_selectedIndex == 2)
-					return; // Quitter
-				break;
-			case IAT_PAUSE:
-				return; // Revenir au jeu
-			default:
-				break;
-			}
-			DisplayMenu(_selectedIndex, _brightness, _contrast);
-		}
+		//	switch (_inputAction)
+		//	{
+		//	case IAT_UP:
+		//		_selectedIndex = (_selectedIndex - 1 + 3) % 3;
+		//		break;
+		//	case IAT_DOWN:
+		//		_selectedIndex = (_selectedIndex + 1) % 3;
+		//		break;
+		//	case IAT_RIGHT:
+		//		if (_selectedIndex == 0)
+		//			AdjustValue(_brightness, 5);
+		//		else if (_selectedIndex == 1)
+		//			AdjustValue(_contrast, 5);
+		//		break;
+		//	case IAT_LEFT:
+		//		if (_selectedIndex == 0)
+		//			AdjustValue(_brightness, -5);
+		//		else if (_selectedIndex == 1)
+		//			AdjustValue(_contrast, -5);
+		//		break;
+		//	case IAT_VALIDATE:
+		//		if (_selectedIndex == 2)
+		//			return; // Quitter
+		//		break;
+		//	case IAT_PAUSE:
+		//		return; // Revenir au jeu
+		//	default:
+		//		break;
+		//	}
+		//	DisplayMenu(_selectedIndex, _brightness, _contrast);
+		//}
 	}
 }

@@ -3,7 +3,7 @@
 #include "Random.h"
 
 // === Gradient === 
-string Gradient::GradientString(const string& _text, const bool _textOnly)
+string Gradient::GradientString(const string& _text, const bool _textOnly) const
 {
     const int _size = static_cast<int>(_text.size());
     string _newWord = "";
@@ -16,7 +16,7 @@ string Gradient::GradientString(const string& _text, const bool _textOnly)
     }
     return _newWord + RESET;
 }
-Color Gradient::GradientColor(const int _length, const int _colorIndex)
+Color Gradient::GradientColor(const int _length, const int _colorIndex)const
 {
     vector<Color> _colorGradient;
     for (int _index = 0; _index < _length; _index++)

@@ -1,6 +1,7 @@
 #include "FileStream.h"
 #include "Cursor.h"
 
+
 vector<string> FileStream::ReadAll(const string& _path) 
 {
 	const openMode& _openMode = ios_base::in | ios_base::binary;

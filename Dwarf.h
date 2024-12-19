@@ -6,7 +6,3 @@ class Dwarf : public Entity
 public:
 	Dwarf();
 };
-
-public:
-
-};
