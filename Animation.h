@@ -2,7 +2,9 @@
 #include "CoreMinimal.h"
 #include "Color.h"
 #include "Cursor.h"
+#include <type_traits>
 
+#include <any>
 
 enum AnimDirectionType
 {
@@ -30,17 +32,28 @@ public:
 		color.gradA = _colorA;
 		color.gradB = _colorB;
 	}
-	void SetColor(const Gradient& _gradient)
+
+	//template <typename ColorType>
+	void SetColor(const any& _color)
 	{
-		color = _gradient;
+		bool _hasSuccess = true;
+		try
+		{
+			color = any_cast<Gradient>(_color);
+			useGradient = true;
+		}
+		catch (const std::bad_any_cast&)
+		{
+			bool _hasSuccess = true;
+			useGradient = false;
+			color.gradA = any_cast<Color>(_color);
+		}
+		useGradient = _hasSuccess;
 	}
+
 	void SetPlayRate(const float _playRate)
 	{
 		playRate = _playRate;
-	}
-	void SetUseGradient(const bool _useGradient)
-	{
-		useGradient = _useGradient;
 	}
 	void SetPadding(const Coords& _padding)
 	{

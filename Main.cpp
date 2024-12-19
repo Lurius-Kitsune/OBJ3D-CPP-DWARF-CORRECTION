@@ -89,7 +89,6 @@ int main()
     _anim.LoadAnimation("Assets\\SmolLoadingScreen\\SLS-", ".txt", 3);
     _anim.SetColor(_gradient);
     _anim.SetPlayRate(1000);
-    _anim.SetUseGradient(true);
     _anim.PaddingForSmolLoadingScreen();
     _anim.PlayAnimation(false);
 
