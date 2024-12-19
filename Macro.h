@@ -15,11 +15,10 @@ void Print(const string& _separator, const Type& _value, const Args&... _args)
 	Print(_separator, _args...);
 }
 
-void Reset();
-
+void ResetColor();
 void JumpLine();
 
-template<typename Type>
+template <typename Type>
 Type Clamp(const Type& _value, const Type& _min, const Type& _max)
 {
 	return (_value < _min) ? _min : (_value > _max ? _max : _value);

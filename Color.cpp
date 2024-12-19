@@ -2,51 +2,8 @@
 #include "Macro.h"
 #include "Random.h"
 
-// === Gradient === 
-string Gradient::GradientString(const string& _text, const bool _textOnly) const
-{
-    const int _size = static_cast<int>(_text.size());
-    string _newWord = "";
+#pragma region Color
 
-    for (int _index = 0; _index < _size; _index++)
-    {
-        const Color& _color = ClampGradient(_index, _size);
-        if (_text[_index] == ' ') _newWord += _text[_index];
-        else _newWord += _color.ToString(_textOnly) + _text[_index];
-    }
-    return _newWord + RESET;
-}
-Color Gradient::GradientColor(const int _length, const int _colorIndex)const
-{
-    vector<Color> _colorGradient;
-    for (int _index = 0; _index < _length; _index++)
-    {
-        _colorGradient.push_back(ClampGradient(_index, _length));
-    }
-    return _colorGradient[_colorIndex];
-}
-
-Color Gradient::ClampGradient(const int _index, const int _maxDisplayChar) const
-{
-    float _normalizer;
-    float _valueRed = 0;
-    float _valueGreen = 0;
-    float _valueBlue = 0;
-
-    float _rangeRed = static_cast<float>(gradB.r - gradA.r);
-    _normalizer = _index * (_rangeRed / _maxDisplayChar);
-    _valueRed += (gradA.r + _normalizer);
-
-    float _rangeGreen = static_cast<float>(gradB.g - gradA.g);
-    _normalizer = _index * (_rangeGreen / _maxDisplayChar);
-    _valueGreen += (gradA.g + _normalizer);
-
-    float _rangeBlue = static_cast<float>(gradB.b - gradA.b);
-    _normalizer = _index * (_rangeBlue / _maxDisplayChar);
-    _valueBlue += (gradA.b + _normalizer);
-
-    return { (int)_valueRed, (int)_valueGreen, (int)_valueBlue };
-}
 
 Color::Color()
 {
@@ -58,10 +15,14 @@ Color::Color(const int _r, const int _g, const int _b)
     r = _r;
     g = _g;
     b = _b;
- 
 }
 
-// === COLOR === 
+string Color::ToString(const bool _textOnly) const
+{
+    if (_textOnly) return TEXT_RGB(r, g, b);
+    return BG_RGB(r, g, b);
+}
+
 string Color::RainbowEveryChar(const string& _word)
 {
     string _newWord = "";
@@ -131,13 +92,64 @@ void Color::CalculateSaturation(double _factor)
 
 void Color::AdjustBrightness(double _factor)
 {
-    r = ClampColor(r, _factor);
-    g = ClampColor(g, _factor);
-    b = ClampColor(b, _factor);
+    r = Clamp(static_cast<int>(r * _factor), 0, 255);
+    g = Clamp(static_cast<int>(g * _factor), 0, 255);
+    b = Clamp(static_cast<int>(b * _factor), 0, 255);
 }
 
-int Color::ClampColor(int& _value, double _factor)
+int Color::ClampColor(int _value, double _factor)
 {
-    _value = Clamp(CAST(int, _value * _factor), 0, 255);
-    return _value;
+    return Clamp(CAST(int, _value * _factor), 0, 255);
 }
+
+#pragma endregion
+
+#pragma region Gradient
+
+
+string Gradient::GradientString(const string& _text, const bool _textOnly) const
+{
+    const int _size = static_cast<int>(_text.size());
+    string _newWord = "";
+
+    for (int _index = 0; _index < _size; _index++)
+    {
+        const Color& _color = ClampGradient(_index, _size);
+        if (_text[_index] == ' ') _newWord += _text[_index];
+        else _newWord += _color.ToString(_textOnly) + _text[_index];
+    }
+    return _newWord + RESET;
+}
+Color Gradient::GradientColor(const int _length, const int _colorIndex) const
+{
+    vector<Color> _colorGradient;
+    for (int _index = 0; _index < _length; _index++)
+    {
+        _colorGradient.push_back(ClampGradient(_index, _length));
+    }
+    return _colorGradient[_colorIndex];
+}
+
+Color Gradient::ClampGradient(const int _index, const int _maxDisplayChar) const
+{
+    float _normalizer;
+    float _valueRed = 0;
+    float _valueGreen = 0;
+    float _valueBlue = 0;
+
+    float _rangeRed = static_cast<float>(gradB.r - gradA.r);
+    _normalizer = _index * (_rangeRed / _maxDisplayChar);
+    _valueRed += (gradA.r + _normalizer);
+
+    float _rangeGreen = static_cast<float>(gradB.g - gradA.g);
+    _normalizer = _index * (_rangeGreen / _maxDisplayChar);
+    _valueGreen += (gradA.g + _normalizer);
+
+    float _rangeBlue = static_cast<float>(gradB.b - gradA.b);
+    _normalizer = _index * (_rangeBlue / _maxDisplayChar);
+    _valueBlue += (gradA.b + _normalizer);
+
+    return { (int)_valueRed, (int)_valueGreen, (int)_valueBlue };
+}
+
+#pragma endregion

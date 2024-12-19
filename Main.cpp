@@ -116,7 +116,7 @@ int main()
     _game.Start();*/
 
     MainMenu _mainMenu = MainMenu();
-    //_mainMenu
+    _mainMenu.Show();
 
     return EXIT_SUCCESS;
 }

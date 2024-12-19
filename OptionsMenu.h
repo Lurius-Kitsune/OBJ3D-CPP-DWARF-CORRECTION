@@ -14,5 +14,6 @@ public:
 	~OptionsMenu();
 
 public:
-	virtual void Show(const bool _toAdd = true) override;
+	virtual void Show(const bool _toAdd) override;
+	virtual void Interact() override;
 };

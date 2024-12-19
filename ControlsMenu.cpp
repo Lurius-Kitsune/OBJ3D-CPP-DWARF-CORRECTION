@@ -3,7 +3,6 @@
 
 ControlsMenu::ControlsMenu() : Menu("Controls Menu")
 {
-	
 
 }
 
@@ -11,6 +10,7 @@ void ControlsMenu::Show(const bool _toAdd)
 {
 	Super::Show(_toAdd);
 }
+
 
 void ControlsMenu::Interact()
 {

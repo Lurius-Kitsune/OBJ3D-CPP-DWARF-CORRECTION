@@ -53,7 +53,14 @@ bool Game::PollEvents()
 
 		else if (_inputAction == IAT_UP) // haut
 		{
-			cursor->Move(level, Coords(-1, 0));
+			if (isMenuOpen)
+			{
+				//currentMenu->AddOnCurrentIndex(-1);
+			}
+			else
+			{
+				cursor->Move(level, Coords(-1, 0));
+			}
 		}
 		else if (_inputAction == IAT_LEFT) // gauche
 		{
@@ -65,11 +72,21 @@ bool Game::PollEvents()
 		}
 		else if (_inputAction == IAT_DOWN) // bas
 		{
-			cursor->Move(level, Coords(1, 0));
+			if (isMenuOpen)
+			{
+				//currentMenu->AddOnCurrentIndex(1);
+			}
+			else
+			{
+				cursor->Move(level, Coords(1, 0));
+			}
 		}
 		else if (_inputAction == IAT_VALIDATE) // entr�
 		{
-
+			if (isMenuOpen)
+			{
+				currentMenu->Interact();
+			}
 		}
 	}
 

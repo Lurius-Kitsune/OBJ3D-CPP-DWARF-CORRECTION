@@ -114,24 +114,23 @@ struct Color
 	int b;
 
 	Color();
-
 	Color(const int _r, const int _g, const int _b);
 
-	string ToString(const bool _textOnly) const
-	{
-		if (_textOnly) return TEXT_RGB(r, g, b);
-		return BG_RGB(r, g, b);
-	}
+
+private:
+	int ClampColor(int _value, double _factor);
+
+public:
+	void CalculateSaturation(double _factor);
+	void AdjustBrightness(double _factor);
+	string ToString(const bool _textOnly) const;
 
 	static string RainbowEveryChar(const string& _word);
 	static string RainbowString(const string& _word);
 	static void DisplayRainbow(const string& _text);
 	static string GetRandomColor();
-	void CalculateSaturation(double _factor);
-	void AdjustBrightness(double _factor);
 
-private:
-	int ClampColor(int& _value, double _factor);
+	
 };
 
 struct Gradient
@@ -146,7 +145,7 @@ struct Gradient
 		gradB = _b;
 	}
 
-	string GradientString(const string& _text, const bool _textOnly = true)const;
-	Color GradientColor(const int _length, const int _colorIndex)const;
+	string GradientString(const string& _text, const bool _textOnly = true) const;
+	Color GradientColor(const int _length, const int _colorIndex) const;
 	Color ClampGradient(const int _index, const int _maxDisplayChar) const;
 };
