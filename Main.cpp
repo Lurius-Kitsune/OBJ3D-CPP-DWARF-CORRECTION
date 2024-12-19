@@ -134,7 +134,7 @@ void DefaultSetup()
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     SetConsoleName("Dwarf Fortress");
     //SetConsoleSize(1200, 800);
-    MaximizeConsoleV2();
+    MaximizeConsole();
 	InitUTF8;
 }
 
@@ -159,14 +159,8 @@ void SetConsoleSize(const u_int& _sizeX, const u_int& _sizeY)
     SetWindowPos(_hwnd, HWND_TOP, (1920 - _sizeX) / 2, (1080 - _sizeY) / 2, _sizeX, _sizeY, 0);
 }
 
-void MaximizeConsole()
-{
-    const int _x = GetSystemMetrics(SM_CXSCREEN);
-    const int _y = GetSystemMetrics(SM_CYSCREEN);
-    SetConsoleSize(_x, _y);
-}
 
-void MaximizeConsoleV2()
+void MaximizeConsole()
 {
     HWND _hwnd = GetForegroundWindow();
     ShowWindow(_hwnd, SW_MAXIMIZE);
