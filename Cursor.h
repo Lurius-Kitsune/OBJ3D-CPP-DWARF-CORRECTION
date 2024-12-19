@@ -9,6 +9,10 @@ class Cursor : public Singleton<Cursor>
 	string appearance;
 
 public:
+	INLINE void SetLocation(const Coords& _location)
+	{
+		location = _location;
+	}
 	INLINE string GetAppearance() const
 	{
 		return appearance;
@@ -19,8 +23,7 @@ public:
 	}
 
 public:
-	Cursor() = default;
-	Cursor(const Coords& _location);
+	Cursor();
 
 public:
 	Coords GetCenterConsole() const;

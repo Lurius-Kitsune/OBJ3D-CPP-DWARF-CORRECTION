@@ -5,8 +5,11 @@
 #include "Emoji.h"
 #include "FileStream.h"
 
-Level::Level(const string& _path)
+Level::Level(const string& _path, const Coords& _coords)
 {
+
+	Cursor::GetInstance().SetLocation(_coords);
+
 	path = "Assets/Levels/" + _path + ".txt";
 	LoadMap();
 	fullMapSize = Size(map);
@@ -225,38 +228,44 @@ void Level::Save()
 
 #pragma region Display
 
+void Level::DisplayHorizontalBorder(const u_int& _rowSize) const
+{
+	for (u_int _i = 0; _i < _rowSize + 2; _i++)
+	{
+		Print("", BG_GRAY, " ", RESET);
+	}
+	Print("\n", RESET);
+}
+
+void Level::DisplayVerticalBorder(const string& _color, const bool _isRight) const
+{
+	Print("", _color + " " + (_isRight ? "\n" : " "), RESET);
+}
+
 void Level::DisplayMap(const Size& _size, const Coords& _start) const
 {
-	Cursor _cursor = Cursor::GetInstance();
-	_cursor.SetCursorPosition(0, 0);
 
 	const u_int& _mapSize = static_cast<const u_int&>(_size.x);
 	const u_int& _rowSize = static_cast<const u_int&>(_size.y);
-	for (u_int _index = 0; _index < _rowSize + 2; _index++)
-	{
-		Print("", BG_GRAY, "  ", RESET);
-	}
+	const string& _borderColor = CYAN;
+	DisplayHorizontalBorder(_rowSize);
 	Print("", "\n");
 	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
 	{
-		Print("", BG_GRAY, "  ", RESET);
+		DisplayVerticalBorder(_borderColor, false);
 		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex++)
 		{
-			const u_int& _posY = _columnIndex + _start.y;
-			const u_int& _posX = _rowIndex + _start.x;
+			const u_int& _posY = _columnIndex + _start.x;
+			const u_int& _posX = _rowIndex + _start.y;
 			const Coords& _currentCoords = Coords(_posX, _posY);
 			if (!IsValidCoords(_currentCoords)) continue;
-			bool _isCursor = _cursor.GetLocation() == _currentCoords;
+			bool _isCursor = Cursor::GetInstance().GetLocation() == _currentCoords;
 			map[_posX][_posY].Display(_isCursor);
 		}
 		Print("", BG_GRAY, "  \n", RESET);
 	}
 	ResetColor();
-	for (u_int _index = 0; _index < _rowSize + 2; _index++)
-	{
-		Print("", BG_GRAY, "  ", RESET);
-	}
-	Print("", "\n");
+	DisplayVerticalBorder(_borderColor,  true);
 
 }
 

@@ -4,9 +4,8 @@
 #include "Emoji.h"
 #include "Macro.h"
 
-Cursor::Cursor(const Coords& _location)
+Cursor::Cursor()
 {
-	location = _location;
 	appearance = CROSSHAIR;
 }
 
@@ -82,5 +81,6 @@ void Cursor::FlushInput()
 
 void Cursor::Move(Level* _level, const Coords& _offset)
 {
+	if (!_level->IsValidCoords(location + _offset)) return;
 	location += _offset;
 }

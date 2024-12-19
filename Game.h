@@ -21,7 +21,7 @@ private:
 	void Display() const;
 
 public:
-	void SelectLevel(const string& _path);
+	Level* SelectLevel(const string& _path);
 	void Start(Level* _level);
 	void Update();
 	void Pause();

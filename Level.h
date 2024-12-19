@@ -14,7 +14,7 @@ class Level
 	string path;
 	vector<BiomeData> biomesData;
 	Tile selectedTile;
-	bool displayAll;
+	bool displayAll = false;
 	double colorSaturation;
 	double colorBrightness;
 
@@ -36,13 +36,13 @@ private:
 	}
 
 public:
-	Level(const string& _path);
+	Level(const string& _path, const Coords& _coord);
 
 public:
 	bool IsOver(const Coords& _coords) const;
+	bool IsValidCoords(const Coords& _coords) const;
 private:
 	vector<string> ConvertMapToString() const;
-	bool IsValidCoords(const Coords& _coords) const;
 
 public:
 	void UpdateSaturation(const double _newValue);
@@ -82,6 +82,8 @@ public:
 private:
 	void DisplayMap(const Size& _size, const Coords& _start = Coords())const;
 	Coords ComputeCenter(const Coords& _cursorPos) const;
+	void DisplayHorizontalBorder(const u_int& _rowSize) const;
+	void DisplayVerticalBorder(const string& _color, const bool _isRight) const;
 
 public:
 	void DisplayView(const Coords& _cursorPos)const;

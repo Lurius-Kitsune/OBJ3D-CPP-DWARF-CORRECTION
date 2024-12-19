@@ -1,6 +1,5 @@
 #pragma once
 #include "Menu.h"
-#include "GameInput.h"
 #include "Level.h"
 
 class MainMenu : public Menu

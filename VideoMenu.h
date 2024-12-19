@@ -9,7 +9,6 @@
 class VideoMenu : public Menu
 {
 	Level* level;
-	GameInput gameInput;
 
 public:
 
@@ -22,7 +21,7 @@ private:
 	void AdjustValue(u_int& _value, const u_int& _delta);
 
 protected:
-	virtual void Interact() override;
+	//virtual void Interact() override;
 
 public:
 	virtual void Show(const bool _toAdd) override;

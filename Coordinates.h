@@ -37,4 +37,9 @@ struct Coords
 		y += _other.y;
 		return *this;
 	}
+	Coords& operator + (const Coords& _other)
+	{
+		Coords _coords = Coords(x + _other.x, y + _other.y);
+		return *this;
+	}
 };

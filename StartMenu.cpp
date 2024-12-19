@@ -10,7 +10,8 @@ StartMenu::StartMenu() : Menu("Start")
 void StartMenu::LaunchGame(const string& _path)
 {
 	// Load Save Path
-	Level* _level = new Level(_path);
+	const Coords& _cursorLocation = { 109, 200 };
+	Level* _level = new Level(_path, _cursorLocation);
 	Game::GetInstance().Start(_level);
 }
 

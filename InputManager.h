@@ -8,34 +8,42 @@ enum KeyEventType
 	KET_HOLD,
 	KET_REPETED,
 
-	KET_COUNT,
+	KET_COUNT
 };
 
 struct KeyEvent
 {
 	KeyEventType type;
-	int keyCode;
+	int code;
+
+	KeyEvent() = default;
+	KeyEvent(const KeyEventType& _type, const int _code)
+	{
+		type = _type;
+		code = _code;
+	}
 };
 
 enum MouseEventType
 {
 	MET_MOVED,
-	MET_CLOCKED,
+	MET_CLICKED,
 	MET_DRAGGED,
 
-	MET_COUNT,
+	MET_COUNT
 };
 
 union MouseValue
 {
 	struct Position
 	{
-		int x;
-		int y;
+		u_int x;
+		u_int y;
 	} position;
 
 	int code;
 
+	MouseValue() = default;
 	MouseValue(const COORD& _coord)
 	{
 		position.x = _coord.X;
@@ -52,6 +60,7 @@ struct MouseEvent
 	MouseEventType type;
 	MouseValue value;
 
+	MouseEvent() = default;
 	MouseEvent(const MouseEventType& _type, const MouseValue& _value)
 	{
 		type = _type;
@@ -70,26 +79,25 @@ enum EventType
 struct Event
 {
 	EventType type;
-
 	union
 	{
 		KeyEvent keyboard;
 		MouseEvent mouse;
 	};
-	Event() = default;
 
+	Event() = default;
 	Event(const EventType& _type, const KeyEvent& _keyboard)
 	{
 		type = _type;
 		keyboard = _keyboard;
 	}
-
 	Event(const EventType& _type, const MouseEvent& _mouse)
 	{
 		type = _type;
 		mouse = _mouse;
 	}
 };
+
 class InputManager : public Singleton<InputManager>
 {
 	queue<Event> allEvents;

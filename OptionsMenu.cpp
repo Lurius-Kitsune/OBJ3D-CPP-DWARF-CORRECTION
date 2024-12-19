@@ -1,6 +1,4 @@
 #include "OptionsMenu.h"
-#include "GameInput.h"
-#include "Level.h"
 
 OptionsMenu::OptionsMenu() : Menu("Options")
 {

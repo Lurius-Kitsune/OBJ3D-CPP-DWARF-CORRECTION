@@ -6,7 +6,7 @@
 Game::Game()
 {
 	level = nullptr;
-	cursor = new Cursor({ 109, 200 });
+	/*cursor = new Cursor({ 109, 200 });*/
 	//entities = 
 }
 
@@ -22,45 +22,45 @@ Game::~Game()
 
 bool Game::PollEvents()
 {
-    const int _code = getch();
+    const int _code = _getch();
     if (_code == 27) // echap
     {
-        if (!isMenuOpen)
+      /*  if (!isMenuOpen)
         {
             return true;
         }
         level->HideTileInfo();
-        isMenuOpen = false;
+        isMenuOpen = false;*/
     }
     if (_code == 13) // enter
     {
-        level->ShowTileInfo();
-        isMenuOpen = true;
+       /* level->ShowTileInfo();
+        isMenuOpen = true;*/
     }
     else if (_code == 9) // tab
     {
-        system("cls");
-        displayAll = !displayAll; // toggle
+        //system("cls");
+        //displayAll = !displayAll; // toggle
     }
     else if (_code == 72) // haut
     {
-        cursor->Move(level, Coords(0, -1));
+        Cursor::GetInstance().Move(level, Coords(-1, 0));
     }
     else if (_code == 75) // gauche
     {
-        cursor->Move(level, Coords(-1, 0));
+       Cursor::GetInstance().Move(level, Coords(0, -1));
     }
     else if (_code == 77) // droite
     {
-        cursor->Move(level, Coords(1, 0));
+        Cursor::GetInstance().Move(level, Coords(0, 1));
     }
     else if (_code == 80) // bas
     {
-        cursor->Move(level, Coords(0, 1));
+        Cursor::GetInstance().Move(level, Coords(1, 0));
     }
-}
 return false;
 }
+
 
 void Game::UpdateEntities()
 {
@@ -75,9 +75,10 @@ void Game::Display() const
 	level->Display();
 }
 
-void Game::SelectLevel(const string& _path)
+Level* Game::SelectLevel(const string& _path)
 {
-	level = new Level(_path);
+	level = new Level(_path, {109, 100});
+    return level;
 }
 
 void Game::Start(Level* _level)

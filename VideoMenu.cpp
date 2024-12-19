@@ -74,51 +74,51 @@ void VideoMenu::AdjustValue(u_int& _value, const u_int& _delta)
 	_value = Clamp(_value + _delta, u_int(0), u_int(100));
 }
 
-void VideoMenu::Interact()
-{
-	u_int _selectedIndex = 0;
-	u_int _brightness = 50; // 0 == on voit rien, 100 = surbrillance, 50 = parfait
-	u_int _contrast = 50;   // pareil
-
-
-	DisplayMenu(_selectedIndex, _brightness, _contrast);
-
-	while (true)
-	{
-		if (_kbhit())
-		{
-			InputActionType _inputAction = gameInput.GetInputActionType(_getch());
-
-			switch (_inputAction)
-			{
-			case IAT_UP:
-				_selectedIndex = (_selectedIndex - 1 + 3) % 3;
-				break;
-			case IAT_DOWN:
-				_selectedIndex = (_selectedIndex + 1) % 3;
-				break;
-			case IAT_RIGHT:
-				if (_selectedIndex == 0)
-					AdjustValue(_brightness, 5);
-				else if (_selectedIndex == 1)
-					AdjustValue(_contrast, 5);
-				break;
-			case IAT_LEFT:
-				if (_selectedIndex == 0)
-					AdjustValue(_brightness, -5);
-				else if (_selectedIndex == 1)
-					AdjustValue(_contrast, -5);
-				break;
-			case IAT_VALIDATE:
-				if (_selectedIndex == 2)
-					return; // Quitter
-				break;
-			case IAT_PAUSE:
-				return; // Revenir au jeu
-			default:
-				break;
-			}
-			DisplayMenu(_selectedIndex, _brightness, _contrast);
-		}
-	}
-}
+//void VideoMenu::Interact()
+//{
+//	u_int _selectedIndex = 0;
+//	u_int _brightness = 50; // 0 == on voit rien, 100 = surbrillance, 50 = parfait
+//	u_int _contrast = 50;   // pareil
+//
+//
+//	DisplayMenu(_selectedIndex, _brightness, _contrast);
+//
+//	while (true)
+//	{
+//		if (_kbhit())
+//		{
+//			InputActionType _inputAction = gameInput.GetInputActionType(_getch());
+//
+//			switch (_inputAction)
+//			{
+//			case IAT_UP:
+//				_selectedIndex = (_selectedIndex - 1 + 3) % 3;
+//				break;
+//			case IAT_DOWN:
+//				_selectedIndex = (_selectedIndex + 1) % 3;
+//				break;
+//			case IAT_RIGHT:
+//				if (_selectedIndex == 0)
+//					AdjustValue(_brightness, 5);
+//				else if (_selectedIndex == 1)
+//					AdjustValue(_contrast, 5);
+//				break;
+//			case IAT_LEFT:
+//				if (_selectedIndex == 0)
+//					AdjustValue(_brightness, -5);
+//				else if (_selectedIndex == 1)
+//					AdjustValue(_contrast, -5);
+//				break;
+//			case IAT_VALIDATE:
+//				if (_selectedIndex == 2)
+//					return; // Quitter
+//				break;
+//			case IAT_PAUSE:
+//				return; // Revenir au jeu
+//			default:
+//				break;
+//			}
+//			DisplayMenu(_selectedIndex, _brightness, _contrast);
+//		}
+//	}
+//}
