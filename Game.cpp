@@ -25,22 +25,17 @@ bool Game::PollEvents()
     const int _code = _getch();
     if (_code == 27) // echap
     {
-      /*  if (!isMenuOpen)
-        {
-            return true;
-        }
-        level->HideTileInfo();
-        isMenuOpen = false;*/
+        MainMenu _mainMenu = MainMenu();
+        _mainMenu.Show();
     }
     if (_code == 13) // enter
     {
-       /* level->ShowTileInfo();
-        isMenuOpen = true;*/
+        
     }
     else if (_code == 9) // tab
     {
-        //system("cls");
-        //displayAll = !displayAll; // toggle
+        system("cls");
+        level->SetDisplayAll(!level->GetDisplayAll()); // toggle
     }
     else if (_code == 72) // haut
     {

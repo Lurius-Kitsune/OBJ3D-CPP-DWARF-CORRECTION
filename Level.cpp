@@ -255,8 +255,8 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 		DisplayVerticalBorder(_borderColor, false);
 		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex++)
 		{
-			const u_int& _posY = _columnIndex + _start.x;
-			const u_int& _posX = _rowIndex + _start.y;
+			const u_int& _posY = _columnIndex + _start.y;
+			const u_int& _posX = _rowIndex + _start.x;
 			const Coords& _currentCoords = Coords(_posX, _posY);
 			if (!IsValidCoords(_currentCoords)) continue;
 			bool _isCursor = Cursor::GetInstance().GetLocation() == _currentCoords;

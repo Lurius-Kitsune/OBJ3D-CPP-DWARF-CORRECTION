@@ -111,11 +111,10 @@ int main()
      Video => Intensity / Framerate / Daltonien / etc..
      Quit => quitter*/
 
-    Game _game;
-    _game.Start(_game.SelectLevel("MainLevel"));
+    
 
-    MainMenu _mainMenu = MainMenu();
-    _mainMenu.Show();
+   MainMenu _mainMenu = MainMenu();
+   _mainMenu.Show();
 
     return EXIT_SUCCESS;
 }

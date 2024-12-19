@@ -29,11 +29,22 @@ public:
 		return colorSaturation;
 	}
 
+	INLINE bool GetDisplayAll() const
+	{
+		return displayAll;
+	}
+
+	void SetDisplayAll(const bool _displayAll)
+	{
+		displayAll = _displayAll;
+	}
+
 private:
 	INLINE Tile& GetTileByCoords(const Coords& _coords)
 	{
 		return map[_coords.x][_coords.y];
 	}
+
 
 public:
 	Level(const string& _path, const Coords& _coord);
