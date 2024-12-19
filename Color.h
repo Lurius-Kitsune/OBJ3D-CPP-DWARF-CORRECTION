@@ -113,17 +113,9 @@ struct Color
 	int g;
 	int b;
 
-	Color()
-	{
-		r = g = b = 0;
-	}
+	Color();
 
-	Color(const int _r, const int _g, const int _b)
-	{
-		r = _r;
-		g = _g;
-		b = _b;
-	}
+	Color(const int _r, const int _g, const int _b);
 
 	string ToString(const bool _textOnly) const
 	{
@@ -139,10 +131,7 @@ struct Color
 	void AdjustBrightness(double _factor);
 
 private:
-	int Clamp(int _value, int _min, int _max)
-	{
-		return (_value < _min) ? _min : (_value > _max ? _max : _value);
-	}
+	int ClampColor(int& _value, double _factor);
 };
 
 struct Gradient

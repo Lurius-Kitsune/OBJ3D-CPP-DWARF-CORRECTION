@@ -24,40 +24,20 @@ MainMenu::~MainMenu()
 	}
 }
 
-
-void MainMenu::Show()
+void MainMenu::Show(const bool _toAdd)
 {
-	system("cls");
-
+	Super::Show();
 	DisplayLogo();
-	cout << "Quelle option choisissez-vous ?" << endl;
-
-	u_int _index = 1;
-	for (const Menu* _menu : menus)
-	{
-		cout << _index++ << " - " << _menu->GetTitle() << endl;
-	}
-
-	u_int _textIndex;
-	cin >> _textIndex;
-	_textIndex--;
-
-	menus[_textIndex]->Show();
+	const function<void(const u_int&)>& _callback = [&](const u_int& _index) { menus[_index]->Show(); };
+	OpenMenu(menus, "JSP frr", _callback, false);
 }
 
 void MainMenu::DisplayLogo()
 {
-	Cursor _cursor;
-	Gradient _gradient = Gradient({ 159, 37, 96 }, { 94, 153, 42 });
-	ifstream _stream = ifstream("Assets/Logo.txt");
-	vector<string> _logo;
-	string _line;
-	while (getline(_stream, _line)) _logo.push_back(_gradient.GradientString(_line));
 
-	while (!_kbhit()) _cursor.DisplayOnceCenterMultiLine(_logo, (u_int)_logo.size());
 }
 
-void MainMenu::Hide()
+	void MainMenu::Hide()
 {
 	system("cls");
 }

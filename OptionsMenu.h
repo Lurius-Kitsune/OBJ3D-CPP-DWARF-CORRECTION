@@ -10,12 +10,10 @@ class OptionsMenu : public Menu
 	vector<Menu*> menus;
 
 public:
-	OptionsMenu(GameInput* _gameInput, Level* _level);
-	OptionsMenu(Menu* _parent, GameInput* _gameInput, Level* _level);
+	OptionsMenu();
 	~OptionsMenu();
 
 public:
-	virtual void Show() override;
-	virtual void Hide() override;
+	virtual void Show(const bool _toAdd = true) override;
 	virtual void Interact() override;
 };

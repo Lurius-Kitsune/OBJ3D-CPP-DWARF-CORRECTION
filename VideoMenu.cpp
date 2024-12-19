@@ -1,21 +1,16 @@
 ﻿#include "VideoMenu.h"
+#include "Macro.h"
 
-VideoMenu::VideoMenu(GameInput* _gameInput, Level* _level) : Menu("Video", 0)
+VideoMenu::VideoMenu() : Menu("Video")
 {
-	level = _level;
-	gameInput = _gameInput;
+
 }
 
-void VideoMenu::Show()
+void VideoMenu::Show(const bool _toAdd)
 {
 	// Clear l'affichage et laisser que le menu
 	system("cls");
 	Interact();
-}
-
-void VideoMenu::Hide()
-{
-	// TODO: Impl�mentation future
 }
 
 void VideoMenu::DisplayMenu(int _selectedIndex, int& _brightness, int& _contrast)
@@ -74,14 +69,9 @@ void VideoMenu::DisplayProgressBar(const string& _label, int& _value, int _maxLe
 	cout << "] " << _value << "%" << endl;
 }
 
-void VideoMenu::AdjustValue(int& _value, int _delta)
+void VideoMenu::AdjustValue(u_int& _value, const u_int& _delta)
 {
-	_value = Clamp(_value + _delta, 0, 100);
-}
-
-int VideoMenu::Clamp(int _value, int _min, int _max)
-{
-	return (_value < _min) ? _min : (_value > _max ? _max : _value);
+	_value = Clamp<u_int>(_value + _delta, 0, 100);
 }
 
 void VideoMenu::Interact()

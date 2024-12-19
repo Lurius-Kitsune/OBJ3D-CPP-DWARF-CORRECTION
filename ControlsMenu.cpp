@@ -1,31 +1,20 @@
 #include "ControlsMenu.h"
 #include "Macro.h"
 
-ControlsMenu::ControlsMenu(GameInput* _gameInput) : Menu("Controls Menu", _gameInput->inputs.size())
+ControlsMenu::ControlsMenu() : Menu("Controls Menu")
 {
-	gameInputs = _gameInput;
+	
 
 }
 
-void ControlsMenu::Show()
+void ControlsMenu::Show(const bool _toAdd)
 {
-	int _i = 0;
-	for (pair<InputActionType, string> _inputName : gameInputs->inputsName)
-	{
-		cout << (_i == currentIndex ? "> " : "") + _inputName.second << " : " << int(gameInputs->GetInputKeyByInputType(_inputName.first));
-		cout << endl;
-		_i++;
-	}
-}
-
-void ControlsMenu::Hide()
-{
-	system("cls");
+	Super::Show(_toAdd);
 }
 
 void ControlsMenu::Interact()
 {
-	ChangeKey(gameInputs->GetInputByIndex(currentIndex));
+	ChangeKey(gameInputs.GetInputByIndex(0));
 }
 
 void ControlsMenu::ChangeKey(pair<char, InputActionType> _inputToChange)
@@ -41,10 +30,10 @@ void ControlsMenu::ChangeKey(pair<char, InputActionType> _inputToChange)
 		_input = _getch();
 	}
 
-	if (gameInputs->inputs.find(_input) != gameInputs->inputs.end()) return;
+	if (gameInputs.inputs.find(_input) != gameInputs.inputs.end()) return;
 
-	gameInputs->inputs.erase(_inputToChange.first);
+	gameInputs.inputs.erase(_inputToChange.first);
 	_inputToChange.first = _input;
 
-	gameInputs->inputs.insert(_inputToChange);
+	gameInputs.inputs.insert(_inputToChange);
 }

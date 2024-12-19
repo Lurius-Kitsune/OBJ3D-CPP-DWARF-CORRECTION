@@ -145,7 +145,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
-    <ClCompile Include="SelectGameMenu.cpp" />
+    <ClCompile Include="Save.cpp" />
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="VideoMenu.cpp" />
@@ -173,7 +173,7 @@
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="Random.h" />
-    <ClInclude Include="SelectGameMenu.h" />
+    <ClInclude Include="Save.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="StartMenu.h" />
     <ClInclude Include="Tile.h" />

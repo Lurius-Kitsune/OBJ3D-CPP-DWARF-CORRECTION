@@ -55,6 +55,24 @@
     <Filter Include="Scripts\Game\Input">
       <UniqueIdentifier>{671645c2-45a3-41c7-b55a-3d55c9b243ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\Level\Cursor">
+      <UniqueIdentifier>{557a4e56-d338-42cc-b9eb-3793ff3ad55c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Level\Files">
+      <UniqueIdentifier>{8ea16c98-fbd1-4052-9437-b85f0040d2d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Level\Size">
+      <UniqueIdentifier>{0d805922-1ded-45ea-8e8e-7e3868679994}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Level\Tile">
+      <UniqueIdentifier>{4ed585dc-93d9-4e2f-a7a8-ab3d2872200c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Level\Tile\Coordniates">
+      <UniqueIdentifier>{ba762096-6afd-4537-a5c4-e801636adeee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Level\Save">
+      <UniqueIdentifier>{521f038a-7993-4bef-befb-c3cfed6dcf18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Macro.cpp">
@@ -72,15 +90,6 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Scripts\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Scripts\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Scripts\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Cursor.cpp">
-      <Filter>Scripts\Level</Filter>
-    </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Scripts\Components</Filter>
     </ClCompile>
@@ -91,9 +100,6 @@
       <Filter>Scripts\Menus</Filter>
     </ClCompile>
     <ClCompile Include="StartMenu.cpp">
-      <Filter>Scripts\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectGameMenu.cpp">
       <Filter>Scripts\Menus</Filter>
     </ClCompile>
     <ClCompile Include="OptionsMenu.cpp">
@@ -123,6 +129,18 @@
     <ClCompile Include="GameInput.cpp">
       <Filter>Scripts\Game\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Scripts\Level\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Scripts\Level\Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Scripts\Level\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Save.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CoreMinimal.h">
@@ -143,29 +161,11 @@
     <ClInclude Include="Entity.h">
       <Filter>Scripts\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Scripts\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Cursor.h">
-      <Filter>Scripts\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Coordinates.h">
-      <Filter>Scripts\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Size.h">
-      <Filter>Scripts\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Scripts\Level</Filter>
-    </ClInclude>
     <ClInclude Include="MovementComponent.h">
       <Filter>Scripts\Components</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Scripts\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectGameMenu.h">
-      <Filter>Scripts\Menus</Filter>
     </ClInclude>
     <ClInclude Include="OptionsMenu.h">
       <Filter>Scripts\Menus</Filter>
@@ -206,10 +206,28 @@
     <ClInclude Include="GameInput.h">
       <Filter>Scripts\Game\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>Scripts\Level\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="Coordinates.h">
+      <Filter>Scripts\Level\Tile\Coordniates</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Scripts\Level\Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Scripts\Level\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Size.h">
+      <Filter>Scripts\Level\Size</Filter>
+    </ClInclude>
+    <ClInclude Include="Save.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\Levels\MainLevel.txt">
-      <Filter>Scripts\Level</Filter>
+      <Filter>Scripts\Level\Files</Filter>
     </Text>
   </ItemGroup>
 </Project>

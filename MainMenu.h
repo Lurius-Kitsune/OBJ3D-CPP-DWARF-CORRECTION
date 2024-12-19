@@ -12,7 +12,7 @@ public:
 	~MainMenu();
 
 public:
-	virtual void Show() override;
+	virtual void Show(const bool _toAdd = true) override;
 	void DisplayLogo();
 	virtual void Hide() override;
 };

@@ -12,6 +12,7 @@
 #include <fstream>
 #include <sstream>
 #include <assert.h>
+#include <functional>
 #include <regex>
 
 using namespace std;
@@ -24,6 +25,9 @@ typedef unsigned int u_int;
 #define SLEEP(_duration, _time) sleep_for(_duration(_time))
 #define STRING(value) to_string(value)
 #define INLINE inline
+#define CLEAR system("cls")
+#define CAST(_type, _value) static_cast<_type>(_value)
+#define Super __super
 
 #define UTF8
 #ifdef UTF8

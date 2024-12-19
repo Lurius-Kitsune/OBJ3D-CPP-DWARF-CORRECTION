@@ -4,13 +4,12 @@
 
 class ControlsMenu : public Menu
 {
-	GameInput* gameInputs;
+	GameInput gameInputs;
 public:
-	ControlsMenu(GameInput* _gameInput);
+	ControlsMenu();
 
 public:
-	virtual void Show() override;
-	virtual void Hide() override;
+	virtual void Show(const bool _toAdd) override;
 	virtual void Interact() override;
 
 	void ChangeKey(pair<char, InputActionType> _inputToChange);

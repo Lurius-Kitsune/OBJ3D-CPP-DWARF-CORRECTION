@@ -10,7 +10,7 @@ Game::Game()
 	gameInput = new GameInput();
 	cursor = new Cursor({ 109, 200 });
 	isMenuOpen = false;
-	currentMenu = new MainMenu(gameInput, level);
+	currentMenu = new MainMenu();
 }
 
 Game::~Game()
@@ -55,7 +55,7 @@ bool Game::PollEvents()
 		{
 			if (isMenuOpen)
 			{
-				currentMenu->AddOnCurrentIndex(-1);
+				currentMenu->AddOnCurrentIndex();
 			}
 			else
 			{

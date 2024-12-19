@@ -11,7 +11,7 @@ Cursor::Cursor(const Coords& _location)
 }
 
 
-Coords Cursor::GetCenterConsole()
+Coords Cursor::GetCenterConsole() const
 {
 	CONSOLE_SCREEN_BUFFER_INFO _csbi;
 	int _ys, _xs;
@@ -34,7 +34,7 @@ void Cursor::SetCursorPosition(const u_int& _xIndex, const u_int& _yIndex, const
 	SetConsoleCursorPosition(_hOut, coord);
 }
 
-bool Cursor::CheckConsoleSize(Coords& _center, Coords& _previousCenter, const string& _text, const Coords& _padding, int _height)
+bool Cursor::CheckConsoleSize(Coords& _center, Coords& _previousCenter, const string& _text, const Coords& _padding, int _height) const
 {
 	if (_height < 1) _height = 1;
 	const regex& _regex = regex("x1b[(38|48);2;[0-9]{1,3};[0-9]{1,3};[0-9]{1,3}m|\x1b[[0-9;]*[mKHVfF]"); // Regex pour supprimer les codes ANSI
@@ -59,7 +59,7 @@ bool Cursor::CheckConsoleSize(Coords& _center, Coords& _previousCenter, const st
 	return false;
 }
 
-void Cursor::DisplayOnceCenterMultiLine(const vector<string> _textArray, const u_int& _size, const Coords& _padding)
+void Cursor::DisplayOnceCenterMultiLine(const vector<string> _textArray, const u_int& _size, const Coords& _padding) const
 {
 	Coords _center = GetCenterConsole();
 	Coords _previousCenter = _center;

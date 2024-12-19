@@ -2,21 +2,12 @@
 #include "GameInput.h"
 #include "Level.h"
 
-OptionsMenu::OptionsMenu(GameInput* _gameInput, Level* _level) : Menu("Options", 2)
+OptionsMenu::OptionsMenu() : Menu("Options")
 {
 	menus =
 	{
-		new ControlsMenu(_gameInput),
-		new VideoMenu(_gameInput, _level),
-	};
-}
-
-OptionsMenu::OptionsMenu(Menu* _parent, GameInput* _gameInput, Level* _level) : Menu("Options", _parent, 2)
-{
-	menus =
-	{
-		new ControlsMenu(_gameInput),
-		new VideoMenu(_gameInput, _level),
+		new ControlsMenu(),
+		new VideoMenu(),
 	};
 }
 
@@ -28,32 +19,16 @@ OptionsMenu::~OptionsMenu()
 	}
 }
 
-void OptionsMenu::Show()
+void OptionsMenu::Show(const bool _toAdd)
 {
-	cout << "Quelle options choisissez-vous ?" << endl;
+	Super::Show(_toAdd);
 
-	u_int _index = 0;
-	for (const Menu* _menu : menus)
-	{
-		cout << (_index == currentIndex ? "> " : "") + _menu->GetTitle() << endl;
-		_index++;
-	}
-
-
-}
-
-void OptionsMenu::Hide()
-{
-	system("cls");
-
-	if (owner)
-	{
-		owner->Show();
-	}
+	const function<void(const u_int&)>& _callback = [&](const u_int& _index) { menus[_index]->Show(); };
+	OpenMenu(menus, "Select option menu", _callback, false);
 }
 
 void OptionsMenu::Interact()
 {
 	system("cls");
-	menus[currentIndex]->Show();
+	//menus[currentIndex]->Show();
 }

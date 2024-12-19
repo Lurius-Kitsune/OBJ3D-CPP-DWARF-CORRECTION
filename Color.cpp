@@ -48,6 +48,18 @@ Color Gradient::ClampGradient(const int _index, const int _maxDisplayChar) const
     return { (int)_valueRed, (int)_valueGreen, (int)_valueBlue };
 }
 
+Color::Color()
+{
+    r = g = b = 0;
+}
+
+Color::Color(const int _r, const int _g, const int _b)
+{
+    r = _r;
+    g = _g;
+    b = _b;
+ 
+}
 
 // === COLOR === 
 string Color::RainbowEveryChar(const string& _word)
@@ -119,7 +131,13 @@ void Color::CalculateSaturation(double _factor)
 
 void Color::AdjustBrightness(double _factor)
 {
-    r = Clamp(static_cast<int>(r * _factor), 0, 255);
-    g = Clamp(static_cast<int>(g * _factor), 0, 255);
-    b = Clamp(static_cast<int>(b * _factor), 0, 255);
+    r = ClampColor(r, _factor);
+    g = ClampColor(g, _factor);
+    b = ClampColor(b, _factor);
+}
+
+int Color::ClampColor(int& _value, double _factor)
+{
+    _value = Clamp(CAST(int, _value * _factor), 0, 255);
+    return _value;
 }

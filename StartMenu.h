@@ -27,7 +27,9 @@ class StartMenu : public Menu
 public:
 	StartMenu();
 
+private:
+	void LaunchGame(const string& _path);
+
 public:
-	virtual void Show() override;
-	virtual void Hide() override;
+	virtual void Show(const bool _toAdd) override;
 };

@@ -8,16 +8,9 @@
 
 class VideoMenu : public Menu
 {
-	Level* level;
-	GameInput* gameInput;
-
 public:
 
-	VideoMenu(GameInput* _gameInput, Level* _level);
-
-public:
-	virtual void Show() override;
-	virtual void Hide() override;
+	VideoMenu();
 
 private:
 
@@ -25,9 +18,11 @@ private:
 
 	void DisplayProgressBar(const string& _label, int& _value, int _maxLength);
 
-	void AdjustValue(int& _value, int _delta);
+	void AdjustValue(u_int& _value, const u_int& _delta);
 
-	int Clamp(int _value, int _min, int _max);
 protected:
 	virtual void Interact() override;
+
+public:
+	virtual void Show(const bool _toAdd) override;
 };
