@@ -1,18 +1,14 @@
 #include "MainMenu.h"
 #include "StartMenu.h"
 #include "OptionsMenu.h"
-#include "ControlsMenu.h"
-#include "VideoMenu.h"
 
-MainMenu::MainMenu(GameInput* _gameInput, Level* _level) : Menu("Main", 4)
+MainMenu::MainMenu() : Menu("Main")
 {
 	menus =
 	{
 		new StartMenu(),
-		new OptionsMenu(_gameInput, _level),
-		new ControlsMenu(_gameInput),
-		new VideoMenu(_gameInput, _level),
-		new Menu("Quitter", 0),
+		new OptionsMenu(),
+		new Menu("Quitter"),
 	};
 }
 
@@ -27,9 +23,7 @@ MainMenu::~MainMenu()
 
 void MainMenu::Show()
 {
-	system("cls");
-
-	cout << "Quelle option choisissez-vous ?" << endl;
+	cout << "Quelle options choisissez-vous ?" << endl;
 
 	u_int _index = 1;
 	for (const Menu* _menu : menus)

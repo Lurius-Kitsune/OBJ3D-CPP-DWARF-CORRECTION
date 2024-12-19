@@ -15,20 +15,12 @@ class Level
 	Cursor* cursor;
 	vector<BiomeData> biomesData;
 	Tile selectedTile;
-	double colorSaturation;
-	double colorBrightness;
 
 public:
 	INLINE const Size& GetFullSize() const
 	{
 		return fullMapSize;
 	}
-
-	INLINE const double GetColorSaturation() const
-	{
-		return colorSaturation;
-	}
-
 private:
 	INLINE Tile& GetTileByCoords(const Coords& _coords)
 	{
@@ -44,10 +36,6 @@ private:
 	vector<string> ConvertMapToString() const;
 	bool IsValidCoords(const Coords& _coords) const;
 
-public:
-	void UpdateSaturation(const double _newValue);
-	void UpdateBrightness(const double _newValue);
-
 	#pragma region Item
 public:
 	bool SetItemAtLocation(const string& _appearance, const Coords& _coords);
@@ -59,11 +47,10 @@ public:
 	#pragma region Generation
 private:
 	vector<Coords> GetCoordsByBiome(const u_int& _biome) const;
-	vector<Coords> SelectCoords(vector<Coords> _availablesCooords, const u_int& _percentage, const RateType& _rate) const;
+	vector<Coords> SelectCoords(vector<Coords> _availablesCooords, const u_int& _percentage) const;
 
 	void SpawnAtCoords(const vector<Coords>& _selectedCoords, const string& _elementToSpawn);
 
-	void SetupVilage();
 public:
 	void Generate();
 	#pragma endregion
@@ -80,11 +67,11 @@ public:
 
 	#pragma region Display
 private:
-	void DisplayMap(const Size& _size, const Coords& _start = Coords())const;
+	void DisplayMap(const Size& _size, const Coords& _start = Coords()) const;
 	Coords ComputeCenter(const Coords& _cursorPos) const;
 
 public:
-	void DisplayView(const Coords& _cursorPos)const;
-	void DisplayFullMap()const;
+	void DisplayView(const Coords& _cursorPos) const;
+	void DisplayFullMap() const;
 	#pragma endregion
 };

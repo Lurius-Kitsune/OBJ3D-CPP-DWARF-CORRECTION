@@ -10,45 +10,20 @@ Level::Level(const string& _path, Cursor* _cursor)
 	path = "Assets/Levels/" + _path + ".txt";
 	LoadMap();
 	fullMapSize = Size(map);
-	view = Size(21, 21);
+	view = Size(35, 35);
 	cursor = _cursor;
-	biomesData ={
-		BiomeData(BT_WATER, {
-			TileData(FISH, 10, RT_PERTHOUSAND),
-			TileData(SPOUTING_WHALE, 10, RT_PERTHOUSAND),
-			TileData(OCTOPUS, 10, RT_PERTHOUSAND),
-			TileData(TROPICAL_FISH, 10, RT_PERTHOUSAND),
-			TileData(JELLY_FISH, 10, RT_PERTHOUSAND),
-		}),
+	biomesData =
+	{
 		BiomeData(BT_SAND, {
-			TileData(PALM_TREE, 7, RT_PERCENT),
-			TileData(CRAB, 1, RT_PERCENT),
-			TileData(CROCODILE, 1, RT_PERCENT),
+			TileData(CRAB, 5),
+			TileData(PALM_TREE, 10),
 		}),
 		BiomeData(BT_GRASS, {
-			TileData(TREE, 5, RT_PERCENT),
-			TileData(TREE2, 5, RT_PERCENT),
-			TileData(FLOWER1, 5, RT_PERTHOUSAND),
-			TileData(FLOWER2, 5, RT_PERTHOUSAND),
-			TileData(FLOWER3, 5, RT_PERTHOUSAND),
-			TileData(FLOWER4, 5, RT_PERTHOUSAND),
-			TileData(MONKEY, 5, RT_PERTHOUSAND),
-		}),
-		BiomeData(BT_DIRT, {
-			TileData(ROCK, 3, RT_PERCENT),
-		}),
-		BiomeData(BT_ROCK, {
-			TileData(ROCK, 30, RT_PERCENT),
-		}),
-		BiomeData(BT_VOLCANO, {
-		}),
-		BiomeData(BT_LAVA, {
+			TileData(TREE, 40),
 		}),
 	};
 
 	//TODO move
-	colorSaturation = 1;
-	colorBrightness = 1;
 	Generate();
 }
 
@@ -83,16 +58,6 @@ bool Level::IsValidCoords(const Coords& _coords) const
 {
 	return _coords.x >= 0 && _coords.x < fullMapSize.x
 		&& _coords.y >= 0 && _coords.y < fullMapSize.y;
-}
-
-void Level::UpdateSaturation(const double _newValue)
-{
-	colorSaturation = _newValue;
-}
-
-void Level::UpdateBrightness(const double _newValue)
-{
-	colorBrightness = _newValue;
 }
 
 #pragma region Item
@@ -136,10 +101,10 @@ vector<Coords> Level::GetCoordsByBiome(const u_int& _biome) const
 	{
 		const u_int& _rowSize = static_cast<const u_int&>(map[_rowIndex].size());
 
-		for (u_int _columnIndex = 0; _columnIndex < _rowSize - 1; _columnIndex++)
+		for (u_int _columnIndex = 0; _columnIndex < _rowSize - 1; _columnIndex += 3)
 		{
 			const Tile& _tile = map[_rowIndex][_columnIndex];
-			if (!_tile.HasEmoji() && _tile.GetBackgroundKey() == _biome)
+			if (_tile.HasEmoji() && _tile.GetBackgroundKey() == _biome)
 			{
 				_availablesCoords.push_back(Coords(_rowIndex, _columnIndex));
 			}
@@ -149,11 +114,11 @@ vector<Coords> Level::GetCoordsByBiome(const u_int& _biome) const
 	return _availablesCoords;
 }
 
-vector<Coords> Level::SelectCoords(vector<Coords> _availablesCooords, const u_int& _percentage, const RateType& _rate) const
+vector<Coords> Level::SelectCoords(vector<Coords> _availablesCooords, const u_int& _percentage) const
 {
 	const u_int& _coordsCount = static_cast<const u_int&>(_availablesCooords.size());
-	shuffle(_availablesCooords.begin(), _availablesCooords.end(), default_random_engine(static_cast<u_int>(chrono::system_clock::now().time_since_epoch().count())));
-	const u_int& _coordsCountToSelect = static_cast<const u_int&>(_percentage * _coordsCount / _rate);
+	random_shuffle(_availablesCooords.begin(), _availablesCooords.end());
+	const u_int& _coordsCountToSelect = static_cast<const u_int&>(_percentage * _coordsCount / 100);
 	vector<Coords> _selectedCoords;
 	_selectedCoords.insert(_selectedCoords.begin(), _availablesCooords.begin(), _availablesCooords.begin() + _coordsCountToSelect);
 	return _selectedCoords;
@@ -174,18 +139,12 @@ void Level::Generate()
 		for (const TileData& _tileData : _biomeData.allData)
 		{
 			const vector<Coords>& _availablesCooords = GetCoordsByBiome(_biomeData.type);
-			const vector<Coords>& _selectedCoords = SelectCoords(_availablesCooords, _tileData.percentage, _tileData.rate);
+			const vector<Coords>& _selectedCoords = SelectCoords(_availablesCooords, _tileData.percentage);
 			SpawnAtCoords(_selectedCoords, _tileData.appearance);
 		}
 	}
-	SetupVilage();
 }
 
-void Level::SetupVilage()
-{
-	map[fullMapSize.x / 2][fullMapSize.y / 2].ResetAppearance();
-	map[fullMapSize.x / 2][fullMapSize.y / 2].SetAppearance(HUNTER_HUT);
-}
 #pragma endregion
 
 #pragma region Save
@@ -231,33 +190,22 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 	cursor->SetCursorPosition(0, 0);
 
 	const u_int& _mapSize = static_cast<const u_int&>(_size.x);
-	const u_int& _rowSize = static_cast<const u_int&>(_size.y);
-	for (u_int _index = 0; _index < _rowSize + 2; _index++)
-	{
-		Print("", BG_GRAY, "  ", RESET);
-	}
-	Print("", "\n");
 	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
 	{
-		Print("", BG_GRAY, "  ", RESET);
+		const u_int& _rowSize = static_cast<const u_int&>(_size.y);
 		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex++)
 		{
 			const u_int& _posY = _columnIndex + _start.y;
 			const u_int& _posX = _rowIndex + _start.x;
-			const Coords& _currentCoords = Coords(_posX, _posY);
-			if (!IsValidCoords(_currentCoords)) continue;
-			const Cursor* _cursor = cursor->GetLocation() == _currentCoords ? cursor : nullptr;
-			map[_posX][_posY].Display(_cursor);
-		}
-		Print("", BG_GRAY, "  \n", RESET);
-	}
-	Reset();
-	for (u_int _index = 0; _index < _rowSize + 2; _index++)
-	{
-		Print("", BG_GRAY, "  ", RESET);
-	}
-	Print("", "\n");
 
+			if (!IsValidCoords(Coords(_posX, _posY))) continue;
+			map[_posX][_posY].Display();
+		}
+
+		cout << endl;
+	}
+
+	Reset();
 }
 
 Coords Level::ComputeCenter(const Coords& _cursorPos) const

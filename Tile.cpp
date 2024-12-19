@@ -12,15 +12,12 @@ Tile::Tile(const string& _key)
 		"Oui ?",
 		"NON"
 	};
-
-	colorBrightness = 1;
-	colorSaturation = 1;
 }
 
 
-string Tile::ComputeColor(const bool _isCursorPosition) const
+string Tile::ComputeColor() const
 {
-	Color _colors[] = {
+	const Color _colors[] = {
 
 		Color(0,4,217), // Bleu
 		Color(254,255,100), // Jaune
@@ -31,11 +28,8 @@ string Tile::ComputeColor(const bool _isCursorPosition) const
 		Color(255,0,0), // Rouge
 	};
 	const u_int& _backgroundKey = GetBackgroundKey();
-	_colors[_backgroundKey].CalculateSaturation(colorSaturation);
-	_colors[_backgroundKey].AdjustBrightness(colorBrightness);
-
 	string _color = _colors[_backgroundKey].ToString(false);
-	return _color + (HasEmoji() || _isCursorPosition ? "" : "  " RESET);
+	return _color += HasEmoji() ? "" : "  ";
 }
 
 string Tile::ComputeAppearance() const
@@ -50,7 +44,7 @@ u_int Tile::GetKeyByAppearance(const string& _appearance) const
 
 	for (const string& _currentEmoji : emojis)
 	{
-		if (_currentEmoji == _appearance) return 10 * (_index + 1);
+		if (_currentEmoji == _appearance) return _index + 1;
 		_index++;
 	}
 
@@ -59,7 +53,7 @@ u_int Tile::GetKeyByAppearance(const string& _appearance) const
 
 void Tile::SetAppearance(const string& _appearance)
 {
-	key += GetKeyByAppearance(_appearance);
+	key += 10 * GetKeyByAppearance(_appearance);
 }
 
 void Tile::ResetAppearance()
@@ -95,18 +89,13 @@ void Tile::HideInfos(Cursor* _cursor) const
 	}
 }
 
-void Tile::Display(const Cursor* _cursor)const
+void Tile::Display() const
 {
-	Print("", ComputeColor(_cursor));
-	
+	Print("", ComputeColor());
 	if (HasEmoji())
 	{
-		if (_cursor)
-			Print("", RED_INTENSE_BG);
-		Print("", ComputeAppearance(), RESET);
+		Print("", ComputeAppearance());
 	}
-	else if (_cursor)
-		Print("", _cursor->GetAppearance(), RESET);
 }
 
 string Tile::ToString() const
