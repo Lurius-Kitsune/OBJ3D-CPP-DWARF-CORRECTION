@@ -30,7 +30,7 @@ struct GameInput
 			{
 				return _input;
 			}
-		}
+		} 
 	}
 
 	GameInput()
