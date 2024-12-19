@@ -146,7 +146,7 @@ struct Gradient
 		gradB = _b;
 	}
 
-	string GradientString(const string& _text, const bool _textOnly = true);
-	Color GradientColor(const int _length, const int _colorIndex);
+	string GradientString(const string& _text, const bool _textOnly = true)const;
+	Color GradientColor(const int _length, const int _colorIndex)const;
 	Color ClampGradient(const int _index, const int _maxDisplayChar) const;
 };

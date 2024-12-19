@@ -15,5 +15,4 @@ public:
 
 public:
 	virtual void Show(const bool _toAdd = true) override;
-	virtual void Interact() override;
 };

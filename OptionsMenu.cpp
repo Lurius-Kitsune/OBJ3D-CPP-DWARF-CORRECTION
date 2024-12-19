@@ -26,9 +26,3 @@ void OptionsMenu::Show(const bool _toAdd)
 	const function<void(const u_int&)>& _callback = [&](const u_int& _index) { menus[_index]->Show(); };
 	OpenMenu(menus, "Select option menu", _callback, false);
 }
-
-void OptionsMenu::Interact()
-{
-	system("cls");
-	//menus[currentIndex]->Show();
-}

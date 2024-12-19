@@ -145,7 +145,6 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
-    <ClCompile Include="Save.cpp" />
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="VideoMenu.cpp" />
@@ -181,9 +180,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\Levels\MainLevel.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="DwarfCorrection.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
