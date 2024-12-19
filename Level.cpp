@@ -52,7 +52,6 @@ Level::Level(const string& _path, Cursor* _cursor)
 	Generate();
 }
 
-
 bool Level::IsOver(const Coords& _coords) const
 {
 	return false;
@@ -276,6 +275,12 @@ void Level::DisplayView(const Coords& _cursorPos) const
 void Level::DisplayFullMap() const
 {
 	DisplayMap(fullMapSize);
+}
+
+void Level::Display() const
+{
+	cursor->SetCursorPosition(0, 0);
+	displayAll ? DisplayFullMap() : DisplayView(cursor->GetLocation());
 }
 
 #pragma endregion

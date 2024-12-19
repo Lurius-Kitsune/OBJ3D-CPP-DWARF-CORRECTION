@@ -15,9 +15,9 @@ class Level
 	Cursor* cursor;
 	vector<BiomeData> biomesData;
 	Tile selectedTile;
+	bool displayAll;
 	double colorSaturation;
 	double colorBrightness;
-	bool displayAll;
 
 public:
 	INLINE const Size& GetFullSize() const
@@ -88,4 +88,7 @@ public:
 	void DisplayView(const Coords& _cursorPos)const;
 	void DisplayFullMap()const;
 #pragma endregion
+
+public:
+	void Display() const;
 };

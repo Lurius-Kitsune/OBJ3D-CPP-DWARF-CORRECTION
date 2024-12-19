@@ -73,6 +73,9 @@
     <Filter Include="Scripts\Level\Save">
       <UniqueIdentifier>{4f6f0e1a-5442-40ba-9098-4aa30ddd68c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\Resource Files\Singleton">
+      <UniqueIdentifier>{48cbb208-ebf2-4b2d-9cce-71ae9d2a804d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Macro.cpp">
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Scripts\Level\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Scripts\Resource Files\Singleton</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

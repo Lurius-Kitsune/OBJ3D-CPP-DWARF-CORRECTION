@@ -173,6 +173,7 @@
     <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Save.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="StartMenu.h" />
     <ClInclude Include="Tile.h" />

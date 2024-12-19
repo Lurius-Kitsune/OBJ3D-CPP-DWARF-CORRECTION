@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #define EMPTY				"  "
-#define CROSSHAIR			"\xE2\x9D\x8C"
 
 // Buildings
 #define VILLAGE				"\xF0\x9F\x8F\x98"
@@ -53,3 +52,5 @@
 #define FOOTSTEP			"\xF0\x9F\x91\xA3"
 
 // UIs
+#define CROSSHAIR			"\xE2\x9D\x8C"
+#define UP					

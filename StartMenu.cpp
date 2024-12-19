@@ -9,7 +9,8 @@ StartMenu::StartMenu() : Menu("Start")
 
 void StartMenu::LaunchGame(const string& _path)
 {
-	//Todo
+	level = new Level(_path, cursor);
+	Game::GetInstance(level)->Start();
 }
 
 void StartMenu::Show(const bool _toAdd)
