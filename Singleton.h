@@ -12,10 +12,8 @@ public:
 	{
 		return instance;
 	}
-public:
-	Singleton();
-	~Singleton();
-
-private:
 };
+
+template <typename Class>
+Class Singleton<Class>::instance;
 

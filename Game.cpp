@@ -7,7 +7,7 @@ Game::Game()
 {
 	level = nullptr;
 	cursor = new Cursor({ 109, 200 });
-	entities = 
+	//entities = 
 }
 
 Game::~Game()
