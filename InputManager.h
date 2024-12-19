@@ -78,4 +78,5 @@ class InputManager : public Singleton<InputManager>
 	queue<Event> allEvents;
 public:
 	bool PollEvents(Event& _event);
+	void PollEventDemo();
 };

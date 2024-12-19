@@ -11,3 +11,8 @@ bool InputManager::PollEvents(Event& _event)
 
 	return false;
 }
+
+void InputManager::PollEventDemo()
+{
+
+}
