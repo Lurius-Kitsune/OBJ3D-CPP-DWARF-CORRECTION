@@ -62,7 +62,10 @@ private:
 
 	void Erase(const unordered_map<u_int, Node*>& _allNodes)
 	{
-
+		for (auto node : _allNodes)
+		{
+			delete node;
+		}
 	}
 
 public:

@@ -101,6 +101,10 @@ class Tile
 	double colorBrightness;
 
 public:
+	INLINE bool IsValid() const
+	{
+		return !HasEmoji();
+	}
 	INLINE bool HasEmoji() const
 	{
 		return key > 9;

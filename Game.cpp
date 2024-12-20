@@ -2,6 +2,7 @@
 #include "Dwarf.h"
 #include "ControlsMenu.h" // TODO REMOVE
 #include "MainMenu.h"
+#include "MovementComponent.h"
 
 Game::Game()
 {
@@ -79,6 +80,11 @@ Level* Game::SelectLevel(const string& _path)
 void Game::Start(Level* _level)
 {
 	level = _level;
+    Dwarf* _dwarf = new Dwarf();
+    const Coords& _cursorPos = Cursor::GetInstance().GetLocation();
+    _dwarf->SetLocation(Cursor::GetInstance().GetLocation());
+    _dwarf->GetComponent<MovementComponent>()->SetTargetLocation(_cursorPos + Coords(0, 27));
+    entities.push_back(_dwarf);
 	Update();
 }
 

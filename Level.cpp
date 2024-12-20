@@ -279,8 +279,8 @@ Coords Level::ComputeCenter(const Coords& _coords) const
 	const bool _isOutLeft = _coords.y - _halfView.y < fullMapSize.x > 0;
 	const bool _isOutRight = _coords.y + _halfView.y >= fullMapSize.x;
 
-	const int _poxX = _isOutBottom ? fullMapSize.x - view.x : _isOutTop ? 0 : _coords.x - view.x / 2;
-	const int _poxY = _isOutRight ? fullMapSize.y - view.y : _isOutLeft ? 0 : _coords.y - view.y / 2;
+	const int _posX = _isOutBottom ? fullMapSize.x - view.x : _isOutTop ? 0 : _coords.x - view.x / 2;
+	const int _posY = _isOutRight ? fullMapSize.y - view.y : _isOutLeft ? 0 : _coords.y - view.y / 2;
 
 	return {
 		 _posX,
