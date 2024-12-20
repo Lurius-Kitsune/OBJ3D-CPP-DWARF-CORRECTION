@@ -50,7 +50,7 @@ struct Coords
 		return *this;
 	}
 
-	Coords operator + (const Coords& _other)
+	Coords operator + (const Coords& _other) const
 	{
 		return { x + _other.x, y + _other.y};
 	}

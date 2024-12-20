@@ -29,7 +29,7 @@ private:
 	bool TryGetNextCoords();
 	void MoveToTarget();
 
-
 public:
 	virtual void Update() override;
+	void SetTargetLocation(const Coords& _coords);
 };

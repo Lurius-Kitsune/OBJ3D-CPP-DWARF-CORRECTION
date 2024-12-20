@@ -27,6 +27,11 @@ void MovementComponent::MoveToTarget()
 	owner->SetLocation(*targetCoords);
 }
 
+void MovementComponent::SetTargetLocation(const Coords& _coords)
+{
+
+}
+
 
 void MovementComponent::Update()
 {

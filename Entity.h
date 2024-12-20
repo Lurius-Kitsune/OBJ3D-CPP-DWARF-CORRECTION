@@ -31,7 +31,7 @@ public:
 	{
 		for (Component* _component : components)
 		{
-			if (Type* _value = dynamic_cast<Type>(_component)) return _value;
+			if (Type* _value = dynamic_cast<Type*>(_component)) return _value;
 		}
 
 		return nullptr;
