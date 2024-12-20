@@ -31,6 +31,18 @@ struct Coords
 		return x == _other.x
 			&& y == _other.y;
 	}
+
+	bool operator != (const Coords& _other) const
+	{
+		return x != _other.x
+			|| y != _other.y;
+	}
+
+	bool operator >= (const int _other) const
+	{
+		return x >= _other && y >= _other;
+	}
+
 	Coords& operator += (const Coords& _other)
 	{
 		x += _other.x;

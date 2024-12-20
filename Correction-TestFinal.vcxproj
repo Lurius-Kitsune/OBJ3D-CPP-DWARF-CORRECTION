@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="AstarAlgo.h" />
     <ClInclude Include="AudioMenu.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MovementComponent.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="OptionsMenu.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Save.h" />
