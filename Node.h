@@ -9,11 +9,16 @@ struct Node
 	u_int h;
 	Node* parent;
 
-	Node(const Coords& _location, const u_int& _gCost, const u_int& _hCost, Node* _parent)
+	INLINE u_int Heuristic(const Coords& _coordsA, const Coords& _coordsB)const
+	{
+		return abs(_coordsA.x - _coordsB.x) + abs(_coordsA.y - _coordsB.y);
+	}
+
+	Node(const Coords& _location, const Coords& _end, Node* _parent)
 	{
 		location = _location;
-		g = _gCost;
-		h = _hCost;
+		g = _parent ? _parent->g + 1 : 0;
+		h = Heuristic(location, _end);;
 		parent = _parent;
 	}
 
