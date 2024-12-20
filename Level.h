@@ -97,7 +97,7 @@ private:
 	void DisplayVerticalBorder(const string& _color, const bool _isRight) const;
 
 public:
-	void DisplayView(const Coords& _cursorPos)const;
+	void DisplayView()const;
 	void DisplayFullMap()const;
 #pragma endregion
 

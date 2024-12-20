@@ -270,11 +270,17 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 
 }
 
-Coords Level::ComputeCenter(const Coords& _cursorPos) const
+Coords Level::ComputeCenter(const Coords& _coords) const
 {
+	const Size& _halfView = view / 2;
 
-	const int _poxX = _cursorPos.x + (view.x / 2) > fullMapSize.x ? fullMapSize.x - view.x : _cursorPos.x - (view.x / 2) < 0 ? 0 : _cursorPos.x - view.x / 2;
-	const int _poxY = _cursorPos.y + (view.y / 2) > fullMapSize.y ? fullMapSize.y - view.y : _cursorPos.y - (view.y/ 2) < 0 ? 0 : _cursorPos.y - view.y / 2;
+	const bool _isOutBottom = _coords.x + _halfView.x >= fullMapSize.x;
+	const bool _isOutTop = _coords.x - _halfView.x < fullMapSize.x > 0;
+	const bool _isOutLeft = _coords.y - _halfView.y < fullMapSize.x > 0;
+	const bool _isOutRight = _coords.y + _halfView.y >= fullMapSize.x;
+
+	const int _poxX = _isOutBottom ? fullMapSize.x - view.x : _isOutTop ? 0 : _coords.x - view.x / 2;
+	const int _poxY = _isOutRight ? fullMapSize.y - view.y : _isOutLeft ? 0 : _coords.y - view.y / 2;
 
 	return {
 		 _poxX,
@@ -282,9 +288,10 @@ Coords Level::ComputeCenter(const Coords& _cursorPos) const
 	};
 }
 
-void Level::DisplayView(const Coords& _cursorPos) const
+void Level::DisplayView() const
 {
-	DisplayMap(view, ComputeCenter(_cursorPos));
+	const Coords& _cursorLocation = Cursor::GetInstance().GetLocation();
+	DisplayMap(view, ComputeCenter(_cursorLocation));
 }
 
 void Level::DisplayFullMap() const
@@ -296,7 +303,7 @@ void Level::Display() const
 {
 	Cursor _cursor = Cursor::GetInstance();
 	_cursor.SetCursorPosition(0, 0);
-	displayAll ? DisplayFullMap() : DisplayView(_cursor.GetLocation());
+	displayAll ? DisplayFullMap() : DisplayView();
 }
 
 #pragma endregion
