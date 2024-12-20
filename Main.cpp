@@ -65,9 +65,12 @@ void TEMP()
     }
 }
 
+#include "AstarAlgo.h"
+
 int main()
 {
     DefaultSetup();
+
 
     /*GameInput* _newGameInput = new GameInput();
     ControlsMenu _menu = ControlsMenu(_newGameInput);
@@ -111,10 +114,12 @@ int main()
      Video => Intensity / Framerate / Daltonien / etc..
      Quit => quitter*/
 
-    
+   /* Game _game;
+    _game.SelectLevel("MainLevel");
+    _game.Start();*/
 
-   MainMenu _mainMenu = MainMenu();
-   _mainMenu.Show();
+    MainMenu _mainMenu = MainMenu();
+    _mainMenu.Show();
 
     return EXIT_SUCCESS;
 }

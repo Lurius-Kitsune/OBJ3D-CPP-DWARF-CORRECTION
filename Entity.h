@@ -10,19 +10,19 @@ protected:
 	float life;
 	vector<Component*> components;
 	Coords location;
+	string appearance;
 
 public:
-	INLINE void SetLocation(const Coords& _location)
+	INLINE Coords GetLocation() const
 	{
-		location = _location;
+		return location;
 	}
 
 public:
-	Entity(const string& _name);
+	Entity(const string& _name, const string& _appearance);
 	~Entity();
 
 public:
-
 	void AddComponent(Component* _component);
 	void RemoveComponent(Component* _component);
 
@@ -38,4 +38,5 @@ public:
 	}
 
 	void Update();
+	void SetLocation(const Coords& _location);
 };

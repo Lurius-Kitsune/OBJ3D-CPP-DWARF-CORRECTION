@@ -52,6 +52,9 @@
     <Filter Include="Scripts\Entities">
       <UniqueIdentifier>{24184491-663a-4c72-bb3c-f98c1127ba29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\Game\Input">
+      <UniqueIdentifier>{671645c2-45a3-41c7-b55a-3d55c9b243ad}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Scripts\Level\Cursor">
       <UniqueIdentifier>{1b15e77c-5cc3-4611-beac-fa0bf9baf0ed}</UniqueIdentifier>
     </Filter>
@@ -70,14 +73,17 @@
     <Filter Include="Scripts\Level\Save">
       <UniqueIdentifier>{4f6f0e1a-5442-40ba-9098-4aa30ddd68c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scripts\Resource Files\Singleton">
-      <UniqueIdentifier>{48cbb208-ebf2-4b2d-9cce-71ae9d2a804d}</UniqueIdentifier>
+    <Filter Include="Scripts\Managers">
+      <UniqueIdentifier>{f4e4fc96-c1ab-4bed-8a38-a92dec5a1a80}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scripts\Manager">
-      <UniqueIdentifier>{351b11cf-f3a0-4152-9773-e41a8f2b8e3c}</UniqueIdentifier>
+    <Filter Include="Scripts\Managers\Singleton">
+      <UniqueIdentifier>{bbf9c2cb-cef0-43ee-a867-317db0a093dc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scripts\Resource Files\Astar">
-      <UniqueIdentifier>{bcf2f245-0d00-4bbb-b472-8dc8a5753940}</UniqueIdentifier>
+      <UniqueIdentifier>{6cdf1ded-762a-4f7b-b437-f83605bbe77b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Managers\Input">
+      <UniqueIdentifier>{1126ad1c-ea6f-4519-ab4e-336cabc65bfc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,14 +141,17 @@
     <ClCompile Include="Color.cpp">
       <Filter>Scripts\Resource Files\Render\Color</Filter>
     </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>Scripts\Managers\Singleton</Filter>
+    </ClCompile>
     <ClCompile Include="Cursor.cpp">
       <Filter>Scripts\Level\Cursor</Filter>
     </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Scripts\Managers\Input</Filter>
+    </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Scripts\Level\Tile</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,23 +221,11 @@
     <ClInclude Include="Save.h">
       <Filter>Scripts\Level\Save</Filter>
     </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Scripts\Managers\Singleton</Filter>
+    </ClInclude>
     <ClInclude Include="Cursor.h">
       <Filter>Scripts\Level\Cursor</Filter>
-    </ClInclude>
-    <ClInclude Include="Coordinates.h">
-      <Filter>Scripts\Level\Coordinates</Filter>
-    </ClInclude>
-    <ClInclude Include="Size.h">
-      <Filter>Scripts\Level\Size</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Scripts\Level\Tile</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>Scripts\Resource Files\Singleton</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Scripts\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">
       <Filter>Scripts\Resource Files\Astar</Filter>
@@ -236,10 +233,22 @@
     <ClInclude Include="AstarAlgo.h">
       <Filter>Scripts\Resource Files\Astar</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Scripts\Managers\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Scripts\Level\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Size.h">
+      <Filter>Scripts\Level\Size</Filter>
+    </ClInclude>
+    <ClInclude Include="Coordinates.h">
+      <Filter>Scripts\Level\Coordinates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\Levels\MainLevel.txt">
-      <Filter>Scripts\Level\Files</Filter>
+      <Filter>Scripts\Level</Filter>
     </Text>
   </ItemGroup>
 </Project>

@@ -7,7 +7,7 @@ class Singleton
 protected:
 	static Class instance;
 
-public: 
+public:
 	static INLINE Class& GetInstance()
 	{
 		return instance;
@@ -16,4 +16,3 @@ public:
 
 template <typename Class>
 Class Singleton<Class>::instance;
-

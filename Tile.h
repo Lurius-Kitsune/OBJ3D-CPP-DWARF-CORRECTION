@@ -101,6 +101,15 @@ class Tile
 	double colorBrightness;
 
 public:
+	INLINE void SetColorSaturation(const int _value)
+	{
+		colorSaturation = _value;
+	}
+
+	INLINE void SetColorBrightness(const int _value)
+	{
+		colorBrightness = _value;
+	}
 	INLINE bool IsValid() const
 	{
 		return !HasEmoji();
@@ -116,17 +125,6 @@ public:
 	INLINE u_int GetForwardKey() const
 	{
 		return key / 10;
-	}
-
-public:
-	void SetColorSaturation(const int _value)
-	{
-		colorSaturation = _value;
-	}
-
-	void SetColorBrightness(const int _value)
-	{
-		colorBrightness = _value;
 	}
 
 public:

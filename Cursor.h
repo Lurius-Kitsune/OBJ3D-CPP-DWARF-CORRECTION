@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "Coordinates.h"
 #include "Singleton.h"
+
 class Cursor : public Singleton<Cursor>
 {
 	Coords location;

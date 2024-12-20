@@ -1,8 +1,10 @@
 #include "Entity.h"
+#include "Game.h"
 
-Entity::Entity(const string& _name)
+Entity::Entity(const string& _name, const string& _appearance)
 {
 	name = _name;
+	appearance = _appearance;
 	life = 100.0f;
 }
 
@@ -41,4 +43,10 @@ void Entity::Update()
 	{
 		_component->Update();
 	}
+}
+
+void Entity::SetLocation(const Coords& _newCoords)
+{
+	Game::GetInstance().GetLevel()->ChangeItemAtLocation(location, appearance, _newCoords);
+	location = _newCoords;
 }

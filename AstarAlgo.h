@@ -1,4 +1,5 @@
 #pragma once
+
 #include "CoreMinimal.h"
 #include "Node.h"
 
@@ -6,124 +7,113 @@ template <typename Type>
 class AstarAlgo
 {
 	Size gridSize;
-	vector<vector<Type>> grid;
-public:
-	INLINE u_int Heuristic(const Coords& _coordsA, const Coords& _coordsB)const
-	{
-		return abs(_coordsA.x - _coordsB.x) + abs(_coordsA.y - _coordsB.y);
-	}
+	vector <vector<Type>> grid;
 
 public:
-
 	AstarAlgo(const vector<vector<Type>>& _grid)
 	{
 		grid = _grid;
-		gridSize = Size(grid);
+		gridSize = Size(_grid);
 	}
 
 private:
-	bool IsValid(const Coords& _coords)const
+	bool IsValid(const Coords& _coords) const
 	{
-		return _coords>= 0 && _coords < gridSize;
+		return _coords >= 0 && _coords < gridSize && grid[_coords.x][_coords.y].IsValid();
 	}
-	bool CopareNodes(Node* _first, Node* _second)
+	static bool CompareNodes(Node* _first, Node* _second)
 	{
 		return _first->GetF() > _second->GetF();
 	}
-
-	vector<Coords> GetNeighbors(const Coords& _coords) const
-	{
-		return
-		{
-			Coords(_coords.x +1, _coords.y),
-			Coords(_coords.x -1, _coords.y),
-			Coords(_coords.x , _coords.y + 1),
-			Coords(_coords.x, _coords.y -1),
-		}
-	}
-
 	u_int ComputeIndex(const Coords& _coords) const
 	{
 		return _coords.y * gridSize.x + _coords.x;
 	}
-
-	vector<Coords> ReconstructPath(Node* _node)
+	vector<Coords> GetNeighbors(const Coords& _coords) const
+	{
+		return
+		{
+			Coords(_coords.x + 1, _coords.y),
+			Coords(_coords.x - 1, _coords.y),
+			Coords(_coords.x, _coords.y + 1),
+			Coords(_coords.x, _coords.y - 1),
+		};
+	}
+	vector<Coords> ReconstructPath(Node* _node) const
 	{
 		vector<Coords> _path;
 
 		while (_node)
 		{
-			_path.push_back(_node->location);
+			_path.insert(_path.begin(), _node->location);
 			_node = _node->parent;
 		}
 
 		return _path;
 	}
-
-	void Erase(const unordered_map<u_int, Node*>& _allNodes)
+	void Erase(const unordered_map<u_int, Node*>& _allNodes) const
 	{
-		for (auto node : _allNodes)
+		for (const pair<u_int, Node*>& _pair : _allNodes)
 		{
-			delete node;
+			delete _pair.second;
 		}
 	}
 
 public:
 	vector<Coords> FindPath(const Coords& _start, const Coords& _end)
 	{
-		priority_queue<Node*, vector<Node*>, function<bool(Node*, Node*)>> _openList(CopareNodes);
-		unordered_map<u_int, Node*> _allNode;
+		priority_queue<Node*, vector<Node*>, function<bool(Node*, Node*)>> _openList(CompareNodes);
+		unordered_map<u_int, Node*> _allNodes;
 		unordered_map<u_int, bool> _closedList;
 
 		Node* _startNode = new Node(_start, _end, nullptr);
-
 		_openList.push(_startNode);
-		_allNode[ComputeIndex(_start)] = _startNode;
+		_allNodes[ComputeIndex(_start)] = _startNode;
 
 		while (!_openList.empty())
 		{
 			Node* _currentNode = _openList.top();
 			_openList.pop();
 
-			// Si le noeud  courant est le 'end' alors path
+			//Si le noeud est le 'end'
 			if (_currentNode->location == _end)
 			{
-				// On reconstruit le chemin
-				const vector<Coords>& _path = ReconstructPath(_currentNode);
+				const vector<Coords>& _finalPath = ReconstructPath(_currentNode);
 
-				Erase(_allNode);
-
-				return _path;
+				//On libère la Mémoire
+				Erase(_allNodes);
+				//On reconstruit le chemin
+				return _finalPath;
 			}
 
-			// Marque le noeud actuel comme visiter;
-
+			//Marquer le noeud actuel comme visité
 			_closedList[ComputeIndex(_currentNode->location)] = true;
 
-			// Explore les voisins
-			for (const Coords& _neighborLocation : GetNeighbors(_currentNode))
+			//Explore les voisins
+			for (const Coords& _neighborLocation : GetNeighbors(_currentNode->location))
 			{
-				const u_int& _neighborIndex = ComputeIndex(_neighborLocation->location);
+				const u_int& _neighborIndex = ComputeIndex(_neighborLocation);
 				if (IsValid(_neighborLocation) && !_closedList[_neighborIndex])
 				{
 					Node* _neighbor = new Node(_neighborLocation, _end, _currentNode);
 
-					// Si le voison n'est pas dans la liste ouverte
-					// Ou  il à un coût F plus bas
-					if (_allNode.find(_neighborLocation.y * gridSize.x + _neighborLocation.x)
-						|| _gCost + _hCost < _allNode[_neighborIndex]->GetF())
+					//Si le voisin n'est pas dans la liste ouverte ou il a un cout F plus bas
+					if (_allNodes.find(_neighborIndex) == _allNodes.end() || _neighbor->GetF() < _allNodes[_neighborIndex]->GetF())
 					{
 						_openList.push(_neighbor);
-						_allNode[_neighborIndex] = _neighbor;
+						_allNodes[_neighborIndex] = _neighbor;
+					}
+					else
+					{
+						delete _neighbor;
 					}
 				}
 			}
 		}
-
-		Erase(_allNode);
+		//On libère la Mémoire
+		Erase(_allNodes);
+		//On retourne le path Vide
 		return vector<Coords>();
 	}
-
-
 };
 

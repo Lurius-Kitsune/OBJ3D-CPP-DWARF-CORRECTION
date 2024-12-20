@@ -1,4 +1,5 @@
 #include "OptionsMenu.h"
+#include "Level.h"
 
 OptionsMenu::OptionsMenu() : Menu("Options")
 {

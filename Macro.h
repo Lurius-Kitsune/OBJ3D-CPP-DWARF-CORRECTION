@@ -23,3 +23,16 @@ Type Clamp(const Type& _value, const Type& _min, const Type& _max)
 {
 	return (_value < _min) ? _min : (_value > _max ? _max : _value);
 }
+
+template <typename Type>
+queue<Type> ToQueue(const vector<Type>& _collection)
+{
+	queue<Type> _queue;
+
+	for (const Type& _value : _collection)
+	{
+		_queue.push(_value);
+	}
+
+	return _queue;
+}

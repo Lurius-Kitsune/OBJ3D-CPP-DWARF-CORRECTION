@@ -145,6 +145,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
+    <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="VideoMenu.cpp" />

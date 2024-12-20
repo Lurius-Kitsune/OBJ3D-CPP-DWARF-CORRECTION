@@ -4,7 +4,7 @@
 class Dwarf : public Entity
 {
 public:
-	Dwarf();
+	Dwarf(const string& _appearance);
 
 public:
 

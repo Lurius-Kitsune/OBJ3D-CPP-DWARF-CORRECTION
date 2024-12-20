@@ -14,11 +14,16 @@ class Level
 	string path;
 	vector<BiomeData> biomesData;
 	Tile selectedTile;
-	bool displayAll = false;
+	bool displayAll;
 	double colorSaturation;
 	double colorBrightness;
 
 public:
+	INLINE const vector<vector<Tile>> GetMap() const
+	{
+		return map;
+	}
+
 	INLINE const Size& GetFullSize() const
 	{
 		return fullMapSize;
@@ -29,25 +34,14 @@ public:
 		return colorSaturation;
 	}
 
-	INLINE bool GetDisplayAll() const
-	{
-		return displayAll;
-	}
-
-	void SetDisplayAll(const bool _displayAll)
-	{
-		displayAll = _displayAll;
-	}
-
 private:
 	INLINE Tile& GetTileByCoords(const Coords& _coords)
 	{
 		return map[_coords.x][_coords.y];
 	}
 
-
 public:
-	Level(const string& _path, const Coords& _coord);
+	Level(const string& _path, const Coords& _cursorLocation);
 
 public:
 	bool IsOver(const Coords& _coords) const;
@@ -61,8 +55,10 @@ public:
 
 #pragma region Item
 public:
+	bool ChangeItemAtLocation(const Coords& _previousCoords, const string& _appearance, const Coords& _newCoords);
 	bool SetItemAtLocation(const string& _appearance, const Coords& _coords);
 	bool ResetItemAtLocation(const Coords& _coords);
+
 	void ShowTileInfo();
 	void HideTileInfo();
 #pragma endregion
@@ -91,16 +87,14 @@ public:
 
 #pragma region Display
 private:
-	void DisplayMap(const Size& _size, const Coords& _start = Coords())const;
-	Coords ComputeCenter(const Coords& _cursorPos) const;
-	void DisplayHorizontalBorder(const u_int& _rowSize) const;
 	void DisplayVerticalBorder(const string& _color, const bool _isRight) const;
-
-public:
+	void DisplayHorizontalBorder(const u_int& _rowSize, const string& _color) const;
+	void DisplayMap(const Size& _size, const Coords& _start = Coords())const;
+	Coords ComputeCenter(const Coords& _coords) const;
 	void DisplayView()const;
 	void DisplayFullMap()const;
-#pragma endregion
 
 public:
 	void Display() const;
+#pragma endregion
 };

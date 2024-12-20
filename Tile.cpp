@@ -69,7 +69,7 @@ void Tile::ResetAppearance()
 
 void Tile::ShowInfos() const
 {
-	Cursor _cursor = Cursor::GetInstance();
+	Cursor& _cursor = Cursor::GetInstance();
 	Print("", RESET);
 	u_int _index = 0;
 
@@ -82,9 +82,10 @@ void Tile::ShowInfos() const
 
 void Tile::HideInfos() const
 {
-	Cursor _cursor = Cursor::GetInstance();
+	Cursor& _cursor = Cursor::GetInstance();
 	Print("", RESET);
 	u_int _index = 0;
+
 	for (const string& _info : infos)
 	{
 		_cursor.SetCursorPosition(75, _index++);
@@ -98,7 +99,7 @@ void Tile::HideInfos() const
 
 void Tile::Display(const bool _isCursor)const
 {
-	Cursor _cursor = Cursor::GetInstance();
+	Cursor& _cursor = Cursor::GetInstance();
 	Print("", ComputeColor(_isCursor));
 
 	if (HasEmoji())

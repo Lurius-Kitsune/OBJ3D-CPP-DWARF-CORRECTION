@@ -15,7 +15,7 @@ struct Size
 		y = _sizeY;
 	}
 
-	template<typename Type>
+	template <typename Type>
 	Size(const vector<vector<Type>>& _map)
 	{
 		if (_map.empty()) return;

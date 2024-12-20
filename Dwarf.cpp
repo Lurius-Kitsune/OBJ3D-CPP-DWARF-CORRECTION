@@ -1,7 +1,7 @@
 #include "Dwarf.h"
 #include "MovementComponent.h"
 
-Dwarf::Dwarf() : Entity("Dwark")
+Dwarf::Dwarf(const string& _appearance) : Entity("Dwark", _appearance)
 {
-	components.push_back(new MovementComponent(1));
+	AddComponent(new MovementComponent(1));
 }

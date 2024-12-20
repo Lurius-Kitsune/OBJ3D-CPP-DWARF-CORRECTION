@@ -5,10 +5,9 @@
 #include "Emoji.h"
 #include "FileStream.h"
 
-Level::Level(const string& _path, const Coords& _coords)
+Level::Level(const string& _path, const Coords& _cursorLocation)
 {
-
-	Cursor::GetInstance().SetLocation(_coords);
+	Cursor::GetInstance().SetLocation(_cursorLocation);
 
 	path = "Assets/Levels/" + _path + ".txt";
 	LoadMap();
@@ -47,12 +46,14 @@ Level::Level(const string& _path, const Coords& _coords)
 		BiomeData(BT_LAVA, {
 		}),
 	};
+	displayAll = false;
 
 	//TODO move
 	colorSaturation = 1;
 	colorBrightness = 1;
 	Generate();
 }
+
 
 bool Level::IsOver(const Coords& _coords) const
 {
@@ -98,6 +99,12 @@ void Level::UpdateBrightness(const double _newValue)
 
 #pragma region Item
 
+bool Level::ChangeItemAtLocation(const Coords& _previousCoords, const string& _appearance, const Coords& _newCoords)
+{
+	return ResetItemAtLocation(_previousCoords)
+	 && SetItemAtLocation(_appearance, _newCoords);
+}
+
 bool Level::SetItemAtLocation(const string& _appearance, const Coords& _coords)
 {
 	if (!IsValidCoords(_coords)) return false;
@@ -115,7 +122,7 @@ bool Level::ResetItemAtLocation(const Coords& _coords)
 
 void Level::ShowTileInfo()
 {
-	Cursor _cursor = Cursor::GetInstance();
+	Cursor& _cursor = Cursor::GetInstance();
 	selectedTile = GetTileByCoords(_cursor.GetLocation());
 	selectedTile.ShowInfos();
 }
@@ -228,64 +235,58 @@ void Level::Save()
 
 #pragma region Display
 
-void Level::DisplayHorizontalBorder(const u_int& _rowSize) const
+void Level::DisplayVerticalBorder(const string& _color, const bool _isRight) const
 {
-	for (u_int _i = 0; _i < _rowSize + 4; _i++)
+	Print("", _color + "  " + (_isRight ? "\n" : ""), RESET);
+}
+
+void Level::DisplayHorizontalBorder(const u_int& _rowSize, const string& _color) const
+{
+	for (u_int _index = 0; _index < _rowSize + 2; _index++)
 	{
-		Print("", BG_CYAN, " ", RESET);
+		Print("", _color, "  ", RESET);
 	}
 	Print("\n", RESET);
 }
 
-void Level::DisplayVerticalBorder(const string& _color, const bool _isRight) const
-{
-	Print("", _color + " " + (_isRight ? " \n" : " "), RESET);
-}
-
 void Level::DisplayMap(const Size& _size, const Coords& _start) const
 {
-
-	const u_int& _mapSize = static_cast<const u_int&>(_size.x);
+	const u_int& _columnSize = static_cast<const u_int&>(_size.x);
 	const u_int& _rowSize = static_cast<const u_int&>(_size.y);
 	const string& _borderColor = BG_CYAN;
-	DisplayHorizontalBorder(_rowSize * 2);
-	//Print("", "\n");
-	for (u_int _rowIndex = 0; _rowIndex < _mapSize; _rowIndex++)
+
+	DisplayHorizontalBorder(_rowSize, _borderColor);
+	for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex++)
 	{
 		DisplayVerticalBorder(_borderColor, false);
-		for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex++)
+		for (u_int _rowIndex = 0; _rowIndex < _columnSize; _rowIndex++)
 		{
-			const u_int& _posX = _rowIndex + _start.x;
-			const u_int& _posY = _columnIndex + _start.y;
+			const u_int& _posX = _columnIndex + _start.x;
+			const u_int& _posY = _rowIndex + _start.y;
 			const Coords& _currentCoords = Coords(_posX, _posY);
 			if (!IsValidCoords(_currentCoords)) continue;
 			const bool _isCursor = Cursor::GetInstance().GetLocation() == _currentCoords;
 			map[_posX][_posY].Display(_isCursor);
 		}
 		DisplayVerticalBorder(_borderColor, true);
-
 	}
-	ResetColor();
-	DisplayHorizontalBorder(_rowSize * 2);
-
+	DisplayHorizontalBorder(_rowSize, _borderColor);
 }
 
 Coords Level::ComputeCenter(const Coords& _coords) const
 {
 	const Size& _halfView = view / 2;
 
+	const bool _isOutTop = _coords.x - _halfView.x < 0;
 	const bool _isOutBottom = _coords.x + _halfView.x >= fullMapSize.x;
-	const bool _isOutTop = _coords.x - _halfView.x < fullMapSize.x > 0;
-	const bool _isOutLeft = _coords.y - _halfView.y < fullMapSize.x > 0;
-	const bool _isOutRight = _coords.y + _halfView.y >= fullMapSize.x;
+	const bool _isOutLeft = _coords.y - _halfView.y < 0;
+	const bool _isOutRight = _coords.y + _halfView.y >= fullMapSize.y;
 
-	const int _posX = _isOutBottom ? fullMapSize.x - view.x : _isOutTop ? 0 : _coords.x - view.x / 2;
-	const int _posY = _isOutRight ? fullMapSize.y - view.y : _isOutLeft ? 0 : _coords.y - view.y / 2;
+	const int _posX = _isOutBottom ? fullMapSize.x - view.x : _isOutTop ? 0 : _coords.x - _halfView.x;
+	const int _posY = _isOutRight ? fullMapSize.y - view.y : _isOutLeft ? 0 : _coords.y - _halfView.y;
+	const int _poxY = _coords.y + (view.y / 2) > fullMapSize.y ? fullMapSize.y - view.y : _coords.y - (view.y / 2) < 0 ? 0 : _coords.y - view.y / 2;
 
-	return {
-		 _posX,
-		 _posY,
-	};
+	return Coords(_posX, _posY);
 }
 
 void Level::DisplayView() const
@@ -301,8 +302,7 @@ void Level::DisplayFullMap() const
 
 void Level::Display() const
 {
-	Cursor _cursor = Cursor::GetInstance();
-	_cursor.SetCursorPosition(0, 0);
+	Cursor::GetInstance().SetCursorPosition(0, 0);
 	displayAll ? DisplayFullMap() : DisplayView();
 }
 

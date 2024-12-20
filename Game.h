@@ -8,8 +8,13 @@
 class Game : public Singleton<Game>
 {
 	Level* level;
-	Cursor* cursor;
 	vector<Entity*> entities;
+
+public:
+	INLINE Level* GetLevel() const
+	{
+		return level;
+	}
 
 public:
 	Game();
@@ -17,11 +22,11 @@ public:
 
 private:
 	bool PollEvents();
+	void InitDwarfs();
 	void UpdateEntities();
 	void Display() const;
 
 public:
-	Level* SelectLevel(const string& _path);
 	void Start(Level* _level);
 	void Update();
 	void Pause();
