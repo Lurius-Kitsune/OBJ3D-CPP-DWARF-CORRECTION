@@ -76,6 +76,9 @@
     <Filter Include="Scripts\Manager">
       <UniqueIdentifier>{351b11cf-f3a0-4152-9773-e41a8f2b8e3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\Resource Files\Astar">
+      <UniqueIdentifier>{bcf2f245-0d00-4bbb-b472-8dc8a5753940}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Macro.cpp">
@@ -226,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Scripts\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Scripts\Resource Files\Astar</Filter>
+    </ClInclude>
+    <ClInclude Include="AstarAlgo.h">
+      <Filter>Scripts\Resource Files\Astar</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
