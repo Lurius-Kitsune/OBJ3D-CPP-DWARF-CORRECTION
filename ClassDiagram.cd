@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="FileStream" Collapsed="true">
+    <Position X="24.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>FileStream.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AstarAlgo&lt;Type&gt;">
+    <Position X="20.5" Y="11" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>QAEAAAIEAAIAAAAAAAgAAAACCAAAAIAAAgAAAAAAAAA=</HashCode>
+      <FileName>AstarAlgo.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gridSize" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AudioMenu">
+    <Position X="1" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AudioMenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControlsMenu">
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ControlsMenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenu">
+    <Position X="5.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEACAAAQEAAAAAAQAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainMenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Menu">
+    <Position X="6.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAQABAAAAAEARAAAAAIAAMAAAAAAAAQACAAAA=</HashCode>
+      <FileName>Menu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OptionsMenu">
+    <Position X="8" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAQAAAAAAAAIAAEAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>OptionsMenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StartMenu">
+    <Position X="10.25" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIMAAABAAAAAAAAAAA=</HashCode>
+      <FileName>StartMenu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VideoMenu">
+    <Position X="12.75" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAIAEEAAAAAQAAQgAAAAA=</HashCode>
+      <FileName>VideoMenu.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="level" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="InputManager">
+    <Position X="7.5" Y="10.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAABAAAAAAABA=</HashCode>
+      <FileName>InputManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Singleton&lt;Class&gt;">
+    <Position X="8" Y="8.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Singleton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cursor">
+    <Position X="10.25" Y="10.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>ABAAAgICAYAAAAAAAAAAAAACAAAAAAAgKAEAAAEAAAA=</HashCode>
+      <FileName>Cursor.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="location" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Tile" Collapsed="true">
+    <Position X="26" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQCAAAAAEBAA0pCgEAQAAAAAAgAIgAQAAAAAAAQA=</HashCode>
+      <FileName>Tile.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Level">
+    <Position X="14.5" Y="8.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>gLARGJACgQAhBEQwgAQSAQMAAEAIAACBAUIAAEASAAI=</HashCode>
+      <FileName>Level.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="fullMapSize" />
+      <Field Name="view" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Game">
+    <Position X="4.75" Y="10.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAQgAAAAACAAAAAAAAAAAQABAAmAAQAAIRAAAAAAAAA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="level" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Dwarf">
+    <Position X="1" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dwarf.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entity">
+    <Position X="0.5" Y="7.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAUAAgACAAAIAAAAAACABAACACAEAAAkAAAAAAAAAAA=</HashCode>
+      <FileName>Entity.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="location" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Component">
+    <Position X="0.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Component.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="owner" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MovementComponent">
+    <Position X="0.5" Y="15.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAEAABIAAAAAAAACABAAAAACAQAAAAAAAAAAAEA=</HashCode>
+      <FileName>MovementComponent.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="targetCoords" />
+    </ShowAsAssociation>
+  </Class>
+  <Struct Name="Color">
+    <Position X="21" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAGAAAAAAAggAAAAACIIQABgAAAAAA=</HashCode>
+      <FileName>Color.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Gradient">
+    <Position X="17.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACABAAAAAAAAAAAAQAAAAAAAAACAAAAAAIgA=</HashCode>
+      <FileName>Color.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gradB" />
+      <Field Name="gradA" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="Node">
+    <Position X="8" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAABAAAAAAAACAAAAAAAIQAAAEAEAAAA=</HashCode>
+      <FileName>Node.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="location" />
+      <Field Name="parent" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="KeyEvent">
+    <Position X="6.75" Y="20.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAABAAAAAAAAAACAAAA=</HashCode>
+      <FileName>InputManager.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="type" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="MouseEvent">
+    <Position X="1.75" Y="20.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAABACAAAAAAAAAAAAA=</HashCode>
+      <FileName>InputManager.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="type" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="Event">
+    <Position X="19.75" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InputManager.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="type" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="Coords">
+    <Position X="4.5" Y="15.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAQAAAAAAAAAAQABgAAAAAAA=</HashCode>
+      <FileName>Coordinates.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Save" Collapsed="true">
+    <Position X="24.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAQAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Save.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Size" Collapsed="true">
+    <Position X="18.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAEAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Size.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TileData">
+    <Position X="16.75" Y="18.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAIAkAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Tile.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="rate" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="BiomeData">
+    <Position X="12.5" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAABABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tile.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="type" />
+    </ShowAsAssociation>
+  </Struct>
+  <Typedef Name="u_int" Collapsed="true">
+    <Position X="24.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CoreMinimal.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="KeyEventType" Collapsed="true">
+    <Position X="6.75" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAgABACAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InputManager.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MouseEventType" Collapsed="true">
+    <Position X="1.75" Y="19.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAgAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>InputManager.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EventType" Collapsed="true">
+    <Position X="19.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAgAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>InputManager.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BiomeType" Collapsed="true">
+    <Position X="12.5" Y="21.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAEAAAAAAAAAABAAMAAAAoAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Tile.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RateType" Collapsed="true">
+    <Position X="16.75" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAACAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tile.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

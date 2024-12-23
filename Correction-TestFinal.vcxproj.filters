@@ -245,4 +245,7 @@
       <Filter>Scripts\Level\Files</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
 </Project>
