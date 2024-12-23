@@ -2,8 +2,6 @@
 #include "Menu.h"
 #include "Save.h"
 
-class Game;
-
 class StartMenu : public Menu
 {
 	vector<Save> allSaves;
@@ -16,5 +14,4 @@ private:
 
 public:
 	virtual void Show(const bool _toAdd) override;
-	virtual void Hide() override;
 };

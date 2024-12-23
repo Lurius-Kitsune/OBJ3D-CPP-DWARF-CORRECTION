@@ -5,9 +5,9 @@
 #include "Emoji.h"
 #include "FileStream.h"
 
-Level::Level(const string& _path, const Coords& _cursorLocation)
+Level::Level(const string& _path, const Coords& _coords)
 {
-	Cursor::GetInstance().SetLocation(_cursorLocation);
+	Cursor::GetInstance().SetLocation(_coords);
 
 	path = "Assets/Levels/" + _path + ".txt";
 	LoadMap();
@@ -102,7 +102,7 @@ void Level::UpdateBrightness(const double _newValue)
 bool Level::ChangeItemAtLocation(const Coords& _previousCoords, const string& _appearance, const Coords& _newCoords)
 {
 	return ResetItemAtLocation(_previousCoords)
-	 && SetItemAtLocation(_appearance, _newCoords);
+		&& SetItemAtLocation(_appearance, _newCoords);
 }
 
 bool Level::SetItemAtLocation(const string& _appearance, const Coords& _coords)
@@ -122,8 +122,7 @@ bool Level::ResetItemAtLocation(const Coords& _coords)
 
 void Level::ShowTileInfo()
 {
-	Cursor& _cursor = Cursor::GetInstance();
-	selectedTile = GetTileByCoords(_cursor.GetLocation());
+	selectedTile = GetTileByCoords(Cursor::GetInstance().GetLocation());
 	selectedTile.ShowInfos();
 }
 
@@ -195,6 +194,7 @@ void Level::SetupVilage()
 	map[fullMapSize.x / 2][fullMapSize.y / 2].ResetAppearance();
 	map[fullMapSize.x / 2][fullMapSize.y / 2].SetAppearance(HUNTER_HUT);
 }
+
 #pragma endregion
 
 #pragma region Save
@@ -222,10 +222,12 @@ void Level::LoadMap()
 		map.push_back(_rowTile);
 	}
 }
+
 void Level::SaveMap()
 {
 	FileStream::Write(path, ConvertMapToString());
 }
+
 void Level::Save()
 {
 	SaveMap();
@@ -240,7 +242,7 @@ void Level::DisplayVerticalBorder(const string& _color, const bool _isRight) con
 	Print("", _color + "  " + (_isRight ? "\n" : ""), RESET);
 }
 
-void Level::DisplayHorizontalBorder(const u_int& _rowSize, const string& _color) const
+void Level::DisplayHorizontalBorders(const u_int& _rowSize, const string& _color) const
 {
 	for (u_int _index = 0; _index < _rowSize + 2; _index++)
 	{
@@ -255,7 +257,7 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 	const u_int& _rowSize = static_cast<const u_int&>(_size.y);
 	const string& _borderColor = BG_CYAN;
 
-	DisplayHorizontalBorder(_rowSize, _borderColor);
+	DisplayHorizontalBorders(_rowSize, _borderColor);
 	for (u_int _columnIndex = 0; _columnIndex < _rowSize; _columnIndex++)
 	{
 		DisplayVerticalBorder(_borderColor, false);
@@ -270,7 +272,8 @@ void Level::DisplayMap(const Size& _size, const Coords& _start) const
 		}
 		DisplayVerticalBorder(_borderColor, true);
 	}
-	DisplayHorizontalBorder(_rowSize, _borderColor);
+
+	DisplayHorizontalBorders(_rowSize, _borderColor);
 }
 
 Coords Level::ComputeCenter(const Coords& _coords) const
@@ -284,7 +287,6 @@ Coords Level::ComputeCenter(const Coords& _coords) const
 
 	const int _posX = _isOutBottom ? fullMapSize.x - view.x : _isOutTop ? 0 : _coords.x - _halfView.x;
 	const int _posY = _isOutRight ? fullMapSize.y - view.y : _isOutLeft ? 0 : _coords.y - _halfView.y;
-	const int _poxY = _coords.y + (view.y / 2) > fullMapSize.y ? fullMapSize.y - view.y : _coords.y - (view.y / 2) < 0 ? 0 : _coords.y - view.y / 2;
 
 	return Coords(_posX, _posY);
 }

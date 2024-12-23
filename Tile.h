@@ -105,7 +105,6 @@ public:
 	{
 		colorSaturation = _value;
 	}
-
 	INLINE void SetColorBrightness(const int _value)
 	{
 		colorBrightness = _value;
@@ -141,6 +140,6 @@ public:
 	void ResetAppearance();
 	void ShowInfos() const;
 	void HideInfos() const;
-	void Display(const bool _isCursor) const;
+	void Display(const bool _isCursor)const;
 	string ToString() const;
 };

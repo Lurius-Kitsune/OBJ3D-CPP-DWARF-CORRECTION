@@ -6,9 +6,9 @@
 
 Cursor::Cursor()
 {
+	location = Coords();
 	appearance = CROSSHAIR;
 }
-
 
 Coords Cursor::GetCenterConsole() const
 {

@@ -35,7 +35,7 @@ enum MouseEventType
 
 union MouseValue
 {
-	struct Position
+	struct Position 
 	{
 		u_int x;
 		u_int y;
@@ -79,7 +79,7 @@ enum EventType
 struct Event
 {
 	EventType type;
-	union
+	union 
 	{
 		KeyEvent keyboard;
 		MouseEvent mouse;

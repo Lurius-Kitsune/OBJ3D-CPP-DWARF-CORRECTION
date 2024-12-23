@@ -40,7 +40,7 @@ struct Coords
 	{
 		return _other.x >= x && _other.y >= y;
 	}
-	bool operator >= (const int& _value) const
+	bool operator >= (const int _value) const
 	{
 		return x >= _value && y >= _value;
 	}
@@ -56,6 +56,7 @@ struct Coords
 	}
 	Coords operator + (const Coords& _other) const
 	{
-		return Coords( x + _other.x , y + _other.y);
+		return Coords(x + _other.x,
+					  y + _other.y);
 	}
 };

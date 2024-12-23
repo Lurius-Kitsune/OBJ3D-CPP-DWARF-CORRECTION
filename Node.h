@@ -1,5 +1,4 @@
 #pragma once
-
 #include "CoreMinimal.h"
 #include "Coordinates.h"
 
@@ -9,7 +8,7 @@ struct Node
 	u_int g;
 	u_int h;
 	Node* parent;
-
+	
 private:
 	INLINE u_int Heuristic(const Coords& _coordsA, const Coords& _coordsB) const
 	{

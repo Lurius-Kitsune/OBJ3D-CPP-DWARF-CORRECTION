@@ -50,10 +50,9 @@ void FileStream::DisplayFile(const string& _path, const Gradient& _color)
 {
 	Cursor _cursor;
 	ifstream _stream = ifstream(_path);
-
-
 	vector<string> _logo;
 	string _line;
+
 	while (getline(_stream, _line))
 	{
 		_logo.push_back(_color.GradientString(_line));
@@ -61,6 +60,6 @@ void FileStream::DisplayFile(const string& _path, const Gradient& _color)
 
 	while (!_kbhit())
 	{
-		_cursor.DisplayOnceCenterMultiLine(_logo, CAST(u_int,_logo.size()));
+		_cursor.DisplayOnceCenterMultiLine(_logo, CAST(u_int, _logo.size()));
 	}
 }

@@ -1,9 +1,7 @@
 #pragma once
-#include "CoreMinimal.h"
-#include "Level.h"
-#include "Cursor.h"
-#include "Entity.h"
 #include "Singleton.h"
+#include "Level.h"
+#include "Entity.h"
 
 class Game : public Singleton<Game>
 {

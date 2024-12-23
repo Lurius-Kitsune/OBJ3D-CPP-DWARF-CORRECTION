@@ -3,6 +3,7 @@
 
 class ControlsMenu : public Menu
 {
+
 public:
 	ControlsMenu();
 

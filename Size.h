@@ -14,7 +14,6 @@ struct Size
 		x = _sizeX;
 		y = _sizeY;
 	}
-
 	template <typename Type>
 	Size(const vector<vector<Type>>& _map)
 	{

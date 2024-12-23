@@ -3,17 +3,20 @@
 
 VideoMenu::VideoMenu() : Menu("Video")
 {
+
 }
+
 
 void VideoMenu::Show(const bool _toAdd)
 {
-	Super::Show();
+	Super::Show(_toAdd);
+
 	// Clear l'affichage et laisser que le menu
 	system("cls");
 	Interact();
 }
 
-void VideoMenu::DisplayMenu(u_int _selectedIndex, u_int& _brightness, u_int& _contrast)
+void VideoMenu::DisplayMenu(int _selectedIndex, int& _brightness, int& _contrast)
 {
 	const int _progressBarMax = 20;
 	string _options[3] = {
@@ -57,7 +60,7 @@ void VideoMenu::DisplayMenu(u_int _selectedIndex, u_int& _brightness, u_int& _co
 	level->UpdateBrightness(_brightness);
 }
 
-void VideoMenu::DisplayProgressBar(const string& _label, u_int& _value, int _maxLength)
+void VideoMenu::DisplayProgressBar(const string& _label, int& _value, int _maxLength)
 {
 	cout << _label << ": [";
 	int _filled = (_value * _maxLength) / 100;
@@ -76,9 +79,9 @@ void VideoMenu::AdjustValue(u_int& _value, const u_int& _delta)
 
 void VideoMenu::Interact()
 {
-	u_int _selectedIndex = 0;
-	u_int _brightness = 50; // 0 == on voit rien, 100 = surbrillance, 50 = parfait
-	u_int _contrast = 50;   // pareil
+	int _selectedIndex = 0;
+	int _brightness = 50; // 0 == on voit rien, 100 = surbrillance, 50 = parfait
+	int _contrast = 50;   // pareil
 
 
 	DisplayMenu(_selectedIndex, _brightness, _contrast);
@@ -87,38 +90,38 @@ void VideoMenu::Interact()
 	{
 		if (_kbhit())
 		{
-			int _inputAction = _getch();
+			//InputActionType _inputAction = gameInput->GetInputActionType(_getch());
 
-			switch (_inputAction)
-			{
-			case 77:
-				_selectedIndex = (_selectedIndex - 1 + 3) % 3;
-				break;
-			case 72:
-				_selectedIndex = (_selectedIndex + 1) % 3;
-				break;
-			case 80:
-				if (_selectedIndex == 0)
-					AdjustValue(_brightness, 5);
-				else if (_selectedIndex == 1)
-					AdjustValue(_contrast, 5);
-				break;
-			case 73:
-				if (_selectedIndex == 0)
-					AdjustValue(_brightness, -5);
-				else if (_selectedIndex == 1)
-					AdjustValue(_contrast, -5);
-				break;
-			case 13:
-				if (_selectedIndex == 2)
-					return; // Quitter
-				break;
-			case 27:
-				return; // Revenir au jeu
-			default:
-				break;
-			}
-			DisplayMenu(_selectedIndex, _brightness, _contrast);
+			//switch (_inputAction)
+			//{
+			//case IAT_UP:
+			//	_selectedIndex = (_selectedIndex - 1 + 3) % 3;
+			//	break;
+			//case IAT_DOWN:
+			//	_selectedIndex = (_selectedIndex + 1) % 3;
+			//	break;
+			//case IAT_RIGHT:
+			//	if (_selectedIndex == 0)
+			//		AdjustValue(_brightness, 5);
+			//	else if (_selectedIndex == 1)
+			//		AdjustValue(_contrast, 5);
+			//	break;
+			//case IAT_LEFT:
+			//	if (_selectedIndex == 0)
+			//		AdjustValue(_brightness, -5);
+			//	else if (_selectedIndex == 1)
+			//		AdjustValue(_contrast, -5);
+			//	break;
+			//case IAT_VALIDATE:
+			//	if (_selectedIndex == 2)
+			//		return; // Quitter
+			//	break;
+			//case IAT_PAUSE:
+			//	return; // Revenir au jeu
+			//default:
+			//	break;
+			//}
+			//DisplayMenu(_selectedIndex, _brightness, _contrast);
 		}
 	}
 }

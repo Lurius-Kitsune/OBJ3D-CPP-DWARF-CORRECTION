@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AstarAlgo.cpp" />
     <ClCompile Include="AudioMenu.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -145,7 +146,6 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="OptionsMenu.cpp" />
-    <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="StartMenu.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="VideoMenu.cpp" />

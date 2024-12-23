@@ -4,7 +4,6 @@
 
 #pragma region Color
 
-
 Color::Color()
 {
     r = g = b = 0;
@@ -22,6 +21,7 @@ string Color::ToString(const bool _textOnly) const
     if (_textOnly) return TEXT_RGB(r, g, b);
     return BG_RGB(r, g, b);
 }
+
 
 string Color::RainbowEveryChar(const string& _word)
 {
@@ -92,20 +92,19 @@ void Color::CalculateSaturation(double _factor)
 
 void Color::AdjustBrightness(double _factor)
 {
-    r = Clamp(static_cast<int>(r * _factor), 0, 255);
-    g = Clamp(static_cast<int>(g * _factor), 0, 255);
-    b = Clamp(static_cast<int>(b * _factor), 0, 255);
+    ClampColor(r, _factor);
+    ClampColor(g, _factor);
+    ClampColor(b, _factor);
 }
 
-int Color::ClampColor(int _value, double _factor)
+void Color::ClampColor(int& _value, double _factor)
 {
-    return Clamp(CAST(int, _value * _factor), 0, 255);
+    _value = Clamp(CAST(int, _value * _factor), 0, 255);
 }
 
 #pragma endregion
 
 #pragma region Gradient
-
 
 string Gradient::GradientString(const string& _text, const bool _textOnly) const
 {
@@ -120,6 +119,7 @@ string Gradient::GradientString(const string& _text, const bool _textOnly) const
     }
     return _newWord + RESET;
 }
+
 Color Gradient::GradientColor(const int _length, const int _colorIndex) const
 {
     vector<Color> _colorGradient;

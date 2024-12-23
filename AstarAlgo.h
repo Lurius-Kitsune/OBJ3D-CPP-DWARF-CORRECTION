@@ -1,5 +1,4 @@
 #pragma once
-
 #include "CoreMinimal.h"
 #include "Node.h"
 
@@ -7,7 +6,7 @@ template <typename Type>
 class AstarAlgo
 {
 	Size gridSize;
-	vector <vector<Type>> grid;
+	vector<vector<Type>> grid;
 
 public:
 	AstarAlgo(const vector<vector<Type>>& _grid)
@@ -31,8 +30,7 @@ private:
 	}
 	vector<Coords> GetNeighbors(const Coords& _coords) const
 	{
-		return
-		{
+		return {
 			Coords(_coords.x + 1, _coords.y),
 			Coords(_coords.x - 1, _coords.y),
 			Coords(_coords.x, _coords.y + 1),
@@ -75,21 +73,23 @@ public:
 			Node* _currentNode = _openList.top();
 			_openList.pop();
 
-			//Si le noeud est le 'end'
+			// Si le noeud courant est le 'end'
 			if (_currentNode->location == _end)
 			{
+				// On reconstruit le chemin
 				const vector<Coords>& _finalPath = ReconstructPath(_currentNode);
 
-				//On libère la Mémoire
+				// On libère la mémoire
 				Erase(_allNodes);
-				//On reconstruit le chemin
+
+				// On retourne le chemin terminé
 				return _finalPath;
 			}
 
-			//Marquer le noeud actuel comme visité
+			// Marque le noeud actuel comme visité
 			_closedList[ComputeIndex(_currentNode->location)] = true;
 
-			//Explore les voisins
+			// Explore les voisins
 			for (const Coords& _neighborLocation : GetNeighbors(_currentNode->location))
 			{
 				const u_int& _neighborIndex = ComputeIndex(_neighborLocation);
@@ -97,7 +97,8 @@ public:
 				{
 					Node* _neighbor = new Node(_neighborLocation, _end, _currentNode);
 
-					//Si le voisin n'est pas dans la liste ouverte ou il a un cout F plus bas
+					// Si le voisin n'est pas dans la liste ouverte
+					// ou il a un coût F plus bas
 					if (_allNodes.find(_neighborIndex) == _allNodes.end() || _neighbor->GetF() < _allNodes[_neighborIndex]->GetF())
 					{
 						_openList.push(_neighbor);
@@ -109,11 +110,13 @@ public:
 					}
 				}
 			}
+
 		}
-		//On libère la Mémoire
+
+		// On libère la mémoire
 		Erase(_allNodes);
-		//On retourne le path Vide
+
+		// On retourne le path vide
 		return vector<Coords>();
 	}
 };
-

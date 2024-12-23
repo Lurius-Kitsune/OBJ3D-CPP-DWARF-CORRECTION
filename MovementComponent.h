@@ -13,7 +13,6 @@ public:
 	{
 		speed = _speed;
 	}
-
 private:
 	INLINE bool RetrieveNextCoords()
 	{
@@ -24,10 +23,9 @@ private:
 			targetCoords = &path.front();
 			path.pop();
 		}
+
 		return true;
 	}
-	
-
 public:
 	MovementComponent(const u_int& _speed);
 

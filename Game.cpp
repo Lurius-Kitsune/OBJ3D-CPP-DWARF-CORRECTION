@@ -1,6 +1,6 @@
 ﻿#include "Game.h"
-#include "Dwarf.h"
 #include "VideoMenu.h"
+#include "Dwarf.h"
 #include "MovementComponent.h"
 
 Game::Game()
@@ -19,17 +19,14 @@ Game::~Game()
 
 bool Game::PollEvents()
 {
-
-    if (_kbhit())
-    {
+	if (_kbhit())
+	{
         const int _code = _getch();
         if (_code == 27) // echap
         {
-
         }
         if (_code == 13) // enter
         {
-
         }
         else if (_code == 9) // tab
         {
@@ -52,8 +49,9 @@ bool Game::PollEvents()
         {
             Cursor::GetInstance().Move(level, Coords(1, 0));
         }
-    }
-    return false;
+	}
+
+	return false;
 }
 
 void Game::InitDwarfs()
@@ -61,11 +59,11 @@ void Game::InitDwarfs()
     const Coords& _cursorPos = Cursor::GetInstance().GetLocation();
     Coords _startLocation;
 
-    Dwarf* _dwarf = new Dwarf(DWARF);
+    Dwarf* _dwarf1 = new Dwarf(DWARF);
     _startLocation = _cursorPos + Coords(-2, 0);
-    _dwarf->SetLocation(_startLocation);
-    _dwarf->GetComponent<MovementComponent>()->SetTargetLocation(_startLocation + Coords(0, 27));
-    entities.push_back(_dwarf);
+    _dwarf1->SetLocation(_startLocation);
+    _dwarf1->GetComponent<MovementComponent>()->SetTargetLocation(_startLocation + Coords(0, 27));
+    entities.push_back(_dwarf1);
 
     Dwarf* _dwarf2 = new Dwarf(DWARF);
     _startLocation = _cursorPos + Coords(2, 0);
@@ -75,20 +73,14 @@ void Game::InitDwarfs()
         _movement->SetSpeed(2);
         _movement->SetTargetLocation(_startLocation + Coords(0, 27));
     }
+   
     entities.push_back(_dwarf2);
-}
-
-void Game::UpdateEntities()
-{
-	for (Entity* _entity : entities)
-	{
-		_entity->Update();
-	}
 }
 
 void Game::Start(Level* _level)
 {
 	level = _level;
+
     InitDwarfs();
 	Update();
 }
@@ -99,7 +91,6 @@ void Game::Update()
 	while (!_wantToExit)
 	{
 		if (PollEvents()) break;
-
 		UpdateEntities();
 		Display();
         SLEEP(milliseconds, 50);
@@ -108,11 +99,18 @@ void Game::Update()
 	Stop();
 }
 
+void Game::UpdateEntities()
+{
+	for (Entity* _entity : entities)
+	{
+		_entity->Update();
+	}
+}
+
 void Game::Display() const
 {
 	level->Display();
 }
-
 
 void Game::Pause()
 {

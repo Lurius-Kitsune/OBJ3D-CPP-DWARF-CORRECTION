@@ -37,16 +37,16 @@ void Entity::RemoveComponent(Component* _component)
 	}
 }
 
+void Entity::SetLocation(const Coords& _newLocation)
+{
+	Game::GetInstance().GetLevel()->ChangeItemAtLocation(location, appearance, _newLocation);
+	location = _newLocation;
+}
+
 void Entity::Update()
 {
 	for (Component* _component : components)
 	{
 		_component->Update();
 	}
-}
-
-void Entity::SetLocation(const Coords& _newCoords)
-{
-	Game::GetInstance().GetLevel()->ChangeItemAtLocation(location, appearance, _newCoords);
-	location = _newCoords;
 }

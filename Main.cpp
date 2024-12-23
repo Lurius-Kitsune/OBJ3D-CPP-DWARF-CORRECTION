@@ -65,12 +65,12 @@ void TEMP()
     }
 }
 
+#include "Singleton.h"
 #include "AstarAlgo.h"
 
 int main()
 {
     DefaultSetup();
-
 
     /*GameInput* _newGameInput = new GameInput();
     ControlsMenu _menu = ControlsMenu(_newGameInput);

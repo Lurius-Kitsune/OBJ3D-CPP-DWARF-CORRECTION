@@ -116,11 +116,6 @@ struct Color
 	Color();
 	Color(const int _r, const int _g, const int _b);
 
-
-private:
-	int ClampColor(int _value, double _factor);
-
-public:
 	void CalculateSaturation(double _factor);
 	void AdjustBrightness(double _factor);
 	string ToString(const bool _textOnly) const;
@@ -130,7 +125,8 @@ public:
 	static void DisplayRainbow(const string& _text);
 	static string GetRandomColor();
 
-	
+private:
+	void ClampColor(int& _value, double _factor);
 };
 
 struct Gradient

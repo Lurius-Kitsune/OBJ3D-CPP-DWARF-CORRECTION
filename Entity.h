@@ -7,10 +7,10 @@ class Entity
 {
 protected:
 	string name;
+	string appearance;
 	float life;
 	vector<Component*> components;
 	Coords location;
-	string appearance;
 
 public:
 	INLINE Coords GetLocation() const
@@ -25,7 +25,6 @@ public:
 public:
 	void AddComponent(Component* _component);
 	void RemoveComponent(Component* _component);
-
 	template <typename Type>
 	Type* GetComponent()
 	{
@@ -36,7 +35,6 @@ public:
 
 		return nullptr;
 	}
-
+	void SetLocation(const Coords& _newLocation);
 	void Update();
-	void SetLocation(const Coords& _location);
 };

@@ -8,14 +8,14 @@ void InputManager::CollectEvents()
     DWORD _eventsRead;
 
     // Lire les événements disponibles sans bloquer
-    while (PeekConsoleInput(_hConsole, _inputRecords, 128, &_eventsRead) && _eventsRead > 0)
+    while (PeekConsoleInput(_hConsole, _inputRecords, 128, &_eventsRead) && _eventsRead > 0) 
     {
         ReadConsoleInput(_hConsole, _inputRecords, _eventsRead, &_eventsRead);
         for (DWORD _index = 0; _index < _eventsRead; ++_index)
         {
             const INPUT_RECORD& _record = _inputRecords[_index];
 
-            if (_record.EventType == MOUSE_EVENT)
+            if (_record.EventType == MOUSE_EVENT) 
             {
                 const MOUSE_EVENT_RECORD& _mouse = _record.Event.MouseEvent;
                 const bool _leftButtonClicked = (_mouse.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED) != 0;
@@ -24,7 +24,7 @@ void InputManager::CollectEvents()
                 allEvents.push(Event(ET_MOUSE, _mouseEvent));
             }
 
-            if (_record.EventType == KEY_EVENT)
+            if (_record.EventType == KEY_EVENT) 
             {
                 const KEY_EVENT_RECORD& _key = _record.Event.KeyEvent;
                 KeyEvent _keyEvent = KeyEvent(_key.bKeyDown ? KET_PRESSED : KET_RELEASED, CAST(int, _key.wVirtualKeyCode));
@@ -45,7 +45,7 @@ void InputManager::PollEventDemo()
 
     int frameCounter = 0;
 
-    while (true)
+    while (true) 
     {
         // Simuler une logique indépendante (non bloquante)
         cout << "Frame: " << frameCounter++ << "\r"; // Écrase la ligne précédente
@@ -56,14 +56,14 @@ void InputManager::PollEventDemo()
 
         // Traiter les événements
         Event _event;
-        while (PollEvents(_event))
+        while (PollEvents(_event)) 
         {
-            if (_event.type == ET_KEYBOARD)
+            if (_event.type == ET_KEYBOARD) 
             {
                 const KeyEvent& _key = _event.keyboard;
             }
 
-            else if (_event.type == ET_MOUSE)
+            else if (_event.type == ET_MOUSE) 
             {
                 const MouseEvent& mouse = _event.mouse;
             }

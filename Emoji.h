@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #define EMPTY				"  "
-#define CROSSHAIR			"\xE2\x9D\x8C"
 
 // Buildings
 #define VILLAGE				"\xF0\x9F\x8F\x98"
@@ -48,8 +47,13 @@
 #define MEAT				"\xF0\x9F\x8D\x96"
 
 // Entities
-#define DWARF				"\xF0\x9F\x98\x92"
+#define DWARF				"\xF0\x9F\xA7\x8C"
 #define ENEMY				"\xF0\x9F\x98\xA1"
 #define FOOTSTEP			"\xF0\x9F\x91\xA3"
 
 // UIs
+#define CROSSHAIR			"\xE2\x9D\x8C"
+#define UP					"\xE2\x86\x91"
+#define LEFT				"\xE2\x86\x90"
+#define RIGHT				"\xE2\x86\x92"
+#define DOWN				"\xE2\x86\x93"

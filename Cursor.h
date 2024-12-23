@@ -1,8 +1,8 @@
 #pragma once
-#include "CoreMinimal.h"
-#include "Level.h"
-#include "Coordinates.h"
 #include "Singleton.h"
+#include "Coordinates.h"
+
+class Level;
 
 class Cursor : public Singleton<Cursor>
 {

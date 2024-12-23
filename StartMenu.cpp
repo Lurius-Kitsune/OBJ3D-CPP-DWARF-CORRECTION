@@ -8,6 +8,7 @@ StartMenu::StartMenu() : Menu("Start")
 
 void StartMenu::LaunchGame(const string& _path)
 {
+	// load save at path
 	const Coords& _cursorLocation = { 109, 200 };
 	Level* _level = new Level("MainLevel", _cursorLocation);
 	Game::GetInstance().Start(_level);
@@ -15,21 +16,6 @@ void StartMenu::LaunchGame(const string& _path)
 
 void StartMenu::Show(const bool _toAdd)
 {
-	function<void(const u_int&)> _callback = [&](const u_int& _index) { LaunchGame(allSaves[_index].path); };
-	OpenMenu(allSaves, "Quel sauvegarde choisissez-vous ?", _callback, false);
-
-	u_int _index = 0;
-	for (const Save& _save : allSaves)
-	{
-		cout << _index++ << " - " << _save.title << endl;
-	}
-
-	u_int _textIndex;
-	cin >> _textIndex;
-	_textIndex--;
-}
-
-void StartMenu::Hide()
-{
-
+	const function<void(const u_int&)>& _callback = [&](const u_int& _index) { LaunchGame(allSaves[_index].path); };
+	OpenMenu(allSaves, "Quel sauvegarde choisissez-vous ?", _callback);
 }

@@ -1,4 +1,5 @@
 #include "OptionsMenu.h"
+#include "GameInput.h"
 #include "Level.h"
 
 OptionsMenu::OptionsMenu() : Menu("Options")
@@ -22,8 +23,8 @@ void OptionsMenu::Show(const bool _toAdd)
 {
 	Super::Show(_toAdd);
 
-	function<void(const u_int&)> _callback = [&](const u_int& _index) { menus[_index]->Show(); };
-	OpenMenu(menus, "Select Options Menu", _callback, false);
+	const function<void(const u_int&)>& _callback = [&](const u_int& _index) { menus[_index]->Show(); };
+	OpenMenu(menus, "Select option menu", _callback, false);
 }
 
 void OptionsMenu::Interact()

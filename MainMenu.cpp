@@ -5,6 +5,8 @@
 #include "VideoMenu.h"
 #include "FileStream.h"
 
+#include "Singleton.h"
+
 MainMenu::MainMenu() : Menu("Main")
 {
 	menus =
@@ -31,14 +33,14 @@ void MainMenu::Show(const bool _toAdd)
 	Super::Show(_toAdd);
 
 	DisplayLogo();
-
-	function<void(const u_int&)> _callback = [&](const u_int& _index) { menus[_index]->Show(); };
+	const function<void(const u_int&)>& _callback = [&](const u_int& _index) { menus[_index]->Show(); };
 	OpenMenu(menus, "JSP frr", _callback, false);
 }
 
 void MainMenu::DisplayLogo()
 {
-	FileStream::DisplayFile("Assets/Logo/Logo.txt", Gradient({ 222, 22, 35 }, { 24, 65, 230 }));
+	Gradient _gradient = Gradient({ 159, 37, 96 }, { 94, 153, 42 });
+	FileStream::DisplayFile("Assets/Logo/Logo.txt", _gradient);
 }
 
 void MainMenu::Hide()

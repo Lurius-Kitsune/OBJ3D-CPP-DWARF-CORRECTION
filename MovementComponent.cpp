@@ -1,9 +1,9 @@
 #include "MovementComponent.h"
-#include "Entity.h"
-#include "Macro.h"
 #include "Game.h"
+#include "Entity.h"
 #include "AstarAlgo.h"
 #include "Cursor.h"
+#include "Macro.h"
 
 MovementComponent::MovementComponent(const u_int& _speed)
 {
@@ -12,15 +12,17 @@ MovementComponent::MovementComponent(const u_int& _speed)
 	targetCoords = nullptr;
 }
 
+
 bool MovementComponent::TryGetNextCoords()
 {
-	//Si je n'ai plus de destination
+	// Si je n'ai plus de destination
 	if (!targetCoords)
 	{
-		//Je met à jour ma destination
-		//Si je suis déjà arrivé à destination
+		// Je mets à jour ma destination
+		// Si je suis déjà arrivé à destination
 		if (!RetrieveNextCoords()) return false;
 	}
+
 	return true;
 }
 
@@ -40,7 +42,6 @@ void MovementComponent::Update()
 
 void MovementComponent::SetTargetLocation(const Coords& _targetCoords)
 {
-	
 	AstarAlgo<Tile> _astar = AstarAlgo<Tile>(Game::GetInstance().GetLevel()->GetMap());
 	path = ToQueue(_astar.FindPath(owner->GetLocation(), _targetCoords));
 }
